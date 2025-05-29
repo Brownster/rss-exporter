@@ -1,0 +1,10 @@
+
+services:
+  blackbox-exporter:
+    image: ghcr.io/4O4-Not-F0und/rss-exporter:main
+    container_name: rss-exporter
+    ports:
+      - "9091:9091/tcp"
+    volumes:
+      - "path/to/config/config.yml:/rss_exporter/config.yml:ro"
+    restart: unless-stopped
