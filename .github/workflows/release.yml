@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '^1.24'
+
+      - name: Build binary
+        run: |
+          go mod download
+          go build -o rss_exporter .
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: rss_exporter
+          generate_release_notes: true
