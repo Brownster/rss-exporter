@@ -13,7 +13,9 @@ It's highly configurable through a YAML file and allows for dynamic probe adjust
     * HTTP status code of the probe.
     * Overall probe success status.
     * Detailed probe duration (DNS lookup, TCP connection, TLS handshake, time to first byte, content transfer).
-    * Feed content size.
+* Feed content size.
+* Detects service incident keywords ("SERVICE ISSUE", "OUTAGE") and exposes service status metrics.
+* Continuously monitors configured service feeds and updates their status metrics.
 * Configuration via a YAML file for listener settings, logging, default probe behavior.
 * Customizable probe behavior per request using HTTP query parameters (e.g., target URL, timeout, valid HTTP status codes).
 * Logs response body (truncated and base64 encoded) on failure.
@@ -74,6 +76,11 @@ Below are the available options for the `config.yml` file:
       * Valid values: `"trace"`, `"debug"`, `"info"`, `"warn"`.
   * `probe_path` (default: `/probe`): The HTTP path for the probe endpoint.
   * `default_timeout` (default: `10`): The default timeout in seconds for a probe if not specified in the HTTP request.
+  * `services` (optional): A list of service feeds to monitor continuously.
+      * Each service entry supports:
+          * `name`: A unique service name.
+          * `url`: The RSS/Atom feed URL.
+          * `interval`: Refresh interval in seconds (default: `300`).
 
 For example config, please refer to `config.example.yml`.
 
@@ -148,3 +155,6 @@ All metrics exposed by the exporter are prefixed with `rss_exporter_`. The `targ
 
   * `rss_exporter_feed_content_size_bytes{target="<feed_url>"}` (Gauge):
     The size of the fetched RSS feed content in bytes.
+  * `rss_exporter_service_status{service="<name>",state="<status>"}` (Gauge):
+    Tracks the current state of each configured service feed. `state` can be
+    `ok`, `service_issue`, or `outage`.

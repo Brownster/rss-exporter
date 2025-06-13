@@ -1,12 +1,15 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"net/http"
 	"os"
 	"time"
 
+	"github.com/mmcdole/gofeed"
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 )
@@ -19,11 +22,18 @@ const (
 )
 
 type Config struct {
-	ListenAddress  string `yaml:"listen_address"`
-	ListenPort     int    `yaml:"listen_port"`
-	LogLevel       string `yaml:"log_level"`
-	ProbePath      string `yaml:"probe_path"`
-	DefaultTimeout int    `yaml:"default_timeout"`
+	ListenAddress  string        `yaml:"listen_address"`
+	ListenPort     int           `yaml:"listen_port"`
+	LogLevel       string        `yaml:"log_level"`
+	ProbePath      string        `yaml:"probe_path"`
+	DefaultTimeout int           `yaml:"default_timeout"`
+	Services       []ServiceFeed `yaml:"services"`
+}
+
+type ServiceFeed struct {
+	Name     string `yaml:"name"`
+	URL      string `yaml:"url"`
+	Interval int    `yaml:"interval"`
 }
 
 var (
@@ -57,6 +67,8 @@ func init() {
 		logrus.Fatalf("load config failed: %v", err)
 	}
 
+	prometheus.MustRegister(serviceStatusGauge)
+
 	logLevel, ok := logLevels[appConfig.LogLevel]
 	if ok {
 		logrus.SetLevel(logLevel)
@@ -86,6 +98,12 @@ func loadConfig(configFile string) (cfg Config, err error) {
 		return cfg, fmt.Errorf("parse '%s' failed: %v", configFile, err)
 	}
 
+	for i := range cfg.Services {
+		if cfg.Services[i].Interval <= 0 {
+			cfg.Services[i].Interval = 300
+		}
+	}
+
 	if cfg.ProbePath == "" {
 		cfg.ProbePath = defaultProbePath
 	} else if cfg.ProbePath[0] != '/' {
@@ -97,6 +115,10 @@ func loadConfig(configFile string) (cfg Config, err error) {
 }
 
 func main() {
+	for _, svc := range appConfig.Services {
+		go monitorService(svc)
+	}
+
 	http.HandleFunc(appConfig.ProbePath, probeHandler)
 	http.HandleFunc("/", landingPageHandler)
 
@@ -108,11 +130,49 @@ func main() {
 func landingPageHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	landingPageHTML := fmt.Sprintf(`<html>
-			<head><title>RSS Exporter</title></head>
-			<body>
-			<h1>RSS Exporter</h1>
-			<p>Probe Example: <code>%s?target=https://example.com/files/sample-rss-2.xml&timeout=10</code></p>
-			</body>
-			</html>`, appConfig.ProbePath)
+                        <head><title>RSS Exporter</title></head>
+                        <body>
+                        <h1>RSS Exporter</h1>
+                        <p>Probe Example: <code>%s?target=https://example.com/files/sample-rss-2.xml&timeout=10</code></p>
+                        </body>
+                        </html>`, appConfig.ProbePath)
 	w.Write([]byte(landingPageHTML))
+}
+
+func monitorService(cfg ServiceFeed) {
+	logger := logrus.WithField("service", cfg.Name)
+	ticker := time.NewTicker(time.Duration(cfg.Interval) * time.Second)
+	defer ticker.Stop()
+
+	for {
+		updateServiceStatus(cfg, logger)
+		<-ticker.C
+	}
+}
+
+func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(appConfig.DefaultTimeout)*time.Second)
+	defer cancel()
+
+	feed, err := gofeed.NewParser().ParseURLWithContext(cfg.URL, ctx)
+	if err != nil {
+		logger.Warnf("fetch feed failed: %v", err)
+		return
+	}
+
+	state := "ok"
+	if len(feed.Items) > 0 {
+		_, st, active := extractServiceStatus(feed.Items[0])
+		if active {
+			state = st
+		}
+	}
+
+	for _, s := range []string{"ok", "service_issue", "outage"} {
+		val := 0.0
+		if s == state {
+			val = 1
+		}
+		serviceStatusGauge.WithLabelValues(cfg.Name, s).Set(val)
+	}
 }

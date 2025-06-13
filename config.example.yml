@@ -6,3 +6,8 @@ listen_port: 9091
 log_level: info
 probe_path: /probe
 default_timeout: 10
+
+services:
+  - name: gcp
+    url: https://status.cloud.google.com/en/feed.atom
+    interval: 300
