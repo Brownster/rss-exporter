@@ -193,8 +193,10 @@ func probeRSS(opts *ProbeRSSOpts, logger *logrus.Entry) {
 	logger.Traceln("making probe request")
 	resp, err := client.Do(req)
 
-	// Set received response headers time before read body
-	customTransport.ReceivedResponseHeaders()
+	if err == nil {
+		// Set received response headers time before read body
+		customTransport.ReceivedResponseHeaders()
+	}
 
 	rssProbeDurationSec.WithLabelValues(opts.Target, "dns").Set(customTransport.current.DNSDuration())
 	rssProbeDurationSec.WithLabelValues(opts.Target, "connect").Set(customTransport.current.ConnectDuration())
