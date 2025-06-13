@@ -39,6 +39,14 @@ var (
 		},
 		[]string{"service", "state"},
 	)
+	serviceIssueInfo = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: namespace,
+			Name:      "service_issue_info",
+			Help:      "Details for the currently active service issue.",
+		},
+		[]string{"service", "title", "link", "guid"},
+	)
 )
 
 type ProbeRSSOpts struct {

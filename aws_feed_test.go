@@ -83,6 +83,30 @@ func TestUpdateServiceStatus_AWSAthenaIssueFeed(t *testing.T) {
 	}
 }
 
+func TestServiceIssueInfoMetric(t *testing.T) {
+	data := loadAWSAthenaIssueFeed(t)
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write(data)
+	}))
+	defer ts.Close()
+
+	serviceStatusGauge.Reset()
+	serviceIssueInfo.Reset()
+
+	cfg := ServiceFeed{Name: "aws-athena", URL: ts.URL, Interval: 0}
+	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
+
+	val := testutil.ToFloat64(serviceIssueInfo.WithLabelValues(
+		"aws-athena",
+		"Service impact: Increased Queue Processing Time",
+		"https://status.aws.amazon.com/",
+		"https://status.aws.amazon.com/#athena-us-west-2_1749832722",
+	))
+	if val != 1 {
+		t.Errorf("service_issue_info gauge = %v, want 1", val)
+	}
+}
+
 func TestUpdateServiceStatus_AWSMultiItemFeed(t *testing.T) {
 	data := loadAWSMultiItemFeed(t)
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
