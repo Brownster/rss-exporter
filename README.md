@@ -113,6 +113,42 @@ rss_exporter_service_status{service="openai",state="ok"} 0
 rss_exporter_service_status{service="openai",state="outage"} 1
 rss_exporter_service_status{service="openai",state="service_issue"} 0
 
+### Local Testing With Sample Feeds
+
+The repository includes sample RSS and Atom files under `testdata/` that can be served locally for quick testing. Use a temporary configuration like:
+
+```yaml
+listen_address: 127.0.0.1
+listen_port: 9095
+log_level: debug
+services:
+  - name: openai
+    provider: openai
+    url: http://localhost:8000/openai_resolved.atom
+    interval: 1
+  - name: azure
+    provider: azure
+    url: http://localhost:8000/azure_issue.rss
+    interval: 1
+```
+
+Running the exporter with these feeds yields metrics such as:
+
+```text
+# HELP rss_exporter_service_issue_info Details for the currently active service issue.
+# TYPE rss_exporter_service_issue_info gauge
+rss_exporter_service_issue_info{guid="storage-eastus_issue",link="https://status.azure.com/en-us/status",region="eastus",service="azure",service_name="storage",title="Service issue: Storage - East US"} 1
+# HELP rss_exporter_service_status Current service status parsed from configured feeds.
+# TYPE rss_exporter_service_status gauge
+rss_exporter_service_status{service="azure",state="ok"} 0
+rss_exporter_service_status{service="azure",state="outage"} 0
+rss_exporter_service_status{service="azure",state="service_issue"} 1
+rss_exporter_service_status{service="openai",state="ok"} 1
+rss_exporter_service_status{service="openai",state="outage"} 0
+rss_exporter_service_status{service="openai",state="service_issue"} 0
+rss_exporter_fetch_errors_total{service="azure"} 0
+rss_exporter_fetch_errors_total{service="openai"} 0
+```
 ## Graceful Shutdown
 
 The exporter now listens for `SIGINT` and `SIGTERM` signals. All service
