@@ -178,6 +178,12 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 			seen[key] = struct{}{}
 		}
 		_, st, active := extractServiceStatus(item)
+		if st == "resolved" {
+			// issue has been resolved; ignore older items
+			state = "ok"
+			activeItem = nil
+			break
+		}
 		if active {
 			state = st
 			activeItem = item
