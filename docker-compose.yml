@@ -1,6 +1,6 @@
 
 services:
-  blackbox-exporter:
+  rss-exporter:
     image: ghcr.io/4O4-Not-F0und/rss-exporter:main
     container_name: rss-exporter
     ports:
