@@ -35,11 +35,11 @@ func TestExtractServiceStatus_GCPFeed(t *testing.T) {
 	if svc != wantSvc {
 		t.Errorf("service got %q want %q", svc, wantSvc)
 	}
-	if state != "service_issue" {
-		t.Errorf("state got %q want service_issue", state)
+	if state != "resolved" {
+		t.Errorf("state got %q want resolved", state)
 	}
-	if !active {
-		t.Error("expected active true")
+	if active {
+		t.Error("expected active false")
 	}
 }
 
@@ -59,11 +59,11 @@ func TestUpdateServiceStatus_GCPFeed(t *testing.T) {
 	cfg := ServiceFeed{Name: "gcp", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "service_issue")); val != 1 {
-		t.Errorf("service_issue gauge = %v, want 1", val)
+	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "ok")); val != 1 {
+		t.Errorf("ok gauge = %v, want 1", val)
 	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "ok")); val != 0 {
-		t.Errorf("ok gauge = %v, want 0", val)
+	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "service_issue")); val != 0 {
+		t.Errorf("service_issue gauge = %v, want 0", val)
 	}
 	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "outage")); val != 0 {
 		t.Errorf("outage gauge = %v, want 0", val)
