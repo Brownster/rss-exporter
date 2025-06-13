@@ -30,7 +30,7 @@ services:
   - name: some_custoer-gcp
     provider: gcp
     customer: some_custoer
-    url: https://status.cloud.google.com/en/vattenfall-specfic-feed.atom
+    url: https://status.cloud.google.com/en/some_custoer-specfic-feed.atom
     interval: 300
 ```
 
