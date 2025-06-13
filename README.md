@@ -91,6 +91,7 @@ The exporter exposes two HTTP endpoints:
 
   * `/`: A simple landing page that provides an example of how to use the probe endpoint.
   * `{probe_path}` (as configured, e.g., `/probe` by default): The main endpoint for probing RSS feeds and scraping metrics.
+  * `/metrics`: Exposes metrics collected from configured service feeds.
 
 ### Probing an RSS Feed
 
