@@ -1,9 +1,9 @@
 package exporter
 
 import (
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/sirupsen/logrus"
@@ -11,7 +11,7 @@ import (
 
 func loadAzureIssueFeed(t *testing.T) []byte {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/azure_issue.rss")
+	data, err := os.ReadFile("testdata/azure_issue.rss")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}

@@ -1,9 +1,9 @@
 package exporter
 
 import (
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
 
@@ -13,7 +13,7 @@ import (
 
 func loadGCPFeed(t *testing.T) *gofeed.Feed {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/gcp_feed.atom")
+	data, err := os.ReadFile("testdata/gcp_feed.atom")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
@@ -26,20 +26,7 @@ func loadGCPFeed(t *testing.T) *gofeed.Feed {
 
 func loadGCPUpdateFeed(t *testing.T) *gofeed.Feed {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/gcp_update_resolved.atom")
-	if err != nil {
-		t.Fatalf("read feed: %v", err)
-	}
-	feed, err := gofeed.NewParser().ParseString(string(data))
-	if err != nil {
-		t.Fatalf("parse feed: %v", err)
-	}
-	return feed
-}
-
-func loadGCPResolvedThenUpdateFeed(t *testing.T) *gofeed.Feed {
-	t.Helper()
-	data, err := ioutil.ReadFile("testdata/gcp_resolved_then_update.atom")
+	data, err := os.ReadFile("testdata/gcp_update_resolved.atom")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
@@ -70,7 +57,7 @@ func TestExtractServiceStatus_GCPFeed(t *testing.T) {
 
 func TestUpdateServiceStatus_GCPFeed(t *testing.T) {
 	// serve the feed via test server
-	data, err := ioutil.ReadFile("testdata/gcp_feed.atom")
+	data, err := os.ReadFile("testdata/gcp_feed.atom")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
@@ -110,7 +97,7 @@ func TestExtractServiceStatus_GCPUpdateFeed(t *testing.T) {
 }
 
 func TestUpdateServiceStatus_GCPResolvedThenUpdate(t *testing.T) {
-	data, err := ioutil.ReadFile("testdata/gcp_resolved_then_update.atom")
+	data, err := os.ReadFile("testdata/gcp_resolved_then_update.atom")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}

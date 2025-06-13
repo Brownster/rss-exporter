@@ -1,9 +1,9 @@
 package exporter
 
 import (
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/sirupsen/logrus"
@@ -11,7 +11,7 @@ import (
 
 func loadGenesysFeed(t *testing.T) []byte {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/genesys_feed.atom")
+	data, err := os.ReadFile("testdata/genesys_feed.atom")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
