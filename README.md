@@ -113,13 +113,15 @@ To probe an RSS feed, send a GET request to the configured `probe_path`. The beh
       * Example: `fail_on_empty_items=1`
   * `peek_resp_headers_log` (string, optional): A **comma-separated** list of response header names. The first value of each specified header will be logged. Header names are case-insensitive (standard HTTP header behavior, logged keys are modified).
       * Example: `peek_resp_headers_log=Content-Type,Last-Modified,ETag`
+  * `peek_resp_headers_labels` (string, optional): A **comma-separated** list of response header names. The first value of each specified header will be exposed as labels on the `probe_headers_info` metric.
+      * Example: `peek_resp_headers_labels=Server,ETag`
 
 ### Example Probe URL
 
 Assuming the exporter is running on `localhost:9191` with the default `probe_path` (`/probe`):
 
 ```
-http://localhost:9191/probe?target=https://rss.example.com/files/sample-rss-2.xml&timeout=20&valid_status=200&fail_on_empty_items=1&peek_resp_headers_log=Server,Content-Type
+http://localhost:9191/probe?target=https://rss.example.com/files/sample-rss-2.xml&timeout=20&valid_status=200&fail_on_empty_items=1&peek_resp_headers_log=Server,Content-Type&peek_resp_headers_labels=Server
 ```
 
 This request will:
@@ -158,6 +160,8 @@ All metrics exposed by the exporter are prefixed with `rss_exporter_`. The `targ
 
   * `rss_exporter_feed_content_size_bytes{target="<feed_url>"}` (Gauge):
     The size of the fetched RSS feed content in bytes.
+  * `rss_exporter_probe_headers_info{target="<feed_url>",<header_label>="<value>",...}` (Gauge):
+    Exposes the first value of each header listed in `peek_resp_headers_labels` as labels. Always set to `1` if present.
   * `rss_exporter_service_status{service="<name>",state="<status>"}` (Gauge):
     Tracks the current state of each configured service feed. `state` can be
     `ok`, `service_issue`, or `outage`.
