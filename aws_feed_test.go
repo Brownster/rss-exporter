@@ -129,3 +129,46 @@ func TestUpdateServiceStatus_AWSMultiItemFeed(t *testing.T) {
 		t.Errorf("outage gauge = %v, want 0", val)
 	}
 }
+
+func loadAWSOutageFeed(t *testing.T) []byte {
+	t.Helper()
+	data, err := ioutil.ReadFile("testdata/aws_outage.rss")
+	if err != nil {
+		t.Fatalf("read feed: %v", err)
+	}
+	return data
+}
+
+func TestUpdateServiceStatus_AWSOutageFeed(t *testing.T) {
+	data := loadAWSOutageFeed(t)
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write(data)
+	}))
+	defer ts.Close()
+
+	serviceStatusGauge.Reset()
+	serviceIssueInfo.Reset()
+
+	cfg := ServiceFeed{Name: "aws-ec2", URL: ts.URL, Interval: 0}
+	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
+
+	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-ec2", "ok")); val != 0 {
+		t.Errorf("ok gauge = %v, want 0", val)
+	}
+	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-ec2", "service_issue")); val != 0 {
+		t.Errorf("service_issue gauge = %v, want 0", val)
+	}
+	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-ec2", "outage")); val != 1 {
+		t.Errorf("outage gauge = %v, want 1", val)
+	}
+
+	val := testutil.ToFloat64(serviceIssueInfo.WithLabelValues(
+		"aws-ec2",
+		"OUTAGE: Unable to Launch Instances",
+		"https://status.aws.amazon.com/",
+		"https://status.aws.amazon.com/#ec2-us-west-2_outage",
+	))
+	if val != 1 {
+		t.Errorf("service_issue_info gauge = %v, want 1", val)
+	}
+}

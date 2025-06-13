@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title><![CDATA[Amazon EC2 (Oregon) Service Status]]></title>
+    <link>https://status.aws.amazon.com/</link>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Jun 2025 10:02:26 PDT</lastBuildDate>
+    <generator>AWS Service Health Dashboard RSS Generator</generator>
+    <description><![CDATA[Receive the most recent update for events affecting the overall availability of Amazon EC2 in Oregon.]]></description>
+    <ttl>5</ttl>
+
+    <item>
+      <title><![CDATA[OUTAGE: Unable to Launch Instances]]></title>
+      <link>https://status.aws.amazon.com/</link>
+      <pubDate>Fri, 13 Jun 2025 09:38:42 PDT</pubDate>
+      <guid isPermaLink="false">https://status.aws.amazon.com/#ec2-us-west-2_outage</guid>
+      <description><![CDATA[We are investigating connectivity issues that are preventing instance launches.]]></description>
+    </item>
+
+  </channel>
+</rss>
