@@ -7,6 +7,9 @@ import (
 
 	"github.com/mmcdole/gofeed"
 	"github.com/sirupsen/logrus"
+
+	"github.com/4O4-Not-F0und/rss-exporter/internal/collectors"
+	"github.com/4O4-Not-F0und/rss-exporter/internal/connectors"
 )
 
 // monitorService periodically fetches the configured feed and updates metrics.
@@ -28,7 +31,7 @@ func monitorService(ctx context.Context, cfg ServiceFeed) {
 
 // updateServiceStatus fetches the feed once and records status information.
 func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
-	feed, err := fetchFeedWithRetry(cfg.URL, logger)
+	feed, err := connector.FetchFeedWithRetry(cfg.URL, logger)
 	if err != nil {
 		logger.Warnf("fetch feed failed: %v", err)
 		metricsMu.Lock()
@@ -51,11 +54,11 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 
 	state := "ok"
 	var activeItem *gofeed.Item
-	parser := parserForService(cfg.Provider, cfg.Name)
+	scraper := collectors.ScraperForService(cfg.Provider, cfg.Name)
 	var svcName, region string
 	seen := make(map[string]struct{})
 	for _, item := range feed.Items {
-		key := parser.IncidentKey(item)
+		key := scraper.IncidentKey(item)
 		if key != "" {
 			if _, ok := seen[key]; ok {
 				continue
@@ -67,13 +70,13 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 			// issue has been resolved; ignore older items
 			state = "ok"
 			activeItem = nil
-			svcName, region = parser.ServiceInfo(item)
+			svcName, region = scraper.ServiceInfo(item)
 			break
 		}
 		if active {
 			state = st
 			activeItem = item
-			svcName, region = parser.ServiceInfo(item)
+			svcName, region = scraper.ServiceInfo(item)
 			break
 		}
 	}
@@ -81,7 +84,7 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 	var info *issueInfo
 	if activeItem != nil {
 		if svcName == "" && region == "" {
-			svcName, region = parser.ServiceInfo(activeItem)
+			svcName, region = scraper.ServiceInfo(activeItem)
 		}
 		info = &issueInfo{
 			ServiceName: svcName,

@@ -1,4 +1,4 @@
-package exporter
+package connector
 
 import (
 	"context"
@@ -13,8 +13,8 @@ const (
 	defaultFetchRetries = 3
 )
 
-// fetchFeedWithRetry retrieves the feed URL with exponential backoff retries.
-func fetchFeedWithRetry(url string, logger *logrus.Entry) (*gofeed.Feed, error) {
+// FetchFeedWithRetry retrieves the feed URL with exponential backoff retries.
+func FetchFeedWithRetry(url string, logger *logrus.Entry) (*gofeed.Feed, error) {
 	backoff := time.Second
 	var lastErr error
 	for i := 1; i <= defaultFetchRetries; i++ {

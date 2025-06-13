@@ -1,4 +1,4 @@
-package exporter
+package collectors
 
 import (
 	"strings"
@@ -6,10 +6,9 @@ import (
 	"github.com/mmcdole/gofeed"
 )
 
-// ItemParser extracts provider-specific information from a feed item.
-// ItemParser extracts provider-specific information from a feed item and
+// Scraper extracts provider-specific information from a feed item and
 // also provides a deduplication key used to filter repeated entries.
-type ItemParser interface {
+type Scraper interface {
 	// ServiceInfo returns the service name and region associated with the item.
 	ServiceInfo(item *gofeed.Item) (serviceName, region string)
 	// IncidentKey returns a stable identifier for the incident represented
@@ -20,7 +19,7 @@ type ItemParser interface {
 type awsParser struct{}
 
 func (awsParser) ServiceInfo(item *gofeed.Item) (string, string) {
-	return parseAWSGUID(item.GUID)
+	return ParseAWSGUID(item.GUID)
 }
 
 func (awsParser) IncidentKey(item *gofeed.Item) string {
@@ -101,8 +100,8 @@ func (genericParser) IncidentKey(item *gofeed.Item) string {
 	return strings.TrimSpace(item.Title)
 }
 
-// parserForService selects a parser based on the provider or service name.
-func parserForService(provider, service string) ItemParser {
+// ScraperForService selects a scraper based on the provider or service name.
+func ScraperForService(provider, service string) Scraper {
 	p := strings.ToLower(provider)
 	switch p {
 	case "aws":

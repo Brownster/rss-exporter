@@ -56,21 +56,21 @@ services:
 ```
 
 The `services` section lists feeds to poll. `interval` is in seconds. Each entry
-can optionally specify a `provider` to explicitly select the parser used for
+can optionally specify a `provider` to explicitly select the scraper used for
 that service. When omitted, the provider is inferred from the service name.
 
 ### Provider Modules
 
-The exporter includes dedicated parsers for several cloud providers:
+The exporter includes dedicated scrapers for several cloud providers:
 
 * **aws** – parses AWS Health RSS feeds and extracts service and region.
 * **gcp** – handles Google Cloud status feeds.
 * **azure** – parses Azure status feeds and extracts service and region.
 
-Any other value falls back to the generic parser. Provider names like
-`cloudflare`, `genesyscloud`, `okta`, or `openai` all use the generic parser.
+Any other value falls back to the generic scraper. Provider names like
+`cloudflare`, `genesyscloud`, `okta`, or `openai` all use the generic collector.
 When the `provider` field is omitted, the service name is inspected to select a
-suitable parser.
+suitable scraper.
 
 ## Exposed Metrics
 
