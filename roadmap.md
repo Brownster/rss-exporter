@@ -10,9 +10,9 @@ This document outlines the planned enhancements to transform RSS Exporter into a
 ## Planned
 
 ### Provider-Specific Parsing
-- [ ] Implement dedicated parsers for AWS, GCP, Azure, and other providers to handle unique feed formats
-- [ ] Extend `parseAWSGUID` to include additional AWS feed structures
-- [ ] Provide an interface so each provider reports service name, region, and status consistently
+- [x] Implement dedicated parsers for AWS, GCP, Azure, and other providers to handle unique feed formats
+- [x] Extend `parseAWSGUID` to include additional AWS feed structures
+- [x] Provide an interface so each provider reports service name, region, and status consistently
 
 ### Feed Deduplication
 - [ ] Enhance `incidentKey` or create provider-specific deduplication logic for repeated incident entries
