@@ -102,6 +102,9 @@ To probe an RSS feed, send a GET request to the configured `probe_path`. The beh
       * Example: `target=https://www.rssboard.org/files/sample-rss-2.xml`
   * `timeout` (int, optional): The timeout for this specific probe request in seconds. This overrides the `default_timeout` value set in the configuration file. If not provided, negative, or zero, the `default_timeout` from the configuration is used.
       * Example: `timeout=15`
+  * `max_redirections` (int, optional): Maximum number of HTTP redirects to follow. `0` disables following redirects.
+      * Default: `0`
+      * Example: `max_redirections=3`
   * `valid_status` (string, optional): A **comma-separated** list of HTTP status codes that are considered successful for the probe.
       * Default: `"200"`
       * Example: `valid_status=200,201,204`
@@ -121,16 +124,17 @@ To probe an RSS feed, send a GET request to the configured `probe_path`. The beh
 Assuming the exporter is running on `localhost:9191` with the default `probe_path` (`/probe`):
 
 ```
-http://localhost:9191/probe?target=https://rss.example.com/files/sample-rss-2.xml&timeout=20&valid_status=200&fail_on_empty_items=1&peek_resp_headers_log=Server,Content-Type&peek_resp_headers_labels=Server
+http://localhost:9191/probe?target=https://rss.example.com/files/sample-rss-2.xml&timeout=20&max_redirections=2&valid_status=200&fail_on_empty_items=1&peek_resp_headers_log=Server,Content-Type&peek_resp_headers_labels=Server
 ```
 
 This request will:
 
 1.  Probe the RSS feed at `https://rss.example.com/files/sample-rss-2.xml`.
 2.  Set a timeout of 20 seconds for this probe.
-3.  Consider only HTTP status code 200 as successful.
-4.  Mark the probe as failed if the feed has no items.
-5.  Log the values of `Server` and `Content-Type` response headers.
+3.  Allow up to 2 HTTP redirects when fetching the feed.
+4.  Consider only HTTP status code 200 as successful.
+5.  Mark the probe as failed if the feed has no items.
+6.  Log the values of `Server` and `Content-Type` response headers.
 
 ## Exposed Metrics
 

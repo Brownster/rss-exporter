@@ -24,7 +24,7 @@ const (
 	namespace                     = "rss_exporter"
 	defaultTimeout                = 10 * time.Second
 	defaultConnectTimeout         = 5 * time.Second
-	defaultAllowedMaxRedirection  = 0
+	defaultAllowedMaxRedirections = 0
 	defaultValidStatus            = "200"
 	defaultLogRespBodyLengthLimit = 2048
 )
@@ -59,9 +59,10 @@ type ProbeRSSOpts struct {
 	// It corresponds to the 'timeout' HTTP parameter.
 	Timeout time.Duration
 
-	// MaxRedirection is the maximum number of redirects to follow.
-	// TODO: Define and implement redirection handling.
-	MaxRedirection int
+	// MaxRedirections specifies the maximum number of redirects to follow.
+	// It corresponds to the 'max_redirections' HTTP parameter.
+	// A value of 0 disables following redirects entirely.
+	MaxRedirections int
 
 	// LogRespBodyOnFailure controls whether the response body is logged if the probe fails.
 	// Response body content will be truncated if reached maximum length and encoded in base64.
@@ -96,6 +97,7 @@ func newProbeRSSOpts() (opts *ProbeRSSOpts) {
 		ValidStatusCodes:      make([]int, 0),
 		PeekRespHeadersLog:    make([]string, 0),
 		PeekRespHeadersLabels: make([]string, 0),
+		MaxRedirections:       defaultAllowedMaxRedirections,
 	}
 }
 
@@ -199,7 +201,7 @@ func probeRSS(opts *ProbeRSSOpts, logger *logrus.Entry) {
 		Transport: customTransport,
 		Timeout:   opts.Timeout,
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
-			if len(via) >= opts.MaxRedirection {
+			if len(via) > opts.MaxRedirections {
 				logger.Traceln("reached max redirection times, using last response")
 				return http.ErrUseLastResponse
 			}
@@ -369,8 +371,14 @@ func probeHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// TODO: Max Redirection
-	maxRedirection := defaultAllowedMaxRedirection
+	maxRedirections := defaultAllowedMaxRedirections
+	if mr, err := parseQuery(&urlQueries, "max_redirections", defaultAllowedMaxRedirections); err != nil {
+		logger.Warnf("Invalid max_redirections value: %v. Using default: %d", err, maxRedirections)
+	} else if mr < 0 {
+		logger.Warnf("Invalid max_redirections value '%d' (must be non-negative). Using default: %d", mr, maxRedirections)
+	} else {
+		maxRedirections = mr
+	}
 
 	// Peek response headers log
 	var respHdrs = []string{}
@@ -391,7 +399,7 @@ func probeHandler(w http.ResponseWriter, r *http.Request) {
 	opts.Target = target
 	opts.Timeout = probeTimeout
 	opts.Registry = registry
-	opts.MaxRedirection = maxRedirection
+	opts.MaxRedirections = maxRedirections
 	opts.ValidStatusCodes = validStatusCodes
 	opts.PeekRespHeadersLog = respHdrs
 	opts.PeekRespHeadersLabels = respHdrsLabels
