@@ -17,9 +17,6 @@ services:
   - name: azure
     url: https://azurestatuscdn.azureedge.net/en-gb/status/feed
     interval: 300
-  - name: zoom
-    url: https://status.zoom.us/history.atom
-    interval: 300
   - name: cloudflare
     url: https://www.cloudflarestatus.com/history.atom
     interval: 300
