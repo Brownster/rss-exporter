@@ -74,3 +74,10 @@ rss_exporter_service_status{service="okta",state="service_issue"} 0
 rss_exporter_service_status{service="openai",state="ok"} 0
 rss_exporter_service_status{service="openai",state="outage"} 1
 rss_exporter_service_status{service="openai",state="service_issue"} 0
+
+## Graceful Shutdown
+
+The exporter now listens for `SIGINT` and `SIGTERM` signals. All service
+monitoring goroutines and the HTTP server share a common context that is
+cancelled on shutdown, allowing workers to exit cleanly before the process
+terminates.
