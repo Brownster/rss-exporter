@@ -18,7 +18,7 @@ Each entry under `services` defines a single feed.
 | Field      | Description                                                      |
 |------------|------------------------------------------------------------------|
 | `name`     | Unique identifier for the service.                               |
-| `provider` | Optional parser to use (`aws`, `gcp`, `azure`, etc.). When omitted the service name is inspected. |
+| `provider` | Optional scraper to use (`aws`, `gcp`, `azure`, etc.). When omitted the service name is inspected. |
 | `customer` | Optional customer or tenant name. Appears as a metric label.     |
 | `url`      | RSS or Atom feed URL.                                            |
 | `interval` | Polling interval in seconds (defaults to `300` when not set).    |

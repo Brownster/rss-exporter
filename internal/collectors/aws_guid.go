@@ -1,15 +1,15 @@
-package exporter
+package collectors
 
 import "strings"
 
-// parseAWSGUID extracts the AWS service name and region from a GUID string.
+// ParseAWSGUID extracts the AWS service name and region from a GUID string.
 // GUIDs may appear in several formats, including:
 //
 //	https://status.aws.amazon.com/#service-region_12345
 //	arn:aws:health:region::event/AWS_SERVICE_eventid
 //
 // Unknown formats return empty strings.
-func parseAWSGUID(guid string) (serviceName, region string) {
+func ParseAWSGUID(guid string) (serviceName, region string) {
 	if idx := strings.Index(guid, "#"); idx != -1 {
 		guid = guid[idx+1:]
 	}
