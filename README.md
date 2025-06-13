@@ -25,6 +25,9 @@ services:
   - name: gcp
     url: https://status.cloud.google.com/en/feed.atom
     interval: 300
+  - name: aws
+    url: https://status.aws.amazon.com/rss/all.rss
+    interval: 300
 ```
 
 The `services` section lists feeds to poll. `interval` is in seconds.
