@@ -177,10 +177,11 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 	}
 
 	state := "ok"
-	if len(feed.Items) > 0 {
-		_, st, active := extractServiceStatus(feed.Items[0])
+	for _, item := range feed.Items {
+		_, st, active := extractServiceStatus(item)
 		if active {
 			state = st
+			break
 		}
 	}
 
