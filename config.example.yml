@@ -24,3 +24,13 @@ services:
   - name: okta
     url: https://feeds.feedburner.com/OktaTrustRSS
     interval: 300
+  # Example AWS feeds (also added automatically with the -aws flag)
+  - name: aws_apigateway_eu-central-1
+    url: https://status.aws.amazon.com/rss/apigateway-eu-central-1.rss
+    interval: 300
+  - name: aws_connect_eu-west-2
+    url: https://status.aws.amazon.com/rss/connect-eu-west-2.rss
+    interval: 300
+  - name: aws_athena_us-west-2
+    url: https://status.aws.amazon.com/rss/athena-us-west-2.rss
+    interval: 300
