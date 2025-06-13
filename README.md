@@ -14,7 +14,8 @@ It's highly configurable through a YAML file and allows for dynamic probe adjust
     * Overall probe success status.
     * Detailed probe duration (DNS lookup, TCP connection, TLS handshake, time to first byte, content transfer).
 * Feed content size.
-* Detects service incident keywords ("SERVICE ISSUE", "OUTAGE") and exposes service status metrics.
+* Detects service incident keywords ("SERVICE ISSUE", "OUTAGE"). Incidents labeled
+  "RESOLVED" reset the service status to `ok`.
 * Continuously monitors configured service feeds and updates their status metrics.
 * Configuration via a YAML file for listener settings, logging, default probe behavior.
 * Customizable probe behavior per request using HTTP query parameters (e.g., target URL, timeout, valid HTTP status codes).
