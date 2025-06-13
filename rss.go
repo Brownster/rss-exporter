@@ -370,6 +370,9 @@ func wrapFailureBody(logger *logrus.Entry, body []byte) *logrus.Entry {
 func parseStringSlice[T comparable](strs string, parseFunc func(string) (T, error)) (ret []T, err error) {
 	ret = make([]T, 0)
 	for str := range strings.SplitSeq(strs, ",") {
+		if len(str) == 0 {
+			continue
+		}
 		var sc T
 		sc, err = parseFunc(str)
 		if err != nil {
