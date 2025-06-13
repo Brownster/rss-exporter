@@ -26,7 +26,7 @@ It's highly configurable through a YAML file and allows for dynamic probe adjust
 
 #### Prerequisites
 
-* Go (latest stable version recommended) for building from source.
+* Go 1.24 or later for building from source.
 
 1.  Clone the repository:
     ```bash
