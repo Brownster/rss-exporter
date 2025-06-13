@@ -15,7 +15,7 @@ This document outlines the planned enhancements to transform RSS Exporter into a
 - [x] Provide an interface so each provider reports service name, region, and status consistently
 
 ### Feed Deduplication
-- [ ] Enhance `incidentKey` or create provider-specific deduplication logic for repeated incident entries
+- [x] Enhance `incidentKey` or create provider-specific deduplication logic for repeated incident entries
 
 ### Error Handling & Retries
 - [ ] Add retry logic with exponential backoff around feed fetching

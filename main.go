@@ -166,7 +166,7 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 	var svcName, region string
 	seen := make(map[string]struct{})
 	for _, item := range feed.Items {
-		key := incidentKey(item)
+		key := parser.IncidentKey(item)
 		if key != "" {
 			if _, ok := seen[key]; ok {
 				continue
@@ -210,11 +210,4 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 		Issue:    info,
 	}
 	metricsMu.Unlock()
-}
-
-func incidentKey(item *gofeed.Item) string {
-	if strings.Contains(item.Link, "status.cloud.google.com/incidents/") {
-		return item.Link
-	}
-	return ""
 }
