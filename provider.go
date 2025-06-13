@@ -101,8 +101,24 @@ func (genericParser) IncidentKey(item *gofeed.Item) string {
 	return strings.TrimSpace(item.Title)
 }
 
-// parserForService selects a parser based on the configured service name.
-func parserForService(service string) ItemParser {
+// parserForService selects a parser based on the provider or service name.
+func parserForService(provider, service string) ItemParser {
+	p := strings.ToLower(provider)
+	switch p {
+	case "aws":
+		return awsParser{}
+	case "gcp":
+		return gcpParser{}
+	case "azure":
+		return azureParser{}
+	case "":
+		// fall back to service name when provider not set
+	default:
+		if p != "" {
+			return genericParser{}
+		}
+	}
+
 	svc := strings.ToLower(service)
 	switch {
 	case strings.Contains(svc, "aws"):

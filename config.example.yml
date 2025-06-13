@@ -7,30 +7,38 @@ log_level: info
 
 services:
   - name: gcp
+    provider: gcp
     # customer defaults to the service name when omitted
     # customer: gcp
     url: https://status.cloud.google.com/en/feed.atom
     interval: 300
   - name: genesys-cloud
+    provider: genesyscloud
     url: https://status.mypurecloud.com/history.atom
     interval: 300
   - name: azure
+    provider: azure
     url: https://azurestatuscdn.azureedge.net/en-gb/status/feed
     interval: 300
   - name: cloudflare
+    provider: cloudflare
     url: https://www.cloudflarestatus.com/history.atom
     interval: 300
   - name: openai
+    provider: openai
     url: https://status.openai.com/history.atom
     interval: 300
   - name: Vattenfall-gcp
+    provider: gcp
     customer: Vattenfall
     url: https://status.cloud.google.com/en/vattenfall-specfic-feed.atom
     interval: 300
   - name: okta
+    provider: okta
     url: https://feeds.feedburner.com/OktaTrustRSS
     interval: 300
   # Example AWS feed
   - name: aws
+    provider: aws
     url: https://status.aws.amazon.com/rss/all.rss
     interval: 300

@@ -23,16 +23,20 @@ listen_port: 9091
 log_level: info
 services:
   - name: gcp
+    provider: gcp
     # customer defaults to the service name
     url: https://status.cloud.google.com/en/feed.atom
     interval: 300
   - name: Vattenfall-gcp
+    provider: gcp
     customer: Vattenfall
     url: https://status.cloud.google.com/en/vattenfall-specfic-feed.atom
     interval: 300
 ```
 
-The `services` section lists feeds to poll. `interval` is in seconds.
+The `services` section lists feeds to poll. `interval` is in seconds. Each entry
+can optionally specify a `provider` to explicitly select the parser used for
+that service. When omitted, the provider is inferred from the service name.
 
 ## Exposed Metrics
 
