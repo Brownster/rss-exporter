@@ -22,7 +22,7 @@ This document outlines the planned enhancements to transform RSS Exporter into a
 - [x] Surface errors through Prometheus metrics and logs
 
 ### Concurrency & Rate Control
-- [ ] Use worker pools or contexts to manage goroutines and enable graceful shutdown
+- [x] Use worker pools or contexts to manage goroutines and enable graceful shutdown
 
 ### Configuration Improvements
 - [ ] Allow specifying provider type per service in `config.yml` to select the appropriate parser

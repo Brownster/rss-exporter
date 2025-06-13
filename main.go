@@ -7,7 +7,9 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/mmcdole/gofeed"
@@ -116,16 +118,37 @@ func loadConfig(configFile string) (cfg Config, err error) {
 }
 
 func main() {
-	for _, svc := range appConfig.Services {
-		go monitorService(svc)
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
+
+	wg := startWorkers(ctx, appConfig.Services)
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", landingPageHandler)
+	mux.Handle("/metrics", promhttp.Handler())
+
+	srv := &http.Server{
+		Addr:    fmt.Sprintf("%s:%d", appConfig.ListenAddress, appConfig.ListenPort),
+		Handler: mux,
 	}
 
-	http.HandleFunc("/", landingPageHandler)
-	http.Handle("/metrics", promhttp.Handler())
+	go func() {
+		logrus.Infof("Listening at: %s", srv.Addr)
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			logrus.Fatalf("http server failed: %v", err)
+		}
+	}()
 
-	listenOn := fmt.Sprintf("%s:%d", appConfig.ListenAddress, appConfig.ListenPort)
-	logrus.Infof("Listening at: %s", listenOn)
-	logrus.Fatalln(http.ListenAndServe(listenOn, nil))
+	<-ctx.Done()
+	stop()
+
+	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(shutdownCtx); err != nil {
+		logrus.Errorf("server shutdown: %v", err)
+	}
+
+	wg.Wait()
 }
 
 func landingPageHandler(w http.ResponseWriter, r *http.Request) {
@@ -140,14 +163,19 @@ func landingPageHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(landingPageHTML))
 }
 
-func monitorService(cfg ServiceFeed) {
+func monitorService(ctx context.Context, cfg ServiceFeed) {
 	logger := logrus.WithField("service", cfg.Name)
 	ticker := time.NewTicker(time.Duration(cfg.Interval) * time.Second)
 	defer ticker.Stop()
 
 	for {
 		updateServiceStatus(cfg, logger)
-		<-ticker.C
+		select {
+		case <-ticker.C:
+			continue
+		case <-ctx.Done():
+			return
+		}
 	}
 }
 
