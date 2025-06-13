@@ -8,12 +8,10 @@ Build and run:
 
 ```bash
 go build -o rss_exporter .
-./rss_exporter -config /path/to/config.yml -aws
+./rss_exporter -config /path/to/config.yml
 ```
 
 Metrics are available at `http://<listen_address>:<listen_port>/metrics`.
-
-The optional `-aws` flag enables a predefined set of AWS status feeds.
 
 ## Configuration
 
