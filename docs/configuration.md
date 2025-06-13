@@ -7,7 +7,7 @@ The exporter is configured via a YAML file passed with the `-config` flag. The d
 | Field           | Description                         | Default |
 |-----------------|-------------------------------------|---------|
 | `listen_address`| Address to bind the HTTP server     | `0.0.0.0` |
-| `listen_port`   | Port for the HTTP server            | `9191` |
+| `listen_port`   | Port for the HTTP server            | `9091` |
 | `log_level`     | Log verbosity (`trace`, `debug`, `info`, `warn`) | `info` |
 | `services`      | List of RSS/Atom feeds to monitor   | - |
 
