@@ -83,8 +83,9 @@ type ProbeRSSOpts struct {
 	// It corresponds to the 'peek_resp_headers_log' HTTP parameter.
 	PeekRespHeadersLog []string
 
-	// PeekResponseHeadersLabels defines response headers to peek and write to labels.
-	// TODO: Implement this feature to peek specified response headers and write them as labels.
+	// PeekRespHeadersLabels defines response header names whose first values
+	// will be exposed as labels on the `probe_headers_info` metric.
+	// It corresponds to the 'peek_resp_headers_labels' HTTP parameter.
 	PeekRespHeadersLabels []string
 
 	Registry *prometheus.Registry
@@ -150,7 +151,25 @@ func probeRSS(opts *ProbeRSSOpts, logger *logrus.Entry) {
 			},
 			[]string{"target"},
 		)
+		rssProbeHeadersInfo *prometheus.GaugeVec
 	)
+
+	if len(opts.PeekRespHeadersLabels) > 0 {
+		labelNames := make([]string, 0, len(opts.PeekRespHeadersLabels)+1)
+		labelNames = append(labelNames, "target")
+		for _, hdr := range opts.PeekRespHeadersLabels {
+			labelNames = append(labelNames, strings.ReplaceAll(hdr, "-", "_"))
+		}
+		rssProbeHeadersInfo = prometheus.NewGaugeVec(
+			prometheus.GaugeOpts{
+				Namespace: namespace,
+				Name:      "probe_headers_info",
+				Help:      "Response headers specified via 'peek_resp_headers_labels'",
+			},
+			labelNames,
+		)
+		opts.Registry.MustRegister(rssProbeHeadersInfo)
+	}
 	opts.Registry.MustRegister(rssProbeDurationSec)
 	opts.Registry.MustRegister(rssProbeStatusCode)
 	opts.Registry.MustRegister(rssItemCount)
@@ -236,6 +255,15 @@ func probeRSS(opts *ProbeRSSOpts, logger *logrus.Entry) {
 			logFields[strings.ReplaceAll(logHdr, "-", "_")] = resp.Header.Get(logHdr)
 		}
 		logger = logger.WithFields(logFields)
+	}
+
+	if rssProbeHeadersInfo != nil {
+		vals := make([]string, 0, len(opts.PeekRespHeadersLabels)+1)
+		vals = append(vals, opts.Target)
+		for _, hdr := range opts.PeekRespHeadersLabels {
+			vals = append(vals, resp.Header.Get(hdr))
+		}
+		rssProbeHeadersInfo.WithLabelValues(vals...).Set(1)
 	}
 
 	rssProbeDurationSec.WithLabelValues(opts.Target, "first_resp_byte").Set(customTransport.current.FirstResponseByteDuration())
@@ -351,6 +379,13 @@ func probeHandler(w http.ResponseWriter, r *http.Request) {
 		respHdrs, _ = parseStringSlice(respHdrsLogStr, func(s string) (string, error) { return s, nil })
 	}
 
+	// Peek response headers labels
+	var respHdrsLabels = []string{}
+	respHdrsLabelsStr := urlQueries.Get("peek_resp_headers_labels")
+	if respHdrsLabelsStr != "" {
+		respHdrsLabels, _ = parseStringSlice(respHdrsLabelsStr, func(s string) (string, error) { return s, nil })
+	}
+
 	registry := prometheus.NewRegistry()
 	opts := newProbeRSSOpts()
 	opts.Target = target
@@ -359,6 +394,7 @@ func probeHandler(w http.ResponseWriter, r *http.Request) {
 	opts.MaxRedirection = maxRedirection
 	opts.ValidStatusCodes = validStatusCodes
 	opts.PeekRespHeadersLog = respHdrs
+	opts.PeekRespHeadersLabels = respHdrsLabels
 	opts.LogRespBodyOnFailure = len(urlQueries.Get("log_resp_body_on_failure")) > 0
 	opts.FailOnEmptyItems = len(urlQueries.Get("fail_on_empty_items")) > 0
 	probeRSS(opts, logger)
