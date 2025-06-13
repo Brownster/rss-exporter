@@ -161,3 +161,5 @@ All metrics exposed by the exporter are prefixed with `rss_exporter_`. The `targ
   * `rss_exporter_service_status{service="<name>",state="<status>"}` (Gauge):
     Tracks the current state of each configured service feed. `state` can be
     `ok`, `service_issue`, or `outage`.
+  * `rss_exporter_service_issue_info{service="<name>",title="<item_title>",link="<item_link>",guid="<item_guid>"}` (Gauge):
+    Set to `1` when a service has an active issue. The metric is removed once the service returns to `ok`.

@@ -83,6 +83,7 @@ func init() {
 	}
 
 	prometheus.MustRegister(serviceStatusGauge)
+	prometheus.MustRegister(serviceIssueInfo)
 
 	logLevel, ok := logLevels[appConfig.LogLevel]
 	if ok {
@@ -177,12 +178,19 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 	}
 
 	state := "ok"
+	var activeItem *gofeed.Item
 	for _, item := range feed.Items {
 		_, st, active := extractServiceStatus(item)
 		if active {
 			state = st
+			activeItem = item
 			break
 		}
+	}
+
+	serviceIssueInfo.DeletePartialMatch(prometheus.Labels{"service": cfg.Name})
+	if activeItem != nil {
+		serviceIssueInfo.WithLabelValues(cfg.Name, strings.TrimSpace(activeItem.Title), activeItem.Link, activeItem.GUID).Set(1)
 	}
 
 	for _, s := range []string{"ok", "service_issue", "outage"} {
