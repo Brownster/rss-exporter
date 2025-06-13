@@ -6,7 +6,6 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/prometheus/client_golang/prometheus/testutil"
 	"github.com/sirupsen/logrus"
 )
 
@@ -44,19 +43,19 @@ func TestUpdateServiceStatus_AWSFeed(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "aws", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws", "aws", "ok")); val != 1 {
-		t.Errorf("ok gauge = %v, want 1", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws", "aws", "service_issue")); val != 0 {
-		t.Errorf("service_issue gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws", "aws", "outage")); val != 0 {
-		t.Errorf("outage gauge = %v, want 0", val)
+	metricsMu.Lock()
+	sm := metricsData["aws"]
+	metricsMu.Unlock()
+
+	if sm.State != "ok" {
+		t.Errorf("state = %v, want ok", sm.State)
 	}
 }
 
@@ -67,19 +66,19 @@ func TestUpdateServiceStatus_AWSAthenaIssueFeed(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "aws-athena", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-athena", "aws-athena", "ok")); val != 0 {
-		t.Errorf("ok gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-athena", "aws-athena", "service_issue")); val != 1 {
-		t.Errorf("service_issue gauge = %v, want 1", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-athena", "aws-athena", "outage")); val != 0 {
-		t.Errorf("outage gauge = %v, want 0", val)
+	metricsMu.Lock()
+	sm := metricsData["aws-athena"]
+	metricsMu.Unlock()
+
+	if sm.State != "service_issue" {
+		t.Errorf("state = %v, want service_issue", sm.State)
 	}
 }
 
@@ -90,23 +89,22 @@ func TestServiceIssueInfoMetric(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
-	serviceIssueInfo.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "aws-athena", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	val := testutil.ToFloat64(serviceIssueInfo.WithLabelValues(
-		"aws-athena",
-		"aws-athena",
-		"athena",
-		"us-west-2",
-		"Service impact: Increased Queue Processing Time",
-		"https://status.aws.amazon.com/",
-		"https://status.aws.amazon.com/#athena-us-west-2_1749832722",
-	))
-	if val != 1 {
-		t.Errorf("service_issue_info gauge = %v, want 1", val)
+	metricsMu.Lock()
+	sm := metricsData["aws-athena"]
+	metricsMu.Unlock()
+
+	if sm.Issue == nil {
+		t.Fatal("expected issue info")
+	}
+	if sm.Issue.ServiceName != "athena" || sm.Issue.Region != "us-west-2" {
+		t.Errorf("issue info mismatch: %+v", sm.Issue)
 	}
 }
 
@@ -117,19 +115,19 @@ func TestUpdateServiceStatus_AWSMultiItemFeed(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "aws-multi", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-multi", "aws-multi", "ok")); val != 1 {
-		t.Errorf("ok gauge = %v, want 1", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-multi", "aws-multi", "service_issue")); val != 0 {
-		t.Errorf("service_issue gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-multi", "aws-multi", "outage")); val != 0 {
-		t.Errorf("outage gauge = %v, want 0", val)
+	metricsMu.Lock()
+	sm := metricsData["aws-multi"]
+	metricsMu.Unlock()
+
+	if sm.State != "ok" {
+		t.Errorf("state = %v, want ok", sm.State)
 	}
 }
 
@@ -149,32 +147,21 @@ func TestUpdateServiceStatus_AWSOutageFeed(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
-	serviceIssueInfo.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "aws-ec2", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-ec2", "aws-ec2", "ok")); val != 0 {
-		t.Errorf("ok gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-ec2", "aws-ec2", "service_issue")); val != 0 {
-		t.Errorf("service_issue gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-ec2", "aws-ec2", "outage")); val != 1 {
-		t.Errorf("outage gauge = %v, want 1", val)
-	}
+	metricsMu.Lock()
+	sm := metricsData["aws-ec2"]
+	metricsMu.Unlock()
 
-	val := testutil.ToFloat64(serviceIssueInfo.WithLabelValues(
-		"aws-ec2",
-		"aws-ec2",
-		"ec2",
-		"us-west-2",
-		"OUTAGE: Unable to Launch Instances",
-		"https://status.aws.amazon.com/",
-		"https://status.aws.amazon.com/#ec2-us-west-2_outage",
-	))
-	if val != 1 {
-		t.Errorf("service_issue_info gauge = %v, want 1", val)
+	if sm.State != "outage" {
+		t.Errorf("state = %v, want outage", sm.State)
+	}
+	if sm.Issue == nil || sm.Issue.ServiceName != "ec2" || sm.Issue.Region != "us-west-2" {
+		t.Errorf("issue info mismatch: %+v", sm.Issue)
 	}
 }

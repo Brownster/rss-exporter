@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/mmcdole/gofeed"
-	"github.com/prometheus/client_golang/prometheus/testutil"
 	"github.com/sirupsen/logrus"
 )
 
@@ -48,18 +47,18 @@ func TestUpdateServiceStatus_OpenAIResolved(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "openai", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("openai", "openai", "ok")); val != 1 {
-		t.Errorf("ok gauge = %v, want 1", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("openai", "openai", "service_issue")); val != 0 {
-		t.Errorf("service_issue gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("openai", "openai", "outage")); val != 0 {
-		t.Errorf("outage gauge = %v, want 0", val)
+	metricsMu.Lock()
+	sm := metricsData["openai"]
+	metricsMu.Unlock()
+
+	if sm.State != "ok" {
+		t.Errorf("state = %v, want ok", sm.State)
 	}
 }

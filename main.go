@@ -75,8 +75,7 @@ func init() {
 		}
 	}
 
-	prometheus.MustRegister(serviceStatusGauge)
-	prometheus.MustRegister(serviceIssueInfo)
+	prometheus.MustRegister(metricsCollector{})
 
 	logLevel, ok := logLevels[appConfig.LogLevel]
 	if ok {
@@ -108,9 +107,6 @@ func loadConfig(configFile string) (cfg Config, err error) {
 	for i := range cfg.Services {
 		if cfg.Services[i].Interval <= 0 {
 			cfg.Services[i].Interval = 300
-		}
-		if cfg.Services[i].Customer == "" {
-			cfg.Services[i].Customer = cfg.Services[i].Name
 		}
 	}
 
@@ -189,24 +185,25 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 		}
 	}
 
-	cust := cfg.Customer
-	if cust == "" {
-		cust = cfg.Name
-	}
-
-	serviceIssueInfo.DeletePartialMatch(prometheus.Labels{"service": cfg.Name, "customer": cust})
+	var info *issueInfo
 	if activeItem != nil {
 		svcName, region := parseAWSGUID(activeItem.GUID)
-		serviceIssueInfo.WithLabelValues(cfg.Name, cust, svcName, region, strings.TrimSpace(activeItem.Title), activeItem.Link, activeItem.GUID).Set(1)
+		info = &issueInfo{
+			ServiceName: svcName,
+			Region:      region,
+			Title:       strings.TrimSpace(activeItem.Title),
+			Link:        activeItem.Link,
+			GUID:        activeItem.GUID,
+		}
 	}
 
-	for _, s := range []string{"ok", "service_issue", "outage"} {
-		val := 0.0
-		if s == state {
-			val = 1
-		}
-		serviceStatusGauge.WithLabelValues(cfg.Name, cust, s).Set(val)
+	metricsMu.Lock()
+	metricsData[cfg.Name] = &serviceMetrics{
+		Customer: cfg.Customer,
+		State:    state,
+		Issue:    info,
 	}
+	metricsMu.Unlock()
 }
 
 func incidentKey(item *gofeed.Item) string {

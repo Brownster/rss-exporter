@@ -8,7 +8,6 @@ import (
 	"testing"
 
 	"github.com/mmcdole/gofeed"
-	"github.com/prometheus/client_golang/prometheus/testutil"
 	"github.com/sirupsen/logrus"
 )
 
@@ -80,19 +79,19 @@ func TestUpdateServiceStatus_GCPFeed(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "gcp", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "gcp", "ok")); val != 1 {
-		t.Errorf("ok gauge = %v, want 1", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "gcp", "service_issue")); val != 0 {
-		t.Errorf("service_issue gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "gcp", "outage")); val != 0 {
-		t.Errorf("outage gauge = %v, want 0", val)
+	metricsMu.Lock()
+	sm := metricsData["gcp"]
+	metricsMu.Unlock()
+
+	if sm.State != "ok" {
+		t.Errorf("state = %v, want ok", sm.State)
 	}
 }
 
@@ -120,18 +119,18 @@ func TestUpdateServiceStatus_GCPResolvedThenUpdate(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "gcp", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "gcp", "ok")); val != 1 {
-		t.Errorf("ok gauge = %v, want 1", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "gcp", "service_issue")); val != 0 {
-		t.Errorf("service_issue gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("gcp", "gcp", "outage")); val != 0 {
-		t.Errorf("outage gauge = %v, want 0", val)
+	metricsMu.Lock()
+	sm := metricsData["gcp"]
+	metricsMu.Unlock()
+
+	if sm.State != "ok" {
+		t.Errorf("state = %v, want ok", sm.State)
 	}
 }

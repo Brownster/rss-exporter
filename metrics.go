@@ -2,6 +2,7 @@ package main
 
 import (
 	"strings"
+	"sync"
 
 	"github.com/mmcdole/gofeed"
 	"github.com/prometheus/client_golang/prometheus"
@@ -9,24 +10,79 @@ import (
 
 const namespace = "rss_exporter"
 
+type issueInfo struct {
+	ServiceName string
+	Region      string
+	Title       string
+	Link        string
+	GUID        string
+}
+
+type serviceMetrics struct {
+	Customer string
+	State    string
+	Issue    *issueInfo
+}
+
 var (
-	serviceStatusGauge = prometheus.NewGaugeVec(
-		prometheus.GaugeOpts{
-			Namespace: namespace,
-			Name:      "service_status",
-			Help:      "Current service status parsed from configured feeds.",
-		},
-		[]string{"service", "customer", "state"},
-	)
-	serviceIssueInfo = prometheus.NewGaugeVec(
-		prometheus.GaugeOpts{
-			Namespace: namespace,
-			Name:      "service_issue_info",
-			Help:      "Details for the currently active service issue.",
-		},
-		[]string{"service", "customer", "service_name", "region", "title", "link", "guid"},
-	)
+	metricsMu   sync.Mutex
+	metricsData = map[string]*serviceMetrics{}
 )
+
+type metricsCollector struct{}
+
+func (metricsCollector) Describe(ch chan<- *prometheus.Desc) {}
+
+func (metricsCollector) Collect(ch chan<- prometheus.Metric) {
+	metricsMu.Lock()
+	defer metricsMu.Unlock()
+
+	for svc, sm := range metricsData {
+		for _, s := range []string{"ok", "service_issue", "outage"} {
+			val := 0.0
+			if sm.State == s {
+				val = 1
+			}
+			var (
+				labels []string
+				values []string
+			)
+			if sm.Customer != "" {
+				labels = []string{"service", "customer", "state"}
+				values = []string{svc, sm.Customer, s}
+			} else {
+				labels = []string{"service", "state"}
+				values = []string{svc, s}
+			}
+			desc := prometheus.NewDesc(
+				prometheus.BuildFQName(namespace, "", "service_status"),
+				"Current service status parsed from configured feeds.",
+				labels, nil,
+			)
+			ch <- prometheus.MustNewConstMetric(desc, prometheus.GaugeValue, val, values...)
+		}
+
+		if sm.Issue != nil {
+			var (
+				labels []string
+				values []string
+			)
+			if sm.Customer != "" {
+				labels = []string{"service", "customer", "service_name", "region", "title", "link", "guid"}
+				values = []string{svc, sm.Customer, sm.Issue.ServiceName, sm.Issue.Region, sm.Issue.Title, sm.Issue.Link, sm.Issue.GUID}
+			} else {
+				labels = []string{"service", "service_name", "region", "title", "link", "guid"}
+				values = []string{svc, sm.Issue.ServiceName, sm.Issue.Region, sm.Issue.Title, sm.Issue.Link, sm.Issue.GUID}
+			}
+			desc := prometheus.NewDesc(
+				prometheus.BuildFQName(namespace, "", "service_issue_info"),
+				"Details for the currently active service issue.",
+				labels, nil,
+			)
+			ch <- prometheus.MustNewConstMetric(desc, prometheus.GaugeValue, 1, values...)
+		}
+	}
+}
 
 func extractServiceStatus(item *gofeed.Item) (service string, state string, active bool) {
 	upper := func(s string) string {
