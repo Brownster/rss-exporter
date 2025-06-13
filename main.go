@@ -17,19 +17,17 @@ import (
 )
 
 const (
-	defaultProbePath     = "/probe"
 	defaultListenAddress = "0.0.0.0"
 	defaultListenPort    = 9191
 	defaultConfigFile    = "config.yml"
+	defaultTimeout       = 10 * time.Second
 )
 
 type Config struct {
-	ListenAddress  string        `yaml:"listen_address"`
-	ListenPort     int           `yaml:"listen_port"`
-	LogLevel       string        `yaml:"log_level"`
-	ProbePath      string        `yaml:"probe_path"`
-	DefaultTimeout int           `yaml:"default_timeout"`
-	Services       []ServiceFeed `yaml:"services"`
+	ListenAddress string        `yaml:"listen_address"`
+	ListenPort    int           `yaml:"listen_port"`
+	LogLevel      string        `yaml:"log_level"`
+	Services      []ServiceFeed `yaml:"services"`
 }
 
 type ServiceFeed struct {
@@ -40,7 +38,7 @@ type ServiceFeed struct {
 
 var (
 	appConfig Config
-	enableAWS bool
+	awsFlag   bool
 	logLevels = map[string]logrus.Level{
 		"trace": logrus.TraceLevel,
 		"debug": logrus.DebugLevel,
@@ -52,7 +50,7 @@ var (
 func init() {
 	var configFile string
 	flag.StringVar(&configFile, "config", defaultConfigFile, "path to config file")
-	flag.BoolVar(&enableAWS, "enable-aws-feeds", false, "monitor default AWS service feeds")
+	flag.BoolVar(&awsFlag, "aws", false, "monitor default AWS service feeds")
 	// Skip parsing if running under "go test".
 	if !strings.HasSuffix(os.Args[0], ".test") {
 		flag.Parse()
@@ -78,7 +76,7 @@ func init() {
 		}
 	}
 
-	if enableAWS {
+	if awsFlag {
 		appConfig.Services = append(appConfig.Services, defaultAWSServiceFeeds()...)
 	}
 
@@ -97,8 +95,6 @@ func loadConfig(configFile string) (cfg Config, err error) {
 
 	cfg.ListenAddress = defaultListenAddress
 	cfg.ListenPort = defaultListenPort
-	cfg.ProbePath = defaultProbePath
-	cfg.DefaultTimeout = int(defaultTimeout.Seconds())
 
 	yamlFile, err := os.ReadFile(configFile)
 	if err != nil {
@@ -120,12 +116,6 @@ func loadConfig(configFile string) (cfg Config, err error) {
 		}
 	}
 
-	if cfg.ProbePath == "" {
-		cfg.ProbePath = defaultProbePath
-	} else if cfg.ProbePath[0] != '/' {
-		cfg.ProbePath = "/" + cfg.ProbePath
-	}
-
 	logrus.Infof("loaded config from '%s'", configFile)
 	return cfg, nil
 }
@@ -135,7 +125,6 @@ func main() {
 		go monitorService(svc)
 	}
 
-	http.HandleFunc(appConfig.ProbePath, probeHandler)
 	http.HandleFunc("/", landingPageHandler)
 	http.Handle("/metrics", promhttp.Handler())
 
@@ -146,13 +135,13 @@ func main() {
 
 func landingPageHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	landingPageHTML := fmt.Sprintf(`<html>
+	landingPageHTML := `<html>
                         <head><title>RSS Exporter</title></head>
                         <body>
                         <h1>RSS Exporter</h1>
-                        <p>Probe Example: <code>%s?target=https://example.com/files/sample-rss-2.xml&timeout=10</code></p>
+                        <p>Metrics available at <code>/metrics</code></p>
                         </body>
-                        </html>`, appConfig.ProbePath)
+                        </html>`
 	w.Write([]byte(landingPageHTML))
 }
 
@@ -168,7 +157,7 @@ func monitorService(cfg ServiceFeed) {
 }
 
 func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(appConfig.DefaultTimeout)*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTimeout)
 	defer cancel()
 
 	feed, err := gofeed.NewParser().ParseURLWithContext(cfg.URL, ctx)

@@ -4,8 +4,6 @@ listen_address: 127.0.0.1
 listen_port: 9091
 # Valid levels: trace, debug, info, warn
 log_level: info
-probe_path: /probe
-default_timeout: 10
 
 services:
   - name: gcp
