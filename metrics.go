@@ -29,7 +29,7 @@ var (
 )
 
 func extractServiceStatus(item *gofeed.Item) (service string, state string, active bool) {
-	text := strings.ToUpper(strings.TrimSpace(item.Title + " " + item.Description))
+	text := strings.ToUpper(strings.TrimSpace(item.Title))
 	switch {
 	case strings.Contains(text, "RESOLVED"):
 		state = "resolved"

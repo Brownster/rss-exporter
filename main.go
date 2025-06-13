@@ -168,7 +168,15 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 
 	state := "ok"
 	var activeItem *gofeed.Item
+	seen := make(map[string]struct{})
 	for _, item := range feed.Items {
+		key := incidentKey(item)
+		if key != "" {
+			if _, ok := seen[key]; ok {
+				continue
+			}
+			seen[key] = struct{}{}
+		}
 		_, st, active := extractServiceStatus(item)
 		if active {
 			state = st
@@ -189,4 +197,11 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 		}
 		serviceStatusGauge.WithLabelValues(cfg.Name, s).Set(val)
 	}
+}
+
+func incidentKey(item *gofeed.Item) string {
+	if strings.Contains(item.Link, "status.cloud.google.com/incidents/") {
+		return item.Link
+	}
+	return ""
 }
