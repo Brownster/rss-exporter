@@ -162,6 +162,8 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 
 	state := "ok"
 	var activeItem *gofeed.Item
+	parser := parserForService(cfg.Name)
+	var svcName, region string
 	seen := make(map[string]struct{})
 	for _, item := range feed.Items {
 		key := incidentKey(item)
@@ -176,18 +178,22 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 			// issue has been resolved; ignore older items
 			state = "ok"
 			activeItem = nil
+			svcName, region = parser.ServiceInfo(item)
 			break
 		}
 		if active {
 			state = st
 			activeItem = item
+			svcName, region = parser.ServiceInfo(item)
 			break
 		}
 	}
 
 	var info *issueInfo
 	if activeItem != nil {
-		svcName, region := parseAWSGUID(activeItem.GUID)
+		if svcName == "" && region == "" {
+			svcName, region = parser.ServiceInfo(activeItem)
+		}
 		info = &issueInfo{
 			ServiceName: svcName,
 			Region:      region,
