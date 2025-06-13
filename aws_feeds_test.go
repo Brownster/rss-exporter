@@ -4,13 +4,14 @@ import "testing"
 
 func TestDefaultAWSServiceFeeds(t *testing.T) {
 	feeds := defaultAWSServiceFeeds()
-	if len(feeds) != 2 {
-		t.Fatalf("expected 2 feeds got %d", len(feeds))
+	if len(feeds) != 3 {
+		t.Fatalf("expected 3 feeds got %d", len(feeds))
 	}
 
 	want := map[string]string{
 		"aws_apigateway_eu-central-1": "https://status.aws.amazon.com/rss/apigateway-eu-central-1.rss",
 		"aws_connect_eu-west-2":       "https://status.aws.amazon.com/rss/connect-eu-west-2.rss",
+		"aws_athena_us-west-2":        "https://status.aws.amazon.com/rss/athena-us-west-2.rss",
 	}
 
 	for _, f := range feeds {

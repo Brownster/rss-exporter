@@ -406,7 +406,7 @@ func extractServiceStatus(item *gofeed.Item) (service string, state string, acti
 		state = "resolved"
 	case strings.Contains(text, "OUTAGE"):
 		state = "outage"
-	case strings.Contains(text, "SERVICE ISSUE"):
+	case strings.Contains(text, "SERVICE ISSUE"), strings.Contains(text, "SERVICE IMPACT"):
 		state = "service_issue"
 	}
 
