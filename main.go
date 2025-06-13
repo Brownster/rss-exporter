@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/mmcdole/gofeed"
@@ -49,7 +50,10 @@ var (
 func init() {
 	var configFile string
 	flag.StringVar(&configFile, "config", defaultConfigFile, "path to config file")
-	flag.Parse()
+	// Skip parsing if running under "go test".
+	if !strings.HasSuffix(os.Args[0], ".test") {
+		flag.Parse()
+	}
 
 	logrus.SetLevel(logrus.InfoLevel)
 	logrus.SetOutput(os.Stdout)
@@ -64,7 +68,11 @@ func init() {
 	var err error
 	appConfig, err = loadConfig(configFile)
 	if err != nil {
-		logrus.Fatalf("load config failed: %v", err)
+		if strings.HasSuffix(os.Args[0], ".test") {
+			logrus.Warnf("load config failed: %v", err)
+		} else {
+			logrus.Fatalf("load config failed: %v", err)
+		}
 	}
 
 	prometheus.MustRegister(serviceStatusGauge)

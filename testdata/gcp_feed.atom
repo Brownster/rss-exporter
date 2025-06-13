@@ -1,0 +1,17 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>Google Cloud Service Health Updates</title>
+<updated>2025-06-13T06:34:31+00:00</updated>
+<link href="https://status.cloud.google.com/" rel="alternate" type="text/html"/>
+<link href="https://status.cloud.google.com/en/feed.atom" rel="self"/>
+<author>
+<name>Google Cloud</name>
+</author>
+<id>https://status.cloud.google.com/</id>
+<entry>
+<title>RESOLVED: Multiple GCP products are experiencing Service issues</title>
+<link href="https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW" rel="alternate" type="text/html"/>
+<id>tag:status.cloud.google.com,2025:feed:ow5i3PPK96RduMcb1SsW.d7LGbBM4QxfQYfr55s1Q</id>
+<updated>2025-06-13T06:34:31+00:00</updated>
+<summary type="html"><p>Incident began at <strong>2025-06-12 10:51</strong> and ended at <strong>2025-06-12 18:18</strong> <span>(all times are <strong>US/Pacific</strong>).</span></p></summary>
+</entry>
+</feed>
