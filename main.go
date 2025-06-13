@@ -21,6 +21,7 @@ const (
 	defaultListenPort    = 9191
 	defaultConfigFile    = "config.yml"
 	defaultTimeout       = 10 * time.Second
+	defaultFetchRetries  = 3
 )
 
 type Config struct {
@@ -151,14 +152,26 @@ func monitorService(cfg ServiceFeed) {
 }
 
 func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTimeout)
-	defer cancel()
-
-	feed, err := gofeed.NewParser().ParseURLWithContext(cfg.URL, ctx)
+	feed, err := fetchFeedWithRetry(cfg.URL, logger)
 	if err != nil {
 		logger.Warnf("fetch feed failed: %v", err)
+		metricsMu.Lock()
+		sm, ok := metricsData[cfg.Name]
+		if !ok {
+			sm = &serviceMetrics{Customer: cfg.Customer}
+			metricsData[cfg.Name] = sm
+		}
+		sm.FetchErrors++
+		metricsMu.Unlock()
 		return
 	}
+
+	// reset error counter on success
+	metricsMu.Lock()
+	if sm, ok := metricsData[cfg.Name]; ok {
+		sm.FetchErrors = 0
+	}
+	metricsMu.Unlock()
 
 	state := "ok"
 	var activeItem *gofeed.Item
@@ -210,4 +223,24 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 		Issue:    info,
 	}
 	metricsMu.Unlock()
+}
+
+func fetchFeedWithRetry(url string, logger *logrus.Entry) (*gofeed.Feed, error) {
+	backoff := time.Second
+	var lastErr error
+	for i := 1; i <= defaultFetchRetries; i++ {
+		ctx, cancel := context.WithTimeout(context.Background(), defaultTimeout)
+		feed, err := gofeed.NewParser().ParseURLWithContext(url, ctx)
+		cancel()
+		if err == nil {
+			return feed, nil
+		}
+		lastErr = err
+		logger.Debugf("attempt %d failed: %v", i, err)
+		if i < defaultFetchRetries {
+			time.Sleep(backoff)
+			backoff *= 2
+		}
+	}
+	return nil, lastErr
 }
