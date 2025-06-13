@@ -65,7 +65,7 @@ The exporter is configured using a YAML file (default: `config.yml`).
 ### Command-line Flags
 
   * `-config <path>`: Path to the configuration file. Default: `config.yml`.
-  * `-enable-aws-feeds`: Automatically monitor built-in AWS service RSS feeds.
+  * `-enable-aws-feeds`: Automatically monitor built-in AWS status RSS feeds. The exporter now tracks the consolidated `multipleservices-<region>` feeds provided by AWS.
 
 ### Configuration Options
 
