@@ -75,43 +75,19 @@ suitable parser.
 ## Exposed Metrics
 
 * `rss_exporter_service_status{service="<name>",customer="<customer>",state="<status>"}` - Current state of each service (`ok`, `service_issue`, `outage`).
-* `rss_exporter_service_issue_info{service="<name>",customer="<customer>",title="<item_title>",link="<item_link>",guid="<item_guid>"}` - Set to `1` while a service reports an active issue.
+* `rss_exporter_service_issue_info{service="<name>",customer="<customer>",service_name="<service>",region="<region>",title="<item_title>",link="<item_link>",guid="<item_guid>"}` - Set to `1` while a service reports an active issue. The `service_name` and `region` labels are populated only for providers that supply them (e.g. AWS and Azure).
 * `rss_exporter_fetch_errors_total{service="<name>",customer="<customer>"}` - Cumulative count of feed fetch errors.
 
 ## Example output:
 
 # HELP rss_exporter_service_issue_info Details for the currently active service issue.
 # TYPE rss_exporter_service_issue_info gauge
-rss_exporter_service_issue_info{guid="https://status.openai.com//incidents/01JTS3ZKAK8KDEER57AZ0AEE6T",link="https://status.openai.com//incidents/01JTS3ZKAK8KDEER57AZ0AEE6T",service="openai",customer="openai",title="WhatsApp 1-800-CHATGPT partial outage"} 1
+rss_exporter_service_issue_info{guid="storage-eastus_issue",link="https://status.azure.com/en-us/status",region="eastus",service="azure",service_name="storage",title="Service issue: Storage - East US"} 1
 # HELP rss_exporter_service_status Current service status parsed from configured feeds.
 # TYPE rss_exporter_service_status gauge
-rss_exporter_service_status{service="aws_apigateway_eu-central-1",customer="aws_apigateway_eu-central-1",state="ok"} 1
-rss_exporter_service_status{service="aws_apigateway_eu-central-1",customer="aws_apigateway_eu-central-1",state="outage"} 0
-rss_exporter_service_status{service="aws_apigateway_eu-central-1",customer="aws_apigateway_eu-central-1",state="service_issue"} 0
-rss_exporter_service_status{service="aws_athena_us-west-2",state="ok"} 1
-rss_exporter_service_status{service="aws_athena_us-west-2",state="outage"} 0
-rss_exporter_service_status{service="aws_athena_us-west-2",state="service_issue"} 0
-rss_exporter_service_status{service="aws_connect_eu-west-2",state="ok"} 1
-rss_exporter_service_status{service="aws_connect_eu-west-2",state="outage"} 0
-rss_exporter_service_status{service="aws_connect_eu-west-2",state="service_issue"} 0
-rss_exporter_service_status{service="azure",state="ok"} 1
+rss_exporter_service_status{service="azure",state="ok"} 0
 rss_exporter_service_status{service="azure",state="outage"} 0
-rss_exporter_service_status{service="azure",state="service_issue"} 0
-rss_exporter_service_status{service="cloudflare",state="ok"} 1
-rss_exporter_service_status{service="cloudflare",state="outage"} 0
-rss_exporter_service_status{service="cloudflare",state="service_issue"} 0
-rss_exporter_service_status{service="gcp",state="ok"} 1
-rss_exporter_service_status{service="gcp",state="outage"} 0
-rss_exporter_service_status{service="gcp",state="service_issue"} 0
-rss_exporter_service_status{service="genesys-cloud",state="ok"} 1
-rss_exporter_service_status{service="genesys-cloud",state="outage"} 0
-rss_exporter_service_status{service="genesys-cloud",state="service_issue"} 0
-rss_exporter_service_status{service="okta",state="ok"} 1
-rss_exporter_service_status{service="okta",state="outage"} 0
-rss_exporter_service_status{service="okta",state="service_issue"} 0
-rss_exporter_service_status{service="openai",state="ok"} 0
-rss_exporter_service_status{service="openai",state="outage"} 1
-rss_exporter_service_status{service="openai",state="service_issue"} 0
+rss_exporter_service_status{service="azure",state="service_issue"} 1
 
 ### Local Testing With Sample Feeds
 
