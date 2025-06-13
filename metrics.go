@@ -24,7 +24,7 @@ var (
 			Name:      "service_issue_info",
 			Help:      "Details for the currently active service issue.",
 		},
-		[]string{"service", "title", "link", "guid"},
+		[]string{"service", "service_name", "region", "title", "link", "guid"},
 	)
 )
 

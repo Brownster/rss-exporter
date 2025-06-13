@@ -98,6 +98,8 @@ func TestServiceIssueInfoMetric(t *testing.T) {
 
 	val := testutil.ToFloat64(serviceIssueInfo.WithLabelValues(
 		"aws-athena",
+		"athena",
+		"us-west-2",
 		"Service impact: Increased Queue Processing Time",
 		"https://status.aws.amazon.com/",
 		"https://status.aws.amazon.com/#athena-us-west-2_1749832722",
@@ -164,6 +166,8 @@ func TestUpdateServiceStatus_AWSOutageFeed(t *testing.T) {
 
 	val := testutil.ToFloat64(serviceIssueInfo.WithLabelValues(
 		"aws-ec2",
+		"ec2",
+		"us-west-2",
 		"OUTAGE: Unable to Launch Instances",
 		"https://status.aws.amazon.com/",
 		"https://status.aws.amazon.com/#ec2-us-west-2_outage",

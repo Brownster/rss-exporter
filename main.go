@@ -187,7 +187,8 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 
 	serviceIssueInfo.DeletePartialMatch(prometheus.Labels{"service": cfg.Name})
 	if activeItem != nil {
-		serviceIssueInfo.WithLabelValues(cfg.Name, strings.TrimSpace(activeItem.Title), activeItem.Link, activeItem.GUID).Set(1)
+		svcName, region := parseAWSGUID(activeItem.GUID)
+		serviceIssueInfo.WithLabelValues(cfg.Name, svcName, region, strings.TrimSpace(activeItem.Title), activeItem.Link, activeItem.GUID).Set(1)
 	}
 
 	for _, s := range []string{"ok", "service_issue", "outage"} {
