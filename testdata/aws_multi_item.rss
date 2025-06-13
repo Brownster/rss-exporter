@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title><![CDATA[Amazon Athena (Oregon) Service Status]]></title>
+    <link>https://status.aws.amazon.com/</link>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Jun 2025 10:02:26 PDT</lastBuildDate>
+    <generator>AWS Service Health Dashboard RSS Generator</generator>
+    <description><![CDATA[Receive the most recent update for events affecting the overall availability of Amazon Athena in Oregon. To receive personalized events about your specific AWS accounts and resources, try the aws.health source in EventBridge or the Health API.]]></description>
+    <ttl>5</ttl>
+
+    <item>
+      <title><![CDATA[RESOLVED: Query Processing Delays]]></title>
+      <link>https://status.aws.amazon.com/</link>
+      <pubDate>Fri, 13 Jun 2025 09:50:42 PDT</pubDate>
+      <guid isPermaLink="false">https://status.aws.amazon.com/#athena-us-west-2_resolved</guid>
+      <description><![CDATA[The issue causing query processing delays has been resolved.]]></description>
+    </item>
+
+    <item>
+      <title><![CDATA[Service impact: Increased Queue Processing Time]]></title>
+      <link>https://status.aws.amazon.com/</link>
+      <pubDate>Fri, 13 Jun 2025 09:38:42 PDT</pubDate>
+      <guid isPermaLink="false">https://status.aws.amazon.com/#athena-us-west-2_1749832722</guid>
+      <description><![CDATA[We are investigating increased processing times for queued queries in the US-WEST-2 Region. ]]></description>
+    </item>
+
+  </channel>
+</rss>
