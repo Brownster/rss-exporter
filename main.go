@@ -39,6 +39,7 @@ type ServiceFeed struct {
 
 var (
 	appConfig Config
+	enableAWS bool
 	logLevels = map[string]logrus.Level{
 		"trace": logrus.TraceLevel,
 		"debug": logrus.DebugLevel,
@@ -50,6 +51,7 @@ var (
 func init() {
 	var configFile string
 	flag.StringVar(&configFile, "config", defaultConfigFile, "path to config file")
+	flag.BoolVar(&enableAWS, "enable-aws-feeds", false, "monitor default AWS service feeds")
 	// Skip parsing if running under "go test".
 	if !strings.HasSuffix(os.Args[0], ".test") {
 		flag.Parse()
@@ -73,6 +75,10 @@ func init() {
 		} else {
 			logrus.Fatalf("load config failed: %v", err)
 		}
+	}
+
+	if enableAWS {
+		appConfig.Services = append(appConfig.Services, defaultAWSServiceFeeds()...)
 	}
 
 	prometheus.MustRegister(serviceStatusGauge)
