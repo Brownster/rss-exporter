@@ -30,7 +30,15 @@ const (
 )
 
 var (
-	probePhases = []string{"dns", "connect", "tls", "first_resp_byte", "transfer", "all"}
+	probePhases        = []string{"dns", "connect", "tls", "first_resp_byte", "transfer", "all"}
+	serviceStatusGauge = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: namespace,
+			Name:      "service_status",
+			Help:      "Current service status parsed from configured feeds.",
+		},
+		[]string{"service", "state"},
+	)
 )
 
 type ProbeRSSOpts struct {
@@ -383,5 +391,25 @@ func parseQuery(q *url.Values, key string, defVal int) (v int, err error) {
 		}
 		v = val
 	}
+	return
+}
+
+func extractServiceStatus(item *gofeed.Item) (service string, state string, active bool) {
+	text := strings.ToUpper(strings.TrimSpace(item.Title + " " + item.Description))
+	switch {
+	case strings.Contains(text, "SERVICE ISSUE"):
+		state = "service_issue"
+	case strings.Contains(text, "OUTAGE"):
+		state = "outage"
+	case strings.Contains(text, "RESOLVED"):
+		state = "resolved"
+	}
+
+	if state == "" {
+		return
+	}
+
+	service = strings.TrimSpace(item.Title)
+	active = state != "resolved"
 	return
 }
