@@ -10,8 +10,11 @@ import (
 )
 
 func TestMetricsEndpoint(t *testing.T) {
-	serviceStatusGauge.Reset()
-	serviceStatusGauge.WithLabelValues("test", "test", "ok").Set(1)
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{
+		"test": {State: "ok"},
+	}
+	metricsMu.Unlock()
 	mux := http.NewServeMux()
 	mux.Handle("/metrics", promhttp.Handler())
 

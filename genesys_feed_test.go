@@ -6,7 +6,6 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/prometheus/client_golang/prometheus/testutil"
 	"github.com/sirupsen/logrus"
 )
 
@@ -26,18 +25,18 @@ func TestUpdateServiceStatus_GenesysFeed(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	serviceStatusGauge.Reset()
+	metricsMu.Lock()
+	metricsData = map[string]*serviceMetrics{}
+	metricsMu.Unlock()
 
 	cfg := ServiceFeed{Name: "genesys-cloud", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("genesys-cloud", "genesys-cloud", "ok")); val != 1 {
-		t.Errorf("ok gauge = %v, want 1", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("genesys-cloud", "genesys-cloud", "service_issue")); val != 0 {
-		t.Errorf("service_issue gauge = %v, want 0", val)
-	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("genesys-cloud", "genesys-cloud", "outage")); val != 0 {
-		t.Errorf("outage gauge = %v, want 0", val)
+	metricsMu.Lock()
+	sm := metricsData["genesys-cloud"]
+	metricsMu.Unlock()
+
+	if sm.State != "ok" {
+		t.Errorf("state = %v, want ok", sm.State)
 	}
 }
