@@ -7,6 +7,8 @@ log_level: info
 
 services:
   - name: gcp
+    # customer defaults to the service name when omitted
+    # customer: gcp
     url: https://status.cloud.google.com/en/feed.atom
     interval: 300
   - name: genesys-cloud
@@ -20,6 +22,10 @@ services:
     interval: 300
   - name: openai
     url: https://status.openai.com/history.atom
+    interval: 300
+  - name: Vattenfall-gcp
+    customer: Vattenfall
+    url: https://status.cloud.google.com/en/vattenfall-specfic-feed.atom
     interval: 300
   - name: okta
     url: https://feeds.feedburner.com/OktaTrustRSS

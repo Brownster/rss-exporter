@@ -23,10 +23,12 @@ listen_port: 9091
 log_level: info
 services:
   - name: gcp
+    # customer defaults to the service name
     url: https://status.cloud.google.com/en/feed.atom
     interval: 300
-  - name: aws
-    url: https://status.aws.amazon.com/rss/all.rss
+  - name: Vattenfall-gcp
+    customer: Vattenfall
+    url: https://status.cloud.google.com/en/vattenfall-specfic-feed.atom
     interval: 300
 ```
 
@@ -34,19 +36,19 @@ The `services` section lists feeds to poll. `interval` is in seconds.
 
 ## Exposed Metrics
 
-* `rss_exporter_service_status{service="<name>",state="<status>"}` - Current state of each service (`ok`, `service_issue`, `outage`).
-* `rss_exporter_service_issue_info{service="<name>",title="<item_title>",link="<item_link>",guid="<item_guid>"}` - Set to `1` while a service reports an active issue.
+* `rss_exporter_service_status{service="<name>",customer="<customer>",state="<status>"}` - Current state of each service (`ok`, `service_issue`, `outage`).
+* `rss_exporter_service_issue_info{service="<name>",customer="<customer>",title="<item_title>",link="<item_link>",guid="<item_guid>"}` - Set to `1` while a service reports an active issue.
 
 ## Example output:
 
 # HELP rss_exporter_service_issue_info Details for the currently active service issue.
 # TYPE rss_exporter_service_issue_info gauge
-rss_exporter_service_issue_info{guid="https://status.openai.com//incidents/01JTS3ZKAK8KDEER57AZ0AEE6T",link="https://status.openai.com//incidents/01JTS3ZKAK8KDEER57AZ0AEE6T",service="openai",title="WhatsApp 1-800-CHATGPT partial outage"} 1
+rss_exporter_service_issue_info{guid="https://status.openai.com//incidents/01JTS3ZKAK8KDEER57AZ0AEE6T",link="https://status.openai.com//incidents/01JTS3ZKAK8KDEER57AZ0AEE6T",service="openai",customer="openai",title="WhatsApp 1-800-CHATGPT partial outage"} 1
 # HELP rss_exporter_service_status Current service status parsed from configured feeds.
 # TYPE rss_exporter_service_status gauge
-rss_exporter_service_status{service="aws_apigateway_eu-central-1",state="ok"} 1
-rss_exporter_service_status{service="aws_apigateway_eu-central-1",state="outage"} 0
-rss_exporter_service_status{service="aws_apigateway_eu-central-1",state="service_issue"} 0
+rss_exporter_service_status{service="aws_apigateway_eu-central-1",customer="aws_apigateway_eu-central-1",state="ok"} 1
+rss_exporter_service_status{service="aws_apigateway_eu-central-1",customer="aws_apigateway_eu-central-1",state="outage"} 0
+rss_exporter_service_status{service="aws_apigateway_eu-central-1",customer="aws_apigateway_eu-central-1",state="service_issue"} 0
 rss_exporter_service_status{service="aws_athena_us-west-2",state="ok"} 1
 rss_exporter_service_status{service="aws_athena_us-west-2",state="outage"} 0
 rss_exporter_service_status{service="aws_athena_us-west-2",state="service_issue"} 0

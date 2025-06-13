@@ -11,7 +11,7 @@ import (
 
 func TestMetricsEndpoint(t *testing.T) {
 	serviceStatusGauge.Reset()
-	serviceStatusGauge.WithLabelValues("test", "ok").Set(1)
+	serviceStatusGauge.WithLabelValues("test", "test", "ok").Set(1)
 	mux := http.NewServeMux()
 	mux.Handle("/metrics", promhttp.Handler())
 

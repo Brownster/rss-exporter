@@ -16,7 +16,7 @@ var (
 			Name:      "service_status",
 			Help:      "Current service status parsed from configured feeds.",
 		},
-		[]string{"service", "state"},
+		[]string{"service", "customer", "state"},
 	)
 	serviceIssueInfo = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
@@ -24,7 +24,7 @@ var (
 			Name:      "service_issue_info",
 			Help:      "Details for the currently active service issue.",
 		},
-		[]string{"service", "service_name", "region", "title", "link", "guid"},
+		[]string{"service", "customer", "service_name", "region", "title", "link", "guid"},
 	)
 )
 
