@@ -1,0 +1,15 @@
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+<title>Genesys Cloud Status - Incident History</title>
+<updated>2025-06-13T00:06:01-04:00</updated>
+<author>
+<name>Genesys Cloud</name>
+</author>
+<link rel="alternate" type="text/html" href="https://status.mypurecloud.com"/>
+<link rel="self" type="application/atom+xml" href="https://status.mypurecloud.com/history.atom"/>
+<id>tag:status.mypurecloud.com,2005:/history</id>
+<entry>
+<title>Elevated Error Rates: Text to Speech, Speech to Text, and Dialogflow ES/CX bot Integrations</title>
+<updated>2025-06-12T19:36:04-04:00</updated>
+<content type="html"><p><strong>Resolved</strong> - This incident has been resolved.</p></content>
+</entry>
+</feed>

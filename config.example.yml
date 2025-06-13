@@ -11,3 +11,6 @@ services:
   - name: gcp
     url: https://status.cloud.google.com/en/feed.atom
     interval: 300
+  - name: genesys-cloud
+    url: https://status.mypurecloud.com/history.atom
+    interval: 300
