@@ -15,5 +15,10 @@ func defaultAWSServiceFeeds() []ServiceFeed {
 			URL:      "https://status.aws.amazon.com/rss/connect-eu-west-2.rss",
 			Interval: 300,
 		},
+		{
+			Name:     "aws_athena_us-west-2",
+			URL:      "https://status.aws.amazon.com/rss/athena-us-west-2.rss",
+			Interval: 300,
+		},
 	}
 }
