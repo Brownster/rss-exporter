@@ -35,6 +35,7 @@ type Config struct {
 
 type ServiceFeed struct {
 	Name     string `yaml:"name"`
+	Provider string `yaml:"provider"`
 	Customer string `yaml:"customer"`
 	URL      string `yaml:"url"`
 	Interval int    `yaml:"interval"`
@@ -203,7 +204,7 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 
 	state := "ok"
 	var activeItem *gofeed.Item
-	parser := parserForService(cfg.Name)
+	parser := parserForService(cfg.Provider, cfg.Name)
 	var svcName, region string
 	seen := make(map[string]struct{})
 	for _, item := range feed.Items {
