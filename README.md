@@ -22,21 +22,55 @@ listen_address: 127.0.0.1
 listen_port: 9091
 log_level: info
 services:
+  - name: aws
+    provider: aws
+    # customer 
+    url: https://status.aws.amazon.com/rss/all.rss
+    interval: 300
+  - name: aws
+    provider: aws
+    customer: some_customer 
+    url: https://status.aws.amazon.com/rss/some_customer-specific.rss
+    interval: 300
   - name: gcp
     provider: gcp
     # customer defaults to the service name
     url: https://status.cloud.google.com/en/feed.atom
     interval: 300
-  - name: some_custoer-gcp
-    provider: gcp
-    customer: some_custoer
-    url: https://status.cloud.google.com/en/some_custoer-specfic-feed.atom
+  - name: genesys-cloud
+    provider: genesyscloud
+    url: https://status.mypurecloud.com/history.atom
+    interval: 300
+  - name: azure
+    provider: azure
+    url: https://azurestatuscdn.azureedge.net/en-gb/status/feed
+    interval: 300
+  - name: cloudflare
+    provider: cloudflare
+    url: https://www.cloudflarestatus.com/history.atom
+    interval: 300
+  - name: openai
+    provider: openai
+    url: https://status.openai.com/history.atom
     interval: 300
 ```
 
 The `services` section lists feeds to poll. `interval` is in seconds. Each entry
 can optionally specify a `provider` to explicitly select the parser used for
 that service. When omitted, the provider is inferred from the service name.
+
+### Provider Modules
+
+The exporter includes dedicated parsers for several cloud providers:
+
+* **aws** – parses AWS Health RSS feeds and extracts service and region.
+* **gcp** – handles Google Cloud status feeds.
+* **azure** – parses Azure status feeds and extracts service and region.
+
+Any other value falls back to the generic parser. Provider names like
+`cloudflare`, `genesyscloud`, `okta`, or `openai` all use the generic parser.
+When the `provider` field is omitted, the service name is inspected to select a
+suitable parser.
 
 ## Exposed Metrics
 
