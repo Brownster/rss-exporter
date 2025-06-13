@@ -27,9 +27,9 @@ services:
     # customer defaults to the service name
     url: https://status.cloud.google.com/en/feed.atom
     interval: 300
-  - name: Vattenfall-gcp
+  - name: some_custoer-gcp
     provider: gcp
-    customer: Vattenfall
+    customer: some_custoer
     url: https://status.cloud.google.com/en/vattenfall-specfic-feed.atom
     interval: 300
 ```
