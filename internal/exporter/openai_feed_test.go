@@ -1,9 +1,9 @@
 package exporter
 
 import (
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/mmcdole/gofeed"
@@ -12,7 +12,7 @@ import (
 
 func loadOpenAIResolvedFeed(t *testing.T) *gofeed.Feed {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/openai_resolved.atom")
+	data, err := os.ReadFile("testdata/openai_resolved.atom")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
@@ -38,7 +38,7 @@ func TestExtractServiceStatus_OpenAIResolved(t *testing.T) {
 }
 
 func TestUpdateServiceStatus_OpenAIResolved(t *testing.T) {
-	data, err := ioutil.ReadFile("testdata/openai_resolved.atom")
+	data, err := os.ReadFile("testdata/openai_resolved.atom")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}

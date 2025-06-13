@@ -1,9 +1,9 @@
 package exporter
 
 import (
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/sirupsen/logrus"
@@ -11,7 +11,7 @@ import (
 
 func loadAWSFeed(t *testing.T) []byte {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/aws_feed.rss")
+	data, err := os.ReadFile("testdata/aws_feed.rss")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
@@ -20,7 +20,7 @@ func loadAWSFeed(t *testing.T) []byte {
 
 func loadAWSAthenaIssueFeed(t *testing.T) []byte {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/aws_athena_us_west_2_issue.rss")
+	data, err := os.ReadFile("testdata/aws_athena_us_west_2_issue.rss")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
@@ -29,7 +29,7 @@ func loadAWSAthenaIssueFeed(t *testing.T) []byte {
 
 func loadAWSMultiItemFeed(t *testing.T) []byte {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/aws_multi_item.rss")
+	data, err := os.ReadFile("testdata/aws_multi_item.rss")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
@@ -133,7 +133,7 @@ func TestUpdateServiceStatus_AWSMultiItemFeed(t *testing.T) {
 
 func loadAWSOutageFeed(t *testing.T) []byte {
 	t.Helper()
-	data, err := ioutil.ReadFile("testdata/aws_outage.rss")
+	data, err := os.ReadFile("testdata/aws_outage.rss")
 	if err != nil {
 		t.Fatalf("read feed: %v", err)
 	}
