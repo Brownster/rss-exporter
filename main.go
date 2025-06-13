@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 	"os"
 	"strings"
@@ -135,6 +136,7 @@ func main() {
 
 	http.HandleFunc(appConfig.ProbePath, probeHandler)
 	http.HandleFunc("/", landingPageHandler)
+	http.Handle("/metrics", promhttp.Handler())
 
 	listenOn := fmt.Sprintf("%s:%d", appConfig.ListenAddress, appConfig.ListenPort)
 	logrus.Infof("Listening at: %s", listenOn)
