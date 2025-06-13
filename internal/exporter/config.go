@@ -12,7 +12,7 @@ import (
 
 const (
 	defaultListenAddress = "0.0.0.0"
-	defaultListenPort    = 9191
+	defaultListenPort    = 9091
 	defaultConfigFile    = "config.yml"
 )
 
