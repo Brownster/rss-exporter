@@ -1,0 +1,12 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>OpenAI status</title>
+  <updated>2025-06-13T19:09:11.209Z</updated>
+  <entry>
+    <title type="html"><![CDATA[Log in issues]]></title>
+    <id>https://status.openai.com//incidents/01JXJPWKHTPB8Y3B6MBTCAE76X</id>
+    <link href="https://status.openai.com//incidents/01JXJPWKHTPB8Y3B6MBTCAE76X"/>
+    <updated>2025-06-12T20:05:00.000Z</updated>
+    <summary type="html"><![CDATA[<b>Status: Resolved</b><br/><br/>All impacted services have now fully recovered.]]></summary>
+    <content type="html"><![CDATA[<b>Status: Resolved</b><br/><br/>All impacted services have now fully recovered.]]></content>
+  </entry>
+</feed>

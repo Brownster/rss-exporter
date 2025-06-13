@@ -29,13 +29,21 @@ var (
 )
 
 func extractServiceStatus(item *gofeed.Item) (service string, state string, active bool) {
-	text := strings.ToUpper(strings.TrimSpace(item.Title))
+	upper := func(s string) string {
+		return strings.ToUpper(strings.TrimSpace(s))
+	}
+
+	title := upper(item.Title)
+	summary := upper(item.Description)
+	content := upper(item.Content)
+	combined := strings.Join([]string{title, summary, content}, " ")
+
 	switch {
-	case strings.Contains(text, "RESOLVED"):
+	case strings.Contains(combined, "STATUS: RESOLVED") || strings.Contains(title, "RESOLVED"):
 		state = "resolved"
-	case strings.Contains(text, "OUTAGE"):
+	case strings.Contains(combined, "OUTAGE"):
 		state = "outage"
-	case strings.Contains(text, "SERVICE ISSUE"), strings.Contains(text, "SERVICE IMPACT"):
+	case strings.Contains(combined, "SERVICE ISSUE") || strings.Contains(combined, "SERVICE IMPACT"):
 		state = "service_issue"
 	}
 	if state == "" {
