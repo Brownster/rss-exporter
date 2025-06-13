@@ -22,6 +22,8 @@ type serviceMetrics struct {
 	Customer string
 	State    string
 	Issue    *issueInfo
+	// FetchErrors counts consecutive failures fetching the feed
+	FetchErrors int
 }
 
 var (
@@ -80,6 +82,26 @@ func (metricsCollector) Collect(ch chan<- prometheus.Metric) {
 				labels, nil,
 			)
 			ch <- prometheus.MustNewConstMetric(desc, prometheus.GaugeValue, 1, values...)
+		}
+
+		{
+			var (
+				labels []string
+				values []string
+			)
+			if sm.Customer != "" {
+				labels = []string{"service", "customer"}
+				values = []string{svc, sm.Customer}
+			} else {
+				labels = []string{"service"}
+				values = []string{svc}
+			}
+			desc := prometheus.NewDesc(
+				prometheus.BuildFQName(namespace, "", "fetch_errors_total"),
+				"Total number of errors fetching a service feed.",
+				labels, nil,
+			)
+			ch <- prometheus.MustNewConstMetric(desc, prometheus.CounterValue, float64(sm.FetchErrors), values...)
 		}
 	}
 }

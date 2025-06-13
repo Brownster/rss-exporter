@@ -1,6 +1,6 @@
 # RSS Exporter
 
-RSS Exporter periodically polls configured RSS or Atom feeds and exposes Prometheus metrics.
+RSS Exporter periodically polls configured RSS or Atom feeds and exposes Prometheus metrics. Feed retrieval is retried with exponential backoff on errors.
 
 ## Usage
 
@@ -38,6 +38,7 @@ The `services` section lists feeds to poll. `interval` is in seconds.
 
 * `rss_exporter_service_status{service="<name>",customer="<customer>",state="<status>"}` - Current state of each service (`ok`, `service_issue`, `outage`).
 * `rss_exporter_service_issue_info{service="<name>",customer="<customer>",title="<item_title>",link="<item_link>",guid="<item_guid>"}` - Set to `1` while a service reports an active issue.
+* `rss_exporter_fetch_errors_total{service="<name>",customer="<customer>"}` - Cumulative count of feed fetch errors.
 
 ## Example output:
 

@@ -18,8 +18,8 @@ This document outlines the planned enhancements to transform RSS Exporter into a
 - [x] Enhance `incidentKey` or create provider-specific deduplication logic for repeated incident entries
 
 ### Error Handling & Retries
-- [ ] Add retry logic with exponential backoff around feed fetching
-- [ ] Surface errors through Prometheus metrics and logs
+- [x] Add retry logic with exponential backoff around feed fetching
+- [x] Surface errors through Prometheus metrics and logs
 
 ### Concurrency & Rate Control
 - [ ] Use worker pools or contexts to manage goroutines and enable graceful shutdown
