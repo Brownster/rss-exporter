@@ -14,3 +14,6 @@ services:
   - name: genesys-cloud
     url: https://status.mypurecloud.com/history.atom
     interval: 300
+  - name: azure
+    url: https://azurestatuscdn.azureedge.net/en-gb/status/feed
+    interval: 300
