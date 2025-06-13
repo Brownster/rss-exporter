@@ -40,16 +40,15 @@ The `services` section lists feeds to poll. `interval` is in seconds.
 
 # HELP rss_exporter_service_issue_info Details for the currently active service issue.
 # TYPE rss_exporter_service_issue_info gauge
-rss_exporter_service_issue_info{guid="https://status.aws.amazon.com/#athena-us-west-2_1749837178",link="https://status.aws.amazon.com/",service="aws_athena_us-west-2",title="Service impact: Increased Queue Processing Time"} 1
 rss_exporter_service_issue_info{guid="https://status.openai.com//incidents/01JTS3ZKAK8KDEER57AZ0AEE6T",link="https://status.openai.com//incidents/01JTS3ZKAK8KDEER57AZ0AEE6T",service="openai",title="WhatsApp 1-800-CHATGPT partial outage"} 1
 # HELP rss_exporter_service_status Current service status parsed from configured feeds.
 # TYPE rss_exporter_service_status gauge
 rss_exporter_service_status{service="aws_apigateway_eu-central-1",state="ok"} 1
 rss_exporter_service_status{service="aws_apigateway_eu-central-1",state="outage"} 0
 rss_exporter_service_status{service="aws_apigateway_eu-central-1",state="service_issue"} 0
-rss_exporter_service_status{service="aws_athena_us-west-2",state="ok"} 0
+rss_exporter_service_status{service="aws_athena_us-west-2",state="ok"} 1
 rss_exporter_service_status{service="aws_athena_us-west-2",state="outage"} 0
-rss_exporter_service_status{service="aws_athena_us-west-2",state="service_issue"} 1
+rss_exporter_service_status{service="aws_athena_us-west-2",state="service_issue"} 0
 rss_exporter_service_status{service="aws_connect_eu-west-2",state="ok"} 1
 rss_exporter_service_status{service="aws_connect_eu-west-2",state="outage"} 0
 rss_exporter_service_status{service="aws_connect_eu-west-2",state="service_issue"} 0

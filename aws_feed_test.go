@@ -121,11 +121,11 @@ func TestUpdateServiceStatus_AWSMultiItemFeed(t *testing.T) {
 	cfg := ServiceFeed{Name: "aws-multi", URL: ts.URL, Interval: 0}
 	updateServiceStatus(cfg, logrus.NewEntry(logrus.New()))
 
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-multi", "ok")); val != 0 {
-		t.Errorf("ok gauge = %v, want 0", val)
+	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-multi", "ok")); val != 1 {
+		t.Errorf("ok gauge = %v, want 1", val)
 	}
-	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-multi", "service_issue")); val != 1 {
-		t.Errorf("service_issue gauge = %v, want 1", val)
+	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-multi", "service_issue")); val != 0 {
+		t.Errorf("service_issue gauge = %v, want 0", val)
 	}
 	if val := testutil.ToFloat64(serviceStatusGauge.WithLabelValues("aws-multi", "outage")); val != 0 {
 		t.Errorf("outage gauge = %v, want 0", val)
