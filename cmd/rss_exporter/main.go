@@ -12,21 +12,21 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
 
-	"github.com/4O4-Not-F0und/rss-exporter/internal/exporter"
+	"github.com/4O4-Not-F0und/rss-exporter/collectors"
 )
 
 func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
-	wg := exporter.StartWorkers(ctx, exporter.AppConfig.Services)
+	wg := collectors.StartWorkers(ctx, collectors.AppConfig.Services)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", landingPageHandler)
 	mux.Handle("/metrics", promhttp.Handler())
 
 	srv := &http.Server{
-		Addr:    fmt.Sprintf("%s:%d", exporter.AppConfig.ListenAddress, exporter.AppConfig.ListenPort),
+		Addr:    fmt.Sprintf("%s:%d", collectors.AppConfig.ListenAddress, collectors.AppConfig.ListenPort),
 		Handler: mux,
 	}
 
