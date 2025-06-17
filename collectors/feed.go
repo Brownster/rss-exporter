@@ -1,4 +1,4 @@
-package exporter
+package collectors
 
 import (
 	"context"
@@ -8,7 +8,6 @@ import (
 	"github.com/mmcdole/gofeed"
 	"github.com/sirupsen/logrus"
 
-	"github.com/4O4-Not-F0und/rss-exporter/internal/collectors"
 	"github.com/4O4-Not-F0und/rss-exporter/internal/connectors"
 )
 
@@ -54,7 +53,7 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 
 	state := "ok"
 	var activeItem *gofeed.Item
-	scraper := collectors.ScraperForService(cfg.Provider, cfg.Name)
+	scraper := ScraperForService(cfg.Provider, cfg.Name)
 	var svcName, region string
 	seen := make(map[string]struct{})
 	for _, item := range feed.Items {

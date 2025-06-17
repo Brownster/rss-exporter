@@ -1,4 +1,4 @@
-package exporter
+package collectors
 
 import (
 	"strings"
@@ -19,10 +19,9 @@ type issueInfo struct {
 }
 
 type serviceMetrics struct {
-	Customer string
-	State    string
-	Issue    *issueInfo
-	// FetchErrors counts consecutive failures fetching the feed
+	Customer    string
+	State       string
+	Issue       *issueInfo
 	FetchErrors int
 }
 

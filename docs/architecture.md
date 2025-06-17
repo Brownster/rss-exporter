@@ -6,19 +6,18 @@ This document describes the internal structure of **RSS Exporter** and how the m
 
 ```
 rss-exporter/
-├── main.go             # Application entry point
-├── internal/exporter/  # Core exporter logic
+├── cmd/rss_exporter/   # Application entry point
+│   └── main.go
+├── collectors/         # Exporter logic and scrapers
 │   ├── config.go       # Configuration loader
-│   ├── service.go      # Feed monitoring worker
-│   ├── metrics.go      # Prometheus metrics collector
-│   └── worker.go       # Goroutine orchestration
-├── internal/collectors/ # Provider specific scrapers
-│   └── scraper.go      # Scraper implementations
+│   ├── feed.go         # Feed monitoring worker
+│   ├── parsers.go      # Scraper implementations
+│   └── testdata/       # Sample feed files
 └── internal/connectors/ # Feed fetching helpers
     └── connector.go    # HTTP connector with retries
 ```
 
-All production code lives in the `internal/exporter` package. Tests and sample feed files are kept alongside the implementation.
+All production code lives in the `collectors` package. Tests and sample feed files are kept alongside the implementation.
 
 ## Main flow
 
@@ -30,5 +29,5 @@ All production code lives in the `internal/exporter` package. Tests and sample f
 
 ## Adding new providers
 
-Implement the `Scraper` interface with `ServiceInfo` and `IncidentKey`. Update `ScraperForService` to return the new scraper when the provider name is requested. Unit tests under `internal/collectors` demonstrate expected behaviour for existing providers.
+Implement the `Scraper` interface with `ServiceInfo` and `IncidentKey`. Update `ScraperForService` to return the new scraper when the provider name is requested. Unit tests under `collectors` demonstrate expected behaviour for existing providers.
 

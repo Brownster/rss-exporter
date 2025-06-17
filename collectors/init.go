@@ -1,4 +1,4 @@
-package exporter
+package collectors
 
 import (
 	"os"
@@ -8,7 +8,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// init sets up logging, loads configuration and registers Prometheus metrics.
 func init() {
 	logrus.SetLevel(logrus.InfoLevel)
 	logrus.SetOutput(os.Stdout)

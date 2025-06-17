@@ -48,7 +48,7 @@ Run the full test suite with:
 go test ./...
 ```
 
-The tests include sample RSS and Atom feeds under `internal/exporter/testdata` to verify parsing logic for different providers.
+The tests include sample RSS and Atom feeds under `collectors/testdata` to verify parsing logic for different providers.
 
 ## Logging
 

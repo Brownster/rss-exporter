@@ -1,4 +1,4 @@
-package exporter
+package collectors
 
 import (
 	"flag"
