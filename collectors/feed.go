@@ -1,62 +1,64 @@
 package collectors
 
 import (
-	"context"
 	"strings"
 	"time"
 
+	"github.com/alecthomas/kingpin/v2"
 	"github.com/mmcdole/gofeed"
-	"github.com/sirupsen/logrus"
+	"github.com/prometheus/client_golang/prometheus"
+	maas "github.com/sabio-engineering-product/monitoring-maas"
 
-	"github.com/4O4-Not-F0und/rss-exporter/internal/connectors"
+	"github.com/4O4-Not-F0und/rss-exporter/connectors"
 )
 
-// monitorService periodically fetches the configured feed and updates metrics.
-func monitorService(ctx context.Context, cfg ServiceFeed) {
-	logger := logrus.WithField("service", cfg.Name)
-	ticker := time.NewTicker(time.Duration(cfg.Interval) * time.Second)
-	defer ticker.Stop()
+// NewFeedCollector creates a scheduled scraper for a single RSS feed.
+func NewFeedCollector(app *kingpin.Application, serviceConfig maas.ServiceFeed) *maas.ScheduledScraper {
+	maas.WithDescription(app, "service_status", "Current service status", []string{"service", "customer", "state"})
+	maas.WithDescription(app, "service_issue_info", "Details for active service issues", []string{"service", "customer", "service_name", "region", "title", "link", "guid"})
+	maas.WithDescription(app, "fetch_errors_total", "Count of feed fetch errors", []string{"service", "customer"})
 
-	for {
-		updateServiceStatus(cfg, logger)
-		select {
-		case <-ticker.C:
-			continue
-		case <-ctx.Done():
-			return
-		}
+	return maas.NewScheduledScraper(
+		serviceConfig.Name,
+		NewFeedScraper(serviceConfig),
+		maas.WithSchedule(maas.NewSchedule(
+			maas.WithFrequency(time.Duration(serviceConfig.Interval)*time.Second),
+		)),
+	)
+}
+
+// FeedScraper holds configuration for scraping a feed.
+type FeedScraper struct {
+	Config maas.ServiceFeed
+	Parser Scraper
+}
+
+// NewFeedScraper returns a new FeedScraper instance.
+func NewFeedScraper(cfg maas.ServiceFeed) *FeedScraper {
+	return &FeedScraper{
+		Config: cfg,
+		Parser: ScraperForService(cfg.Provider, cfg.Name),
 	}
 }
 
-// updateServiceStatus fetches the feed once and records status information.
-func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
-	feed, err := connector.FetchFeedWithRetry(cfg.URL, logger)
+// Scrape fetches the feed and converts status into metrics.
+func (s *FeedScraper) Scrape(c maas.Connector) ([]maas.Metric, error) {
+	metrics := []maas.Metric{}
+
+	feed, err := c.Execute(connectors.HTTPQuery{URL: s.Config.URL})
 	if err != nil {
-		logger.Warnf("fetch feed failed: %v", err)
-		metricsMu.Lock()
-		sm, ok := metricsData[cfg.Name]
-		if !ok {
-			sm = &serviceMetrics{Customer: cfg.Customer}
-			metricsData[cfg.Name] = sm
-		}
-		sm.FetchErrors++
-		metricsMu.Unlock()
-		return
+		metrics = append(metrics, maas.NewMetric("fetch_errors_total", prometheus.CounterValue, 1, []string{s.Config.Name, s.Config.Customer}))
+		return metrics, err
 	}
 
-	// reset error counter on success
-	metricsMu.Lock()
-	if sm, ok := metricsData[cfg.Name]; ok {
-		sm.FetchErrors = 0
-	}
-	metricsMu.Unlock()
+	fp := feed.(*gofeed.Feed)
 
 	state := "ok"
 	var activeItem *gofeed.Item
-	scraper := ScraperForService(cfg.Provider, cfg.Name)
+	scraper := s.Parser
 	var svcName, region string
 	seen := make(map[string]struct{})
-	for _, item := range feed.Items {
+	for _, item := range fp.Items {
 		key := scraper.IncidentKey(item)
 		if key != "" {
 			if _, ok := seen[key]; ok {
@@ -66,7 +68,6 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 		}
 		_, st, active := extractServiceStatus(item)
 		if st == "resolved" {
-			// issue has been resolved; ignore older items
 			state = "ok"
 			activeItem = nil
 			svcName, region = scraper.ServiceInfo(item)
@@ -80,25 +81,20 @@ func updateServiceStatus(cfg ServiceFeed, logger *logrus.Entry) {
 		}
 	}
 
-	var info *issueInfo
+	for _, st := range []string{"ok", "service_issue", "outage"} {
+		val := 0.0
+		if state == st {
+			val = 1.0
+		}
+		metrics = append(metrics, maas.NewMetric("service_status", prometheus.GaugeValue, val, []string{s.Config.Name, s.Config.Customer, st}))
+	}
+
 	if activeItem != nil {
 		if svcName == "" && region == "" {
 			svcName, region = scraper.ServiceInfo(activeItem)
 		}
-		info = &issueInfo{
-			ServiceName: svcName,
-			Region:      region,
-			Title:       strings.TrimSpace(activeItem.Title),
-			Link:        activeItem.Link,
-			GUID:        activeItem.GUID,
-		}
+		metrics = append(metrics, maas.NewMetric("service_issue_info", prometheus.GaugeValue, 1, []string{s.Config.Name, s.Config.Customer, svcName, region, strings.TrimSpace(activeItem.Title), activeItem.Link, activeItem.GUID}))
 	}
 
-	metricsMu.Lock()
-	metricsData[cfg.Name] = &serviceMetrics{
-		Customer: cfg.Customer,
-		State:    state,
-		Issue:    info,
-	}
-	metricsMu.Unlock()
+	return metrics, nil
 }

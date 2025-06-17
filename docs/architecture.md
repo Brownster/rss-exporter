@@ -10,9 +10,9 @@ rss-exporter/
 │   └── main.go
 ├── collectors/         # Exporter logic and scrapers
 │   ├── config.go       # Configuration loader
-│   ├── feed.go         # Feed monitoring worker
+│   ├── feed.go         # maas.ScheduledScraper implementation
 │   ├── parsers.go      # Scraper implementations
-│   ├── exporter.go     # Wrapper around workers and HTTP server
+│   ├── exporter.go     # Creates maas exporter with feed scrapers
 │   └── testdata/       # Sample feed files
 ├── connectors/         # Maas compatible connectors
 │   ├── http.go         # HTTP connector implementing maas.Connector
@@ -26,10 +26,10 @@ All production code lives in the `collectors` package. Tests and sample feed fil
 ## Main flow
 
 1. **Configuration** is loaded from YAML using `initConfig` in `config.go`.
-2. `main.go` creates a context and starts a worker goroutine for each configured feed via `StartWorkers`.
-3. Each worker continuously fetches its feed in `monitorService`. Feed retrieval is retried using exponential backoff via the connector.
-4. Feed items are parsed by a provider-specific scraper chosen by `ScraperForService`. Parsed status information is stored in shared metrics structures.
-5. Prometheus metrics are exposed via the `/metrics` HTTP handler.
+2. `main.go` constructs a `maas.Exporter` via `NewRssExporter` which registers a `maas.ScheduledScraper` for each configured feed.
+3. Each scraper periodically fetches its feed and returns metrics via the `maas` framework.
+4. Feed items are parsed by a provider-specific scraper chosen by `ScraperForService` and converted to metrics with `maas.NewMetric`.
+5. Prometheus metrics are exposed through the exporter when scraped by Prometheus.
 
 ## Adding new providers
 
