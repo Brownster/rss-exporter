@@ -20,7 +20,12 @@ The exporter relies on the minimal `monitoring-maas` framework bundled in this
 repository. Scrapers are implemented in the `collectors` package and scheduled
 via `maas.ScheduledScraper`. HTTP access is provided through a pluggable
 connector located in the `connectors` package. Tests use `MockHTTPConnector`
-with canned RSS feeds.
+with canned RSS or Atom feeds stored in `collectors/testdata`.
+
+Each unit test creates its own `MockHTTPConnector` instance and registers the
+desired feed responses. This allows the collectors to run without network
+access and ensures tests remain deterministic. To add a new scenario, place an
+example feed file in `collectors/testdata` and load it in the test suite.
 
 To build a container image:
 
