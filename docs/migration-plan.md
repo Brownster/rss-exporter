@@ -51,7 +51,9 @@ rss-exporter/
 IGNORE_WHEN_COPYING_START
 Use code with caution.
 IGNORE_WHEN_COPYING_END
-Step 2: Create a Custom HTTP Connector
+
+
+''Step 2: Create a Custom HTTP Connector
 
 The monitoring-maas framework uses a maas.Connector interface. Since your exporter needs to make HTTP calls, you must create a new connector for this purpose.
 
