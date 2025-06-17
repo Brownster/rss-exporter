@@ -1,6 +1,6 @@
 # RSS Exporter
 
-RSS Exporter periodically polls configured RSS or Atom feeds and exposes Prometheus metrics. Feed retrieval is retried with exponential backoff on errors.
+RSS Exporter periodically polls configured RSS or Atom feeds and exposes Prometheus metrics. It is built on a minimal version of the company's `monitoring-maas` framework which schedules each feed scraper automatically.
 
 ## Usage
 
@@ -127,7 +127,5 @@ rss_exporter_fetch_errors_total{service="openai"} 0
 ```
 ## Graceful Shutdown
 
-The exporter now listens for `SIGINT` and `SIGTERM` signals. All service
-monitoring goroutines and the HTTP server share a common context that is
-cancelled on shutdown, allowing workers to exit cleanly before the process
-terminates.
+The exporter relies on the `maas` framework which gracefully stops all scheduled
+scrapers when the process receives `SIGINT` or `SIGTERM`.

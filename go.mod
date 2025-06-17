@@ -9,7 +9,19 @@ require (
 	gopkg.in/yaml.v3 v3.0.1
 )
 
-require github.com/getsentry/sentry-go v0.33.0
+require (
+	github.com/alecthomas/kingpin/v2 v2.4.0
+	github.com/getsentry/sentry-go v0.33.0
+	github.com/stretchr/testify v1.10.0
+)
+
+require (
+	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/kylelemons/godebug v1.1.0 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/xhit/go-str2duration/v2 v2.1.0 // indirect
+)
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.0 // indirect

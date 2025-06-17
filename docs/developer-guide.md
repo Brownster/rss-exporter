@@ -16,8 +16,11 @@ Clone the repository and run:
 go build -o rss_exporter .
 ```
 
-The code uses a pluggable HTTP connector located in the `connectors` package.
-Tests rely on `MockHTTPConnector` to provide canned responses.
+The exporter relies on the minimal `monitoring-maas` framework bundled in this
+repository. Scrapers are implemented in the `collectors` package and scheduled
+via `maas.ScheduledScraper`. HTTP access is provided through a pluggable
+connector located in the `connectors` package. Tests use `MockHTTPConnector`
+with canned RSS feeds.
 
 To build a container image:
 

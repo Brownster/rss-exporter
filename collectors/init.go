@@ -4,7 +4,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/prometheus/client_golang/prometheus"
 	"github.com/sirupsen/logrus"
 )
 
@@ -20,5 +19,4 @@ func init() {
 	})
 
 	initConfig()
-	prometheus.MustRegister(metricsCollector{})
 }
