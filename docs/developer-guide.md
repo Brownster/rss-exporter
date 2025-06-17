@@ -16,6 +16,9 @@ Clone the repository and run:
 go build -o rss_exporter .
 ```
 
+The code uses a pluggable HTTP connector located in the `connectors` package.
+Tests rely on `MockHTTPConnector` to provide canned responses.
+
 To build a container image:
 
 ```bash
@@ -24,7 +27,8 @@ docker build -t rss-exporter .
 
 ### Docker Compose
 
-A `docker-compose.yml` file is included for quick local deployments. Adjust the mounted configuration path as needed and run:
+A `docker-compose.yml` file is included for quick local deployments. Adjust the
+mounted configuration path as needed and run:
 
 ```bash
 docker compose up -d

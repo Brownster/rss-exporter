@@ -12,9 +12,13 @@ rss-exporter/
 │   ├── config.go       # Configuration loader
 │   ├── feed.go         # Feed monitoring worker
 │   ├── parsers.go      # Scraper implementations
+│   ├── exporter.go     # Wrapper around workers and HTTP server
 │   └── testdata/       # Sample feed files
+├── connectors/         # Maas compatible connectors
+│   ├── http.go         # HTTP connector implementing maas.Connector
+│   └── http_mock.go    # Test helper for mocks
 └── internal/connectors/ # Feed fetching helpers
-    └── connector.go    # HTTP connector with retries
+    └── connector.go    # HTTP fetch with retries
 ```
 
 All production code lives in the `collectors` package. Tests and sample feed files are kept alongside the implementation.
