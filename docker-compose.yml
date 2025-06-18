@@ -6,5 +6,5 @@ services:
     ports:
       - "9091:9091/tcp"
     volumes:
-      - "path/to/config/config.yml:/rss_exporter/config.yml:ro"
+      - "path/to/config/config.yml:/config/config.yml:ro"
     restart: unless-stopped

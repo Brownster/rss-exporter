@@ -1,7 +1,7 @@
 package connectors
 
 import (
-	connector "github.com/4O4-Not-F0und/rss-exporter/internal/connectors"
+	fetcher "github.com/4O4-Not-F0und/rss-exporter/internal/fetcher"
 	"github.com/sirupsen/logrus"
 )
 
@@ -26,5 +26,5 @@ type HTTPQuery struct {
 func (c *HTTPConnector) Execute(query interface{}) (interface{}, error) {
 	httpQuery := query.(HTTPQuery)
 	// Reuse existing FetchFeedWithRetry logic
-	return connector.FetchFeedWithRetry(httpQuery.URL, c.Logger)
+	return fetcher.FetchFeedWithRetry(httpQuery.URL, c.Logger)
 }

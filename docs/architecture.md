@@ -9,7 +9,6 @@ rss-exporter/
 ├── cmd/rss_exporter/   # Application entry point
 │   └── main.go
 ├── collectors/         # Exporter logic and scrapers
-│   ├── config.go       # Configuration loader
 │   ├── feed.go         # maas.ScheduledScraper implementation
 │   ├── parsers.go      # Scraper implementations
 │   ├── exporter.go     # Creates maas exporter with feed scrapers
@@ -17,15 +16,15 @@ rss-exporter/
 ├── connectors/         # Maas compatible connectors
 │   ├── http.go         # HTTP connector implementing maas.Connector
 │   └── http_mock.go    # Test helper for mocks
-└── internal/connectors/ # Feed fetching helpers
-    └── connector.go    # HTTP fetch with retries
+└── internal/fetcher/   # Feed fetching helpers
+    └── fetcher.go      # HTTP fetch with retries
 ```
 
 All production code lives in the `collectors` package. Tests and sample feed files are kept alongside the implementation.
 
 ## Main flow
 
-1. **Configuration** is loaded from YAML using `initConfig` in `config.go`.
+1. **Configuration** is loaded from YAML inside `NewRssExporter` using a `--config.file` flag.
 2. `main.go` constructs a `maas.Exporter` via `NewRssExporter` which registers a `maas.ScheduledScraper` for each configured feed.
 3. Each scraper periodically fetches its feed and returns metrics via the `maas` framework.
 4. Feed items are parsed by a provider-specific scraper chosen by `ScraperForService` and converted to metrics with `maas.NewMetric`.

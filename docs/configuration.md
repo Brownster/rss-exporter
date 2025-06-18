@@ -1,6 +1,6 @@
 # Configuration
 
-The exporter is configured via a YAML file passed with the `-config` flag. The default path is `config.yml`.
+The exporter is configured via a YAML file passed with the `-config.file` flag. The default path is `config.yml`.
 
 ## Top-level options
 
