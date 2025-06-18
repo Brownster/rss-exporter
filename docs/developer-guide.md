@@ -47,7 +47,7 @@ docker compose up -d
 Create a configuration file based on `config.example.yml` and start the exporter:
 
 ```bash
-./rss_exporter -config /path/to/config.yml
+./rss_exporter -config.file=/path/to/config.yml
 ```
 
 Metrics will be available from `http://<listen_address>:<listen_port>/metrics`.

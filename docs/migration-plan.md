@@ -5,7 +5,7 @@ Component	Current Implementation (rss-exporter)	Target Implementation (Company S
 Project Structure	internal/exporter, internal/collectors	/collectors, /cmd
 Main Entrypoint	main.go with signal handling, server setup	cmd/rss_exporter/main.go calling the maas framework
 Worker Logic	Custom goroutine management in worker.go	maas.ScheduledScraper for each feed
-Configuration	Custom config.go with flag package	kingpin via maas; config read in exporter.go
+Configuration	Custom flag parser in init()	kingpin via maas; config read in exporter.go
 Metric Generation	Custom Prometheus collector in metrics.go	maas.NewMetric calls within a Scrape method
 HTTP Fetching	Custom FetchFeedWithRetry in connectors	A new, custom maas.Connector for HTTP
 Testing	httptest servers	Mock maas.Connector and testutil.CollectAndCompare
@@ -63,7 +63,7 @@ The monitoring-maas framework uses a maas.Connector interface. Since your export
     package connectors
 
     import (
-        "github.com/4O4-Not-F0und/rss-exporter/internal/connectors" // Reuse your existing logic
+        "github.com/4O4-Not-F0und/rss-exporter/internal/fetcher" // Reuse your existing logic
         "github.com/mmcdole/gofeed"
         "github.com/sirupsen/logrus"
     )
@@ -159,7 +159,6 @@ This is the core of the refactoring. You will create one scheduled scraper for e
         // The service name is now a label.
         maas.WithDescription(app, "service_status", "Current service status", []string{"service", "customer", "state"})
         maas.WithDescription(app, "service_issue_info", "Details for active service issues", []string{"service", "customer", "service_name", "region", "title", "link", "guid"})
-        maas.WithDescription(app, "fetch_errors_total", "Count of feed fetch errors", []string{"service", "customer"})
         
         return maas.NewScheduledScraper(
             serviceConfig.Name, // This name is used as a prefix for metrics
@@ -240,7 +239,7 @@ import (
 func NewRssExporter(c maas.Connector, options ...func(*maas.Exporter)) (*maas.Exporter, error) {
     app := kingpin.New("rss_exporter", "Exporter for RSS/Atom status feeds.").DefaultEnvars()
     
-    // The maas framework handles the -config flag. We can access the config here.
+    // The maas framework handles the -config.file flag. We can access the config here.
     config := maas.GetConfig() // Assuming maas provides a way to get the parsed config.
                                // If not, you may need to read it here manually.
                                
@@ -374,7 +373,7 @@ Step 5: Final Touches
     FROM registry-maas.maas.services.sabio.co.uk/docker/busybox-glibc:1.0.0
     COPY rss_exporter /
     # Note: config is now handled via a flag, not a file in the image
-    CMD ["/rss_exporter", "-config=/config/config.yml"]
+    CMD ["/rss_exporter", "-config.file=/config/config.yml"]
 
         
 
@@ -385,6 +384,6 @@ Step 5: Final Touches
 
     Update docker-compose.yml: Adjust the volume mount path for the config file.
 
-    Update Documentation: Update the README.md and docs/ to reflect the new standardized command-line flags (-config) and the monitoring-maas framework.
+    Update Documentation: Update the README.md and docs/ to reflect the new standardized command-line flag (-config.file) and the monitoring-maas framework.
 
 By following this plan, you will successfully align your rss-exporter with the company's robust and standardized monitoring framework, making it a valuable and maintainable asset for the team.

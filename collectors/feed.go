@@ -16,7 +16,6 @@ import (
 func NewFeedCollector(app *kingpin.Application, serviceConfig maas.ServiceFeed) *maas.ScheduledScraper {
 	maas.WithDescription(app, "service_status", "Current service status", []string{"service", "customer", "state"})
 	maas.WithDescription(app, "service_issue_info", "Details for active service issues", []string{"service", "customer", "service_name", "region", "title", "link", "guid"})
-	maas.WithDescription(app, "fetch_errors_total", "Count of feed fetch errors", []string{"service", "customer"})
 
 	return maas.NewScheduledScraper(
 		serviceConfig.Name,
@@ -47,8 +46,7 @@ func (s *FeedScraper) Scrape(c maas.Connector) ([]maas.Metric, error) {
 
 	feed, err := c.Execute(connectors.HTTPQuery{URL: s.Config.URL})
 	if err != nil {
-		metrics = append(metrics, maas.NewMetric("fetch_errors_total", prometheus.CounterValue, 1, []string{s.Config.Name, s.Config.Customer}))
-		return metrics, err
+		return nil, err
 	}
 
 	fp := feed.(*gofeed.Feed)

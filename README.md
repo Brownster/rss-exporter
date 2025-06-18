@@ -8,7 +8,7 @@ Build and run:
 
 ```bash
 go build -o rss_exporter .
-./rss_exporter -config /path/to/config.yml
+./rss_exporter -config.file=/path/to/config.yml
 ```
 
 Metrics are available at `http://<listen_address>:<listen_port>/metrics`.
@@ -76,7 +76,6 @@ suitable scraper.
 
 * `rss_exporter_service_status{service="<name>",customer="<customer>",state="<status>"}` - Current state of each service (`ok`, `service_issue`, `outage`).
 * `rss_exporter_service_issue_info{service="<name>",customer="<customer>",service_name="<service>",region="<region>",title="<item_title>",link="<item_link>",guid="<item_guid>"}` - Set to `1` while a service reports an active issue. The `service_name` and `region` labels are populated only for providers that supply them (e.g. AWS and Azure).
-* `rss_exporter_fetch_errors_total{service="<name>",customer="<customer>"}` - Cumulative count of feed fetch errors.
 
 ## Example output:
 
@@ -122,8 +121,6 @@ rss_exporter_service_status{service="azure",state="service_issue"} 1
 rss_exporter_service_status{service="openai",state="ok"} 1
 rss_exporter_service_status{service="openai",state="outage"} 0
 rss_exporter_service_status{service="openai",state="service_issue"} 0
-rss_exporter_fetch_errors_total{service="azure"} 0
-rss_exporter_fetch_errors_total{service="openai"} 0
 ```
 ## Graceful Shutdown
 
