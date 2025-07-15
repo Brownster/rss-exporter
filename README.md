@@ -122,6 +122,18 @@ rss_exporter_service_status{service="openai",state="ok"} 1
 rss_exporter_service_status{service="openai",state="outage"} 0
 rss_exporter_service_status{service="openai",state="service_issue"} 0
 ```
+
+### Mock Feed Server
+
+For more dynamic testing you can run the included mock feed server which
+generates random incidents for several providers:
+
+```bash
+go run ./cmd/mock_feeds
+```
+
+Point the exporter at `config.mock.yml` to scrape these endpoints and iterate on dashboards or alerts.
+
 ## Graceful Shutdown
 
 The exporter relies on the `maas` framework which gracefully stops all scheduled

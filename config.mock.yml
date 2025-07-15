@@ -1,0 +1,28 @@
+listen_address: 127.0.0.1
+listen_port: 9095
+log_level: debug
+services:
+  - name: aws
+    provider: aws
+    url: http://localhost:8000/aws.rss
+    interval: 1
+  - name: gcp
+    provider: gcp
+    url: http://localhost:8000/gcp.atom
+    interval: 1
+  - name: azure
+    provider: azure
+    url: http://localhost:8000/azure.rss
+    interval: 1
+  - name: cloudflare
+    provider: cloudflare
+    url: http://localhost:8000/cloudflare.atom
+    interval: 1
+  - name: genesys-cloud
+    provider: genesyscloud
+    url: http://localhost:8000/genesys.atom
+    interval: 1
+  - name: openai
+    provider: openai
+    url: http://localhost:8000/openai.atom
+    interval: 1
