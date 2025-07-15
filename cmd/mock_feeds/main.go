@@ -100,7 +100,7 @@ func azureHandler(w http.ResponseWriter, r *http.Request) {
       <title>%s: %s - %s</title>
       <link>https://status.azure.com/en-us/status</link>
       <pubDate>%s</pubDate>
-      <guid>%s</guid>
+      <guid isPermaLink="false">%s</guid>
       <description>Simulated %s for %s in %s</description>
     </item>
   </channel>
@@ -198,11 +198,12 @@ func genesysHandler(w http.ResponseWriter, r *http.Request) {
   <updated>%s</updated>
   <entry>
     <title>%s: %s</title>
-    <id>tag:status.mypurecloud.com,2005:%s</id>
+    <id>tag:status.mypurecloud.com,2005:Incident/%s</id>
+    <link href="https://status.mypurecloud.com/incidents/%s"/>
     <updated>%s</updated>
     <content type="html"><p>%s incident for %s</p></content>
   </entry>
-</feed>`, ts, status, svc, id, ts, state, svc)
+</feed>`, ts, status, svc, id, id, ts, state, svc)
 
 	w.Header().Set("Content-Type", "application/atom+xml")
 	fmt.Fprint(w, content)

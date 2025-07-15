@@ -9,6 +9,8 @@
 <id>tag:status.mypurecloud.com,2005:/history</id>
 <entry>
 <title>Elevated Error Rates: Text to Speech, Speech to Text, and Dialogflow ES/CX bot Integrations</title>
+<id>tag:status.mypurecloud.com,2005:Incident/mock-123</id>
+<link href="https://status.mypurecloud.com/incidents/mock-123"/>
 <updated>2025-06-12T19:36:04-04:00</updated>
 <content type="html"><p><strong>Resolved</strong> - This incident has been resolved.</p></content>
 </entry>
