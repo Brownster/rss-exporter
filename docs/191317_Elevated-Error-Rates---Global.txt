@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Elevated Error Rates - (Global)
+Published: 2025-04-25T09:20:41-04:00
+Link     : https://status.mypurecloud.com/incidents/xm10l1yjl29q
+ID       : tag:status.mypurecloud.com,2005:Incident/24784088
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Apr <var>25</var>, <var>09:20</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>09:05</var> EDT</small><br /><strong>Monitoring</strong> - Page rendering errors have subsided. Customers who are already logged in should reload their browser or refresh the desktop application to access the updated version. Agents logging in for the first time will be promptly notified of a new client version and should update accordingly.</p><p><small>Apr <var>25</var>, <var>08:58</var> EDT</small><br /><strong>Identified</strong> - Root cause has been identified and mitigation steps have been put in place. Customers should begin to see recovery.</p><p><small>Apr <var>25</var>, <var>08:36</var> EDT</small><br /><strong>Update</strong> - Service teams are continuing to actively investigate this issue. Next update 09:00 AM Eastern or sooner if information becomes available.</p><p><small>Apr <var>25</var>, <var>08:02</var> EDT</small><br /><strong>Update</strong> - Teams are continuing to investigate root cause for latency in the UI. Next update 08:30 AM Eastern</p><p><small>Apr <var>25</var>, <var>07:40</var> EDT</small><br /><strong>Investigating</strong> - We are investigating an issue that is impacting customers ability to answer interactions due to latency in the UI.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24784088",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/xm10l1yjl29q",
+  "published": "2025-04-25T09:20:41-04:00",
+  "published_parsed": [
+    2025,
+    4,
+    25,
+    13,
+    20,
+    41,
+    4,
+    115,
+    0
+  ],
+  "updated": "2025-04-25T09:20:42-04:00",
+  "updated_parsed": [
+    2025,
+    4,
+    25,
+    13,
+    20,
+    42,
+    4,
+    115,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/xm10l1yjl29q"
+    }
+  ],
+  "title": "Elevated Error Rates - (Global)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Elevated Error Rates - (Global)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Apr <var>25</var>, <var>09:20</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>09:05</var> EDT</small><br /><strong>Monitoring</strong> - Page rendering errors have subsided. Customers who are already logged in should reload their browser or refresh the desktop application to access the updated version. Agents logging in for the first time will be promptly notified of a new client version and should update accordingly.</p><p><small>Apr <var>25</var>, <var>08:58</var> EDT</small><br /><strong>Identified</strong> - Root cause has been identified and mitigation steps have been put in place. Customers should begin to see recovery.</p><p><small>Apr <var>25</var>, <var>08:36</var> EDT</small><br /><strong>Update</strong> - Service teams are continuing to actively investigate this issue. Next update 09:00 AM Eastern or sooner if information becomes available.</p><p><small>Apr <var>25</var>, <var>08:02</var> EDT</small><br /><strong>Update</strong> - Teams are continuing to investigate root cause for latency in the UI. Next update 08:30 AM Eastern</p><p><small>Apr <var>25</var>, <var>07:40</var> EDT</small><br /><strong>Investigating</strong> - We are investigating an issue that is impacting customers ability to answer interactions due to latency in the UI.</p>"
+    }
+  ],
+  "summary": "<p><small>Apr <var>25</var>, <var>09:20</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>09:05</var> EDT</small><br /><strong>Monitoring</strong> - Page rendering errors have subsided. Customers who are already logged in should reload their browser or refresh the desktop application to access the updated version. Agents logging in for the first time will be promptly notified of a new client version and should update accordingly.</p><p><small>Apr <var>25</var>, <var>08:58</var> EDT</small><br /><strong>Identified</strong> - Root cause has been identified and mitigation steps have been put in place. Customers should begin to see recovery.</p><p><small>Apr <var>25</var>, <var>08:36</var> EDT</small><br /><strong>Update</strong> - Service teams are continuing to actively investigate this issue. Next update 09:00 AM Eastern or sooner if information becomes available.</p><p><small>Apr <var>25</var>, <var>08:02</var> EDT</small><br /><strong>Update</strong> - Teams are continuing to investigate root cause for latency in the UI. Next update 08:30 AM Eastern</p><p><small>Apr <var>25</var>, <var>07:40</var> EDT</small><br /><strong>Investigating</strong> - We are investigating an issue that is impacting customers ability to answer interactions due to latency in the UI.</p>"
+}

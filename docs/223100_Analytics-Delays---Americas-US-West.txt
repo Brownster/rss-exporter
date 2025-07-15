@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Analytics Delays - Americas (US-West)
+Published: 2025-06-24T13:35:00-04:00
+Link     : https://status.mypurecloud.com/incidents/7cg58zx1ch1z
+ID       : tag:status.mypurecloud.com,2005:Incident/25584758
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Jun <var>24</var>, <var>13:35</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>24</var>, <var>13:25</var> EDT</small><br /><strong>Identified</strong> - Mitigation steps have been implemented and we are seeing improvement. Next update 14:00 or sooner as information becomes available.</p><p><small>Jun <var>24</var>, <var>13:14</var> EDT</small><br /><strong>Investigating</strong> - Development teams are investigating an issue impacting Analytics Detail Records. Next update 13:45 Eastern or sooner as information becomes available.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/25584758",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/7cg58zx1ch1z",
+  "published": "2025-06-24T13:35:00-04:00",
+  "published_parsed": [
+    2025,
+    6,
+    24,
+    17,
+    35,
+    0,
+    1,
+    175,
+    0
+  ],
+  "updated": "2025-06-24T13:35:00-04:00",
+  "updated_parsed": [
+    2025,
+    6,
+    24,
+    17,
+    35,
+    0,
+    1,
+    175,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/7cg58zx1ch1z"
+    }
+  ],
+  "title": "Analytics Delays - Americas (US-West)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Analytics Delays - Americas (US-West)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Jun <var>24</var>, <var>13:35</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>24</var>, <var>13:25</var> EDT</small><br /><strong>Identified</strong> - Mitigation steps have been implemented and we are seeing improvement. Next update 14:00 or sooner as information becomes available.</p><p><small>Jun <var>24</var>, <var>13:14</var> EDT</small><br /><strong>Investigating</strong> - Development teams are investigating an issue impacting Analytics Detail Records. Next update 13:45 Eastern or sooner as information becomes available.</p>"
+    }
+  ],
+  "summary": "<p><small>Jun <var>24</var>, <var>13:35</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>24</var>, <var>13:25</var> EDT</small><br /><strong>Identified</strong> - Mitigation steps have been implemented and we are seeing improvement. Next update 14:00 or sooner as information becomes available.</p><p><small>Jun <var>24</var>, <var>13:14</var> EDT</small><br /><strong>Investigating</strong> - Development teams are investigating an issue impacting Analytics Detail Records. Next update 13:45 Eastern or sooner as information becomes available.</p>"
+}

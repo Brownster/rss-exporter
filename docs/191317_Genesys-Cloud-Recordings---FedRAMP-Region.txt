@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Genesys Cloud Recordings - FedRAMP Region
+Published: 2025-03-25T08:20:39-04:00
+Link     : https://status.mypurecloud.com/incidents/xc4djr37stgx
+ID       : tag:status.mypurecloud.com,2005:Incident/24444903
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Mar <var>25</var>, <var>08:20</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Mar <var>25</var>, <var>07:28</var> EDT</small><br /><strong>Update</strong> - The rollback operation is still in progress by the platform provider. Teams continue to monitor as error rates have improved. Next update 09:30 Eastern or sooner as information becomes available.</p><p><small>Mar <var>25</var>, <var>00:53</var> EDT</small><br /><strong>Monitoring</strong> - The platform provider is executing a rollback operation that is expected to take 6-8 hours to complete. Once the rollback is completed, the system will automatically restore functionality with no additional action required from Genesys service teams. While recordings will be recovered, please note they may be temporarily inaccessible for several days as they are retrieved from the Edges. Transcripts and sentiment analysis data from the incident period will not be recoverable. Next update 07:30 AM Eastern.</p><p><small>Mar <var>24</var>, <var>23:15</var> EDT</small><br /><strong>Update</strong> - Customers are now experiencing delays in recording availability. Once this issue is resolved, all recordings will be retrieved from the Edges and made available for playback. Transcripts and sentiment analysis are not able to be restored.<br /><br />Our service team is working with the platform provider to investigate and resolve this issue. Next update: 01:00 Eastern (or sooner if new information becomes available).</p><p><small>Mar <var>24</var>, <var>21:43</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate root cause of this issue. Next update 23:00 or sooner as information becomes available.</p><p><small>Mar <var>24</var>, <var>20:32</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate the root cause of this issue. Recently implemented mitigation steps have shown improvement in one category of errors. The next update will be provided at 21:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>19:32</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate the root cause of this issue. Despite implementing additional mitigation steps, error rates remain unchanged. Additional technical resources have been engaged to support the investigation. The next update will be provided at 20:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>18:32</var> EDT</small><br /><strong>Update</strong> - Service teams are actively investigating the root cause. Despite implementing several mitigation steps, error rates remain unchanged. The next update will be provided at 19:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>17:35</var> EDT</small><br /><strong>Investigating</strong> - Service teams are investigating an issue affecting select recordings in the FedRAMP region. While the impacted recordings remain accessible and playable, associated features such as transcription and sentiment analysis will be permanently unavailable for these specific recordings. Next update 18:30 Eastern or sooner as information becomes available.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24444903",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/xc4djr37stgx",
+  "published": "2025-03-25T08:20:39-04:00",
+  "published_parsed": [
+    2025,
+    3,
+    25,
+    12,
+    20,
+    39,
+    1,
+    84,
+    0
+  ],
+  "updated": "2025-03-25T08:20:39-04:00",
+  "updated_parsed": [
+    2025,
+    3,
+    25,
+    12,
+    20,
+    39,
+    1,
+    84,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/xc4djr37stgx"
+    }
+  ],
+  "title": "Genesys Cloud Recordings - FedRAMP Region",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Genesys Cloud Recordings - FedRAMP Region"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Mar <var>25</var>, <var>08:20</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Mar <var>25</var>, <var>07:28</var> EDT</small><br /><strong>Update</strong> - The rollback operation is still in progress by the platform provider. Teams continue to monitor as error rates have improved. Next update 09:30 Eastern or sooner as information becomes available.</p><p><small>Mar <var>25</var>, <var>00:53</var> EDT</small><br /><strong>Monitoring</strong> - The platform provider is executing a rollback operation that is expected to take 6-8 hours to complete. Once the rollback is completed, the system will automatically restore functionality with no additional action required from Genesys service teams. While recordings will be recovered, please note they may be temporarily inaccessible for several days as they are retrieved from the Edges. Transcripts and sentiment analysis data from the incident period will not be recoverable. Next update 07:30 AM Eastern.</p><p><small>Mar <var>24</var>, <var>23:15</var> EDT</small><br /><strong>Update</strong> - Customers are now experiencing delays in recording availability. Once this issue is resolved, all recordings will be retrieved from the Edges and made available for playback. Transcripts and sentiment analysis are not able to be restored.<br /><br />Our service team is working with the platform provider to investigate and resolve this issue. Next update: 01:00 Eastern (or sooner if new information becomes available).</p><p><small>Mar <var>24</var>, <var>21:43</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate root cause of this issue. Next update 23:00 or sooner as information becomes available.</p><p><small>Mar <var>24</var>, <var>20:32</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate the root cause of this issue. Recently implemented mitigation steps have shown improvement in one category of errors. The next update will be provided at 21:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>19:32</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate the root cause of this issue. Despite implementing additional mitigation steps, error rates remain unchanged. Additional technical resources have been engaged to support the investigation. The next update will be provided at 20:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>18:32</var> EDT</small><br /><strong>Update</strong> - Service teams are actively investigating the root cause. Despite implementing several mitigation steps, error rates remain unchanged. The next update will be provided at 19:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>17:35</var> EDT</small><br /><strong>Investigating</strong> - Service teams are investigating an issue affecting select recordings in the FedRAMP region. While the impacted recordings remain accessible and playable, associated features such as transcription and sentiment analysis will be permanently unavailable for these specific recordings. Next update 18:30 Eastern or sooner as information becomes available.</p>"
+    }
+  ],
+  "summary": "<p><small>Mar <var>25</var>, <var>08:20</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Mar <var>25</var>, <var>07:28</var> EDT</small><br /><strong>Update</strong> - The rollback operation is still in progress by the platform provider. Teams continue to monitor as error rates have improved. Next update 09:30 Eastern or sooner as information becomes available.</p><p><small>Mar <var>25</var>, <var>00:53</var> EDT</small><br /><strong>Monitoring</strong> - The platform provider is executing a rollback operation that is expected to take 6-8 hours to complete. Once the rollback is completed, the system will automatically restore functionality with no additional action required from Genesys service teams. While recordings will be recovered, please note they may be temporarily inaccessible for several days as they are retrieved from the Edges. Transcripts and sentiment analysis data from the incident period will not be recoverable. Next update 07:30 AM Eastern.</p><p><small>Mar <var>24</var>, <var>23:15</var> EDT</small><br /><strong>Update</strong> - Customers are now experiencing delays in recording availability. Once this issue is resolved, all recordings will be retrieved from the Edges and made available for playback. Transcripts and sentiment analysis are not able to be restored.<br /><br />Our service team is working with the platform provider to investigate and resolve this issue. Next update: 01:00 Eastern (or sooner if new information becomes available).</p><p><small>Mar <var>24</var>, <var>21:43</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate root cause of this issue. Next update 23:00 or sooner as information becomes available.</p><p><small>Mar <var>24</var>, <var>20:32</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate the root cause of this issue. Recently implemented mitigation steps have shown improvement in one category of errors. The next update will be provided at 21:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>19:32</var> EDT</small><br /><strong>Update</strong> - Teams continue to investigate the root cause of this issue. Despite implementing additional mitigation steps, error rates remain unchanged. Additional technical resources have been engaged to support the investigation. The next update will be provided at 20:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>18:32</var> EDT</small><br /><strong>Update</strong> - Service teams are actively investigating the root cause. Despite implementing several mitigation steps, error rates remain unchanged. The next update will be provided at 19:30 Eastern time or earlier if new information becomes available.</p><p><small>Mar <var>24</var>, <var>17:35</var> EDT</small><br /><strong>Investigating</strong> - Service teams are investigating an issue affecting select recordings in the FedRAMP region. While the impacted recordings remain accessible and playable, associated features such as transcription and sentiment analysis will be permanently unavailable for these specific recordings. Next update 18:30 Eastern or sooner as information becomes available.</p>"
+}

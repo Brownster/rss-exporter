@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Elevated Error Rates:  Americas (US West)
+Published: 2025-03-27T13:55:39-04:00
+Link     : https://status.mypurecloud.com/incidents/tq005ry7ybqq
+ID       : tag:status.mypurecloud.com,2005:Incident/24489917
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Mar <var>27</var>, <var>13:55</var> EDT</small><br /><strong>Resolved</strong> - Health checks are normal.  Resolving incident.  All clear time 1:45pm ET.</p><p><small>Mar <var>27</var>, <var>13:38</var> EDT</small><br /><strong>Update</strong> - Mitigation steps are in progress; next update top of the hour.</p><p><small>Mar <var>27</var>, <var>13:30</var> EDT</small><br /><strong>Identified</strong> - Elevated error rates have been identified in the Americas (US West) region.  Customers may be experiencing issues with call notifications, answering calls, and completing calls.  Teams are engaged for triage and mitigation.  Next update 15 minutes.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24489917",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/tq005ry7ybqq",
+  "published": "2025-03-27T13:55:39-04:00",
+  "published_parsed": [
+    2025,
+    3,
+    27,
+    17,
+    55,
+    39,
+    3,
+    86,
+    0
+  ],
+  "updated": "2025-03-27T13:55:43-04:00",
+  "updated_parsed": [
+    2025,
+    3,
+    27,
+    17,
+    55,
+    43,
+    3,
+    86,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/tq005ry7ybqq"
+    }
+  ],
+  "title": "Elevated Error Rates:  Americas (US West)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Elevated Error Rates:  Americas (US West)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Mar <var>27</var>, <var>13:55</var> EDT</small><br /><strong>Resolved</strong> - Health checks are normal.  Resolving incident.  All clear time 1:45pm ET.</p><p><small>Mar <var>27</var>, <var>13:38</var> EDT</small><br /><strong>Update</strong> - Mitigation steps are in progress; next update top of the hour.</p><p><small>Mar <var>27</var>, <var>13:30</var> EDT</small><br /><strong>Identified</strong> - Elevated error rates have been identified in the Americas (US West) region.  Customers may be experiencing issues with call notifications, answering calls, and completing calls.  Teams are engaged for triage and mitigation.  Next update 15 minutes.</p>"
+    }
+  ],
+  "summary": "<p><small>Mar <var>27</var>, <var>13:55</var> EDT</small><br /><strong>Resolved</strong> - Health checks are normal.  Resolving incident.  All clear time 1:45pm ET.</p><p><small>Mar <var>27</var>, <var>13:38</var> EDT</small><br /><strong>Update</strong> - Mitigation steps are in progress; next update top of the hour.</p><p><small>Mar <var>27</var>, <var>13:30</var> EDT</small><br /><strong>Identified</strong> - Elevated error rates have been identified in the Americas (US West) region.  Customers may be experiencing issues with call notifications, answering calls, and completing calls.  Teams are engaged for triage and mitigation.  Next update 15 minutes.</p>"
+}

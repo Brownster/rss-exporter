@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Genesys Cloud CIDR Update – Commercial Region Rollout Schedule
+Published: 2025-05-03T22:54:02-04:00
+Link     : https://status.mypurecloud.com/incidents/xxnfl7hq45nv
+ID       : tag:status.mypurecloud.com,2005:Incident/24795215
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>May <var> 3</var>, <var>22:54</var> EDT</small><br /><strong>Completed</strong> - All CIDR cutover operations successful for :<br />·         APAC: Hong Kong, Seoul, Singapore, Mumbai <br />·         EMEA: Paris, London, Ireland, Zurich, Frankfurt <br />·         AFS: Cape Town* <br />·         APSE: Jakarta* <br />·         MEA: UAE <br /> *Note: Cape Town and Jakarta will receive updates in both windows to complete the full transition. <br /><br />Customers who experience issues should check their firewall, refresh WebRTC clients, and cycle managed hardware phones for GCV and BYOC Cloud. Customers who have not implemented the firewall rules should contact their network administrator immediately to avoid service disruption. <br /> <br />For more information, visit https://help.mypurecloud.com/announcements/2024-genesys-cidr-expansion-commercial/ <br /> <br />Reminder --- Wave 2 begins Saturday May 10 for: <br />·         AFS: Cape Town* <br />·         APSE: Jakarta* <br />·         APAC: Tokyo, Osaka, Sydney <br />·         AMER: Canada, Sao Paulo, US East, US West</p><p><small>May <var> 3</var>, <var>00:00</var> EDT</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Apr <var>26</var>, <var>09:24</var> EDT</small><br /><strong>Scheduled</strong> - As previously announced on May 27, 2024, Genesys Cloud’s commercial region media services will undergo scheduled maintenance to: <br /><br />·         Add new IP ranges to the Genesys CIDR blocks <br />·         Migrate AFS1 (Cape Town) and APSE3 (Jakarta) to the Genesys CIDR <br />·         Expand the RTP port range <br />·         Transition Force TURN services from AWS-owned addresses to TURN services hosted on Genesys CIDR addresses <br /><br />These changes will be implemented beginning off-peak hours for each region across two scheduled maintenance windows: <br /><br />Wave 1 – May 3, 2025: <br /><br />Regions: <br /><br />·         APAC: Hong Kong, Seoul, Singapore, Mumbai <br />·         EMEA: Paris, London, Ireland, Zurich, Frankfurt <br />·         AFS: Cape Town* <br />·         APSE: Jakarta* <br />·         MEA: UAE <br /><br />Wave 2 – May 10, 2025: <br /><br />Regions: <br /><br />·         AFS: Cape Town* <br />·         APSE: Jakarta* <br />·         APAC: Tokyo, Osaka, Sydney <br />·         AMER: Canada, Sao Paulo, US East, US West <br />*Note: Cape Town and Jakarta will receive updates in both windows to complete the full transition. <br /><br />Customers who experience issues should check their firewall, refresh WebRTC clients, and cycle managed hardware phones for GCV and BYOC Cloud. Customers who have not implemented the firewall rules should contact their network administrator immediately to avoid service disruption. <br /> <br />For more information, visit https://help.mypurecloud.com/announcements/2024-genesys-cidr-expansion-commercial/  <br /> <br />Updates will be provided to this notification at 9am ET on Sunday, May 4.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24795215",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/xxnfl7hq45nv",
+  "published": "2025-05-03T22:54:02-04:00",
+  "published_parsed": [
+    2025,
+    5,
+    4,
+    2,
+    54,
+    2,
+    6,
+    124,
+    0
+  ],
+  "updated": "2025-05-03T22:54:02-04:00",
+  "updated_parsed": [
+    2025,
+    5,
+    4,
+    2,
+    54,
+    2,
+    6,
+    124,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/xxnfl7hq45nv"
+    }
+  ],
+  "title": "Genesys Cloud CIDR Update \u2013 Commercial Region Rollout Schedule",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Genesys Cloud CIDR Update \u2013 Commercial Region Rollout Schedule"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>May <var> 3</var>, <var>22:54</var> EDT</small><br /><strong>Completed</strong> - All CIDR cutover operations successful for :<br />\u00b7         APAC: Hong Kong, Seoul, Singapore, Mumbai <br />\u00b7         EMEA: Paris, London, Ireland, Zurich, Frankfurt <br />\u00b7         AFS: Cape Town* <br />\u00b7         APSE: Jakarta* <br />\u00b7         MEA: UAE <br /> *Note: Cape Town and Jakarta will receive updates in both windows to complete the full transition. <br /><br />Customers who experience issues should check their firewall, refresh WebRTC clients, and cycle managed hardware phones for GCV and BYOC Cloud. Customers who have not implemented the firewall rules should contact their network administrator immediately to avoid service disruption. <br /> <br />For more information, visit https://help.mypurecloud.com/announcements/2024-genesys-cidr-expansion-commercial/ <br /> <br />Reminder --- Wave 2 begins Saturday May 10 for: <br />\u00b7         AFS: Cape Town* <br />\u00b7         APSE: Jakarta* <br />\u00b7         APAC: Tokyo, Osaka, Sydney <br />\u00b7         AMER: Canada, Sao Paulo, US East, US West</p><p><small>May <var> 3</var>, <var>00:00</var> EDT</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Apr <var>26</var>, <var>09:24</var> EDT</small><br /><strong>Scheduled</strong> - As previously announced on May 27, 2024, Genesys Cloud\u2019s commercial region media services will undergo scheduled maintenance to: <br /><br />\u00b7         Add new IP ranges to the Genesys CIDR blocks <br />\u00b7         Migrate AFS1 (Cape Town) and APSE3 (Jakarta) to the Genesys CIDR <br />\u00b7         Expand the RTP port range <br />\u00b7         Transition Force TURN services from AWS-owned addresses to TURN services hosted on Genesys CIDR addresses <br /><br />These changes will be implemented beginning off-peak hours for each region across two scheduled maintenance windows: <br /><br />Wave 1 \u2013 May 3, 2025: <br /><br />Regions: <br /><br />\u00b7         APAC: Hong Kong, Seoul, Singapore, Mumbai <br />\u00b7         EMEA: Paris, London, Ireland, Zurich, Frankfurt <br />\u00b7         AFS: Cape Town* <br />\u00b7         APSE: Jakarta* <br />\u00b7         MEA: UAE <br /><br />Wave 2 \u2013 May 10, 2025: <br /><br />Regions: <br /><br />\u00b7         AFS: Cape Town* <br />\u00b7         APSE: Jakarta* <br />\u00b7         APAC: Tokyo, Osaka, Sydney <br />\u00b7         AMER: Canada, Sao Paulo, US East, US West <br />*Note: Cape Town and Jakarta will receive updates in both windows to complete the full transition. <br /><br />Customers who experience issues should check their firewall, refresh WebRTC clients, and cycle managed hardware phones for GCV and BYOC Cloud. Customers who have not implemented the firewall rules should contact their network administrator immediately to avoid service disruption. <br /> <br />For more information, visit https://help.mypurecloud.com/announcements/2024-genesys-cidr-expansion-commercial/  <br /> <br />Updates will be provided to this notification at 9am ET on Sunday, May 4.</p>"
+    }
+  ],
+  "summary": "<p><small>May <var> 3</var>, <var>22:54</var> EDT</small><br /><strong>Completed</strong> - All CIDR cutover operations successful for :<br />\u00b7         APAC: Hong Kong, Seoul, Singapore, Mumbai <br />\u00b7         EMEA: Paris, London, Ireland, Zurich, Frankfurt <br />\u00b7         AFS: Cape Town* <br />\u00b7         APSE: Jakarta* <br />\u00b7         MEA: UAE <br /> *Note: Cape Town and Jakarta will receive updates in both windows to complete the full transition. <br /><br />Customers who experience issues should check their firewall, refresh WebRTC clients, and cycle managed hardware phones for GCV and BYOC Cloud. Customers who have not implemented the firewall rules should contact their network administrator immediately to avoid service disruption. <br /> <br />For more information, visit https://help.mypurecloud.com/announcements/2024-genesys-cidr-expansion-commercial/ <br /> <br />Reminder --- Wave 2 begins Saturday May 10 for: <br />\u00b7         AFS: Cape Town* <br />\u00b7         APSE: Jakarta* <br />\u00b7         APAC: Tokyo, Osaka, Sydney <br />\u00b7         AMER: Canada, Sao Paulo, US East, US West</p><p><small>May <var> 3</var>, <var>00:00</var> EDT</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Apr <var>26</var>, <var>09:24</var> EDT</small><br /><strong>Scheduled</strong> - As previously announced on May 27, 2024, Genesys Cloud\u2019s commercial region media services will undergo scheduled maintenance to: <br /><br />\u00b7         Add new IP ranges to the Genesys CIDR blocks <br />\u00b7         Migrate AFS1 (Cape Town) and APSE3 (Jakarta) to the Genesys CIDR <br />\u00b7         Expand the RTP port range <br />\u00b7         Transition Force TURN services from AWS-owned addresses to TURN services hosted on Genesys CIDR addresses <br /><br />These changes will be implemented beginning off-peak hours for each region across two scheduled maintenance windows: <br /><br />Wave 1 \u2013 May 3, 2025: <br /><br />Regions: <br /><br />\u00b7         APAC: Hong Kong, Seoul, Singapore, Mumbai <br />\u00b7         EMEA: Paris, London, Ireland, Zurich, Frankfurt <br />\u00b7         AFS: Cape Town* <br />\u00b7         APSE: Jakarta* <br />\u00b7         MEA: UAE <br /><br />Wave 2 \u2013 May 10, 2025: <br /><br />Regions: <br /><br />\u00b7         AFS: Cape Town* <br />\u00b7         APSE: Jakarta* <br />\u00b7         APAC: Tokyo, Osaka, Sydney <br />\u00b7         AMER: Canada, Sao Paulo, US East, US West <br />*Note: Cape Town and Jakarta will receive updates in both windows to complete the full transition. <br /><br />Customers who experience issues should check their firewall, refresh WebRTC clients, and cycle managed hardware phones for GCV and BYOC Cloud. Customers who have not implemented the firewall rules should contact their network administrator immediately to avoid service disruption. <br /> <br />For more information, visit https://help.mypurecloud.com/announcements/2024-genesys-cidr-expansion-commercial/  <br /> <br />Updates will be provided to this notification at 9am ET on Sunday, May 4.</p>"
+}

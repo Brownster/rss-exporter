@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Analytics and Reporting Delays:  APAC (Toyko)
+Published: 2025-04-15T04:58:57-04:00
+Link     : https://status.mypurecloud.com/incidents/lchjrpywcy19
+ID       : tag:status.mypurecloud.com,2005:Incident/24661620
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Apr <var>15</var>, <var>04:58</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>15</var>, <var>04:48</var> EDT</small><br /><strong>Investigating</strong> - Customers in the APAC (Toyko) region may be experiencing delays with analytics and reporting.  Teams are investigating at this time to determine next steps.  Next update top of the hour or as information becomes available.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24661620",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/lchjrpywcy19",
+  "published": "2025-04-15T04:58:57-04:00",
+  "published_parsed": [
+    2025,
+    4,
+    15,
+    8,
+    58,
+    57,
+    1,
+    105,
+    0
+  ],
+  "updated": "2025-04-15T04:58:57-04:00",
+  "updated_parsed": [
+    2025,
+    4,
+    15,
+    8,
+    58,
+    57,
+    1,
+    105,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/lchjrpywcy19"
+    }
+  ],
+  "title": "Analytics and Reporting Delays:  APAC (Toyko)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Analytics and Reporting Delays:  APAC (Toyko)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Apr <var>15</var>, <var>04:58</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>15</var>, <var>04:48</var> EDT</small><br /><strong>Investigating</strong> - Customers in the APAC (Toyko) region may be experiencing delays with analytics and reporting.  Teams are investigating at this time to determine next steps.  Next update top of the hour or as information becomes available.</p>"
+    }
+  ],
+  "summary": "<p><small>Apr <var>15</var>, <var>04:58</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>15</var>, <var>04:48</var> EDT</small><br /><strong>Investigating</strong> - Customers in the APAC (Toyko) region may be experiencing delays with analytics and reporting.  Teams are investigating at this time to determine next steps.  Next update top of the hour or as information becomes available.</p>"
+}

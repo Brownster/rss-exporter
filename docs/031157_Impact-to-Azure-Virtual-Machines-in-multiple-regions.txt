@@ -1,0 +1,48 @@
+Provider : azure
+Title    : Impact to Azure Virtual Machines in multiple regions
+Published: Thu, 26 Jun 2025 03:09:42 Z
+Link     : https://status.azure.com/en-us/status/
+ID       : impact-to-azure-virtual-machines-in-multiple-regions
+
+--- SUMMARY / DESCRIPTION ---
+Impact Statement:&nbsp;Starting at 01:37 UTC on 26 June 2025, an alert for Virtual Machines is being investigated where customers using Virtual Machines may experience issues while performing service management operations (CRUD) create, read, update, and delete hosted in multiple regions.Current Status:&nbsp;We are actively investigating the impact, and the next update will be provided within 60 minutes, or as events warrant.
+
+--- FULL RAW ENTRY ---
+{
+  "id": "impact-to-azure-virtual-machines-in-multiple-regions",
+  "guidislink": false,
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.azure.com/en-us/status/"
+    }
+  ],
+  "link": "https://status.azure.com/en-us/status/",
+  "title": "Impact to Azure Virtual Machines in multiple regions",
+  "title_detail": {
+    "type": "text/plain",
+    "language": null,
+    "base": "https://azurestatuscdn.azureedge.net/en-us/status/feed/",
+    "value": "Impact to Azure Virtual Machines in multiple regions"
+  },
+  "summary": "Impact Statement:&nbsp;Starting at 01:37 UTC on 26 June 2025, an alert for Virtual Machines is being investigated where customers using Virtual Machines may experience issues while performing service management operations (CRUD) create, read, update, and delete hosted in multiple regions.Current Status:&nbsp;We are actively investigating the impact, and the next update will be provided within 60 minutes, or as events warrant.",
+  "summary_detail": {
+    "type": "text/html",
+    "language": null,
+    "base": "https://azurestatuscdn.azureedge.net/en-us/status/feed/",
+    "value": "Impact Statement:&nbsp;Starting at 01:37 UTC on 26 June 2025, an alert for Virtual Machines is being investigated where customers using Virtual Machines may experience issues while performing service management operations (CRUD) create, read, update, and delete hosted in multiple regions.Current Status:&nbsp;We are actively investigating the impact, and the next update will be provided within 60 minutes, or as events warrant."
+  },
+  "published": "Thu, 26 Jun 2025 03:09:42 Z",
+  "published_parsed": [
+    2025,
+    6,
+    26,
+    3,
+    9,
+    42,
+    3,
+    177,
+    0
+  ]
+}

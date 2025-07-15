@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Genesys Cloud - Degraded Performance
+Published: 2025-04-25T16:11:58-04:00
+Link     : https://status.mypurecloud.com/incidents/1qr9snf8p8w7
+ID       : tag:status.mypurecloud.com,2005:Incident/24787787
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Apr <var>25</var>, <var>16:11</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>16:07</var> EDT</small><br /><strong>Monitoring</strong> - System operations have returned to normal levels. Continuous monitoring remains in place to ensure stability.</p><p><small>Apr <var>25</var>, <var>15:33</var> EDT</small><br /><strong>Update</strong> - Additional mitigation steps have been implemented and testing is in progress. Customers who would like to test should refresh any open clients and attempt to use the application again.</p><p><small>Apr <var>25</var>, <var>15:31</var> EDT</small><br /><strong>Update</strong> - We are continuing to investigate this issue.</p><p><small>Apr <var>25</var>, <var>15:14</var> EDT</small><br /><strong>Update</strong> - Investigation remains ongoing across multiple teams. While testing continues, no new mitigation steps have been identified at this time. Next update 15:45 Eastern or sooner as information becomes available</p><p><small>Apr <var>25</var>, <var>14:54</var> EDT</small><br /><strong>Update</strong> - Despite initial mitigation attempts showing minimal improvement, symptoms temporarily resolve upon client refresh but return with continued use. Multiple service teams are now collaborating to identify and address the root cause. Next update 15:15 PM or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>14:31</var> EDT</small><br /><strong>Update</strong> - A mitigation plan has been implemented and is currently undergoing testing to verify its effectiveness in resolving the performance issues. Next update 14:45 PM Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>14:11</var> EDT</small><br /><strong>Investigating</strong> - We are investigating an issue with degraded performance in both the web and desktop applications. Next update 14:30 or sooner as information becomes available.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24787787",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/1qr9snf8p8w7",
+  "published": "2025-04-25T16:11:58-04:00",
+  "published_parsed": [
+    2025,
+    4,
+    25,
+    20,
+    11,
+    58,
+    4,
+    115,
+    0
+  ],
+  "updated": "2025-04-25T16:11:58-04:00",
+  "updated_parsed": [
+    2025,
+    4,
+    25,
+    20,
+    11,
+    58,
+    4,
+    115,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/1qr9snf8p8w7"
+    }
+  ],
+  "title": "Genesys Cloud - Degraded Performance",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Genesys Cloud - Degraded Performance"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Apr <var>25</var>, <var>16:11</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>16:07</var> EDT</small><br /><strong>Monitoring</strong> - System operations have returned to normal levels. Continuous monitoring remains in place to ensure stability.</p><p><small>Apr <var>25</var>, <var>15:33</var> EDT</small><br /><strong>Update</strong> - Additional mitigation steps have been implemented and testing is in progress. Customers who would like to test should refresh any open clients and attempt to use the application again.</p><p><small>Apr <var>25</var>, <var>15:31</var> EDT</small><br /><strong>Update</strong> - We are continuing to investigate this issue.</p><p><small>Apr <var>25</var>, <var>15:14</var> EDT</small><br /><strong>Update</strong> - Investigation remains ongoing across multiple teams. While testing continues, no new mitigation steps have been identified at this time. Next update 15:45 Eastern or sooner as information becomes available</p><p><small>Apr <var>25</var>, <var>14:54</var> EDT</small><br /><strong>Update</strong> - Despite initial mitigation attempts showing minimal improvement, symptoms temporarily resolve upon client refresh but return with continued use. Multiple service teams are now collaborating to identify and address the root cause. Next update 15:15 PM or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>14:31</var> EDT</small><br /><strong>Update</strong> - A mitigation plan has been implemented and is currently undergoing testing to verify its effectiveness in resolving the performance issues. Next update 14:45 PM Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>14:11</var> EDT</small><br /><strong>Investigating</strong> - We are investigating an issue with degraded performance in both the web and desktop applications. Next update 14:30 or sooner as information becomes available.</p>"
+    }
+  ],
+  "summary": "<p><small>Apr <var>25</var>, <var>16:11</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>16:07</var> EDT</small><br /><strong>Monitoring</strong> - System operations have returned to normal levels. Continuous monitoring remains in place to ensure stability.</p><p><small>Apr <var>25</var>, <var>15:33</var> EDT</small><br /><strong>Update</strong> - Additional mitigation steps have been implemented and testing is in progress. Customers who would like to test should refresh any open clients and attempt to use the application again.</p><p><small>Apr <var>25</var>, <var>15:31</var> EDT</small><br /><strong>Update</strong> - We are continuing to investigate this issue.</p><p><small>Apr <var>25</var>, <var>15:14</var> EDT</small><br /><strong>Update</strong> - Investigation remains ongoing across multiple teams. While testing continues, no new mitigation steps have been identified at this time. Next update 15:45 Eastern or sooner as information becomes available</p><p><small>Apr <var>25</var>, <var>14:54</var> EDT</small><br /><strong>Update</strong> - Despite initial mitigation attempts showing minimal improvement, symptoms temporarily resolve upon client refresh but return with continued use. Multiple service teams are now collaborating to identify and address the root cause. Next update 15:15 PM or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>14:31</var> EDT</small><br /><strong>Update</strong> - A mitigation plan has been implemented and is currently undergoing testing to verify its effectiveness in resolving the performance issues. Next update 14:45 PM Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>14:11</var> EDT</small><br /><strong>Investigating</strong> - We are investigating an issue with degraded performance in both the web and desktop applications. Next update 14:30 or sooner as information becomes available.</p>"
+}

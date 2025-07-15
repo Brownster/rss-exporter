@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Analytics Delays - Americas (US-West)
+Published: 2025-04-25T22:29:12-04:00
+Link     : https://status.mypurecloud.com/incidents/802qrdtrycp3
+ID       : tag:status.mypurecloud.com,2005:Incident/24789014
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Apr <var>25</var>, <var>22:29</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>21:38</var> EDT</small><br /><strong>Update</strong> - The service continues to make progress on backlogged events. Next up date 22:40 Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>20:35</var> EDT</small><br /><strong>Update</strong> - The service remains healthy and we have seen significant improvement in event processing. Latency continues to drop as the backlog is cleared and customers may be seeing improvement. Next update 21:30 or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>19:27</var> EDT</small><br /><strong>Update</strong> - All services are operating normally as we process backlogged events and complete required data rebalancing. While customers may continue to experience delays in real-time data processing, these delays will resolve automatically as operations complete. No action is required, and we continue to monitor progress closely. Next update 20:30 Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>18:44</var> EDT</small><br /><strong>Update</strong> - We continue to see steady improvement as the backlog is processed. System metrics show decreasing consumer lag and improving latency. While delays in real-time analytics may still occur, customers should begin experiencing some gradual improvement in reporting times. We are continuing to monitor and will provide updates as they become available.</p><p><small>Apr <var>25</var>, <var>17:52</var> EDT</small><br /><strong>Update</strong> - We are experiencing longer than anticipated processing of real-time analytics events. Additional mitigation steps have been implemented to speed up event processing. Customers may begin to see improvement as the backlogged events are processed and delays will resolve automatically once the backlog clears,</p><p><small>Apr <var>25</var>, <var>16:44</var> EDT</small><br /><strong>Monitoring</strong> - We have successfully resolved the issue that was impacting real-time Analytics in the US-West region. The system is now operating normally; however, users may experience some lag in real-time reports for the next 25 minutes as the system fully stabilizes.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24789014",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/802qrdtrycp3",
+  "published": "2025-04-25T22:29:12-04:00",
+  "published_parsed": [
+    2025,
+    4,
+    26,
+    2,
+    29,
+    12,
+    5,
+    116,
+    0
+  ],
+  "updated": "2025-04-25T22:29:12-04:00",
+  "updated_parsed": [
+    2025,
+    4,
+    26,
+    2,
+    29,
+    12,
+    5,
+    116,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/802qrdtrycp3"
+    }
+  ],
+  "title": "Analytics Delays - Americas (US-West)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Analytics Delays - Americas (US-West)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Apr <var>25</var>, <var>22:29</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>21:38</var> EDT</small><br /><strong>Update</strong> - The service continues to make progress on backlogged events. Next up date 22:40 Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>20:35</var> EDT</small><br /><strong>Update</strong> - The service remains healthy and we have seen significant improvement in event processing. Latency continues to drop as the backlog is cleared and customers may be seeing improvement. Next update 21:30 or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>19:27</var> EDT</small><br /><strong>Update</strong> - All services are operating normally as we process backlogged events and complete required data rebalancing. While customers may continue to experience delays in real-time data processing, these delays will resolve automatically as operations complete. No action is required, and we continue to monitor progress closely. Next update 20:30 Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>18:44</var> EDT</small><br /><strong>Update</strong> - We continue to see steady improvement as the backlog is processed. System metrics show decreasing consumer lag and improving latency. While delays in real-time analytics may still occur, customers should begin experiencing some gradual improvement in reporting times. We are continuing to monitor and will provide updates as they become available.</p><p><small>Apr <var>25</var>, <var>17:52</var> EDT</small><br /><strong>Update</strong> - We are experiencing longer than anticipated processing of real-time analytics events. Additional mitigation steps have been implemented to speed up event processing. Customers may begin to see improvement as the backlogged events are processed and delays will resolve automatically once the backlog clears,</p><p><small>Apr <var>25</var>, <var>16:44</var> EDT</small><br /><strong>Monitoring</strong> - We have successfully resolved the issue that was impacting real-time Analytics in the US-West region. The system is now operating normally; however, users may experience some lag in real-time reports for the next 25 minutes as the system fully stabilizes.</p>"
+    }
+  ],
+  "summary": "<p><small>Apr <var>25</var>, <var>22:29</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Apr <var>25</var>, <var>21:38</var> EDT</small><br /><strong>Update</strong> - The service continues to make progress on backlogged events. Next up date 22:40 Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>20:35</var> EDT</small><br /><strong>Update</strong> - The service remains healthy and we have seen significant improvement in event processing. Latency continues to drop as the backlog is cleared and customers may be seeing improvement. Next update 21:30 or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>19:27</var> EDT</small><br /><strong>Update</strong> - All services are operating normally as we process backlogged events and complete required data rebalancing. While customers may continue to experience delays in real-time data processing, these delays will resolve automatically as operations complete. No action is required, and we continue to monitor progress closely. Next update 20:30 Eastern or sooner as information becomes available.</p><p><small>Apr <var>25</var>, <var>18:44</var> EDT</small><br /><strong>Update</strong> - We continue to see steady improvement as the backlog is processed. System metrics show decreasing consumer lag and improving latency. While delays in real-time analytics may still occur, customers should begin experiencing some gradual improvement in reporting times. We are continuing to monitor and will provide updates as they become available.</p><p><small>Apr <var>25</var>, <var>17:52</var> EDT</small><br /><strong>Update</strong> - We are experiencing longer than anticipated processing of real-time analytics events. Additional mitigation steps have been implemented to speed up event processing. Customers may begin to see improvement as the backlogged events are processed and delays will resolve automatically once the backlog clears,</p><p><small>Apr <var>25</var>, <var>16:44</var> EDT</small><br /><strong>Monitoring</strong> - We have successfully resolved the issue that was impacting real-time Analytics in the US-West region. The system is now operating normally; however, users may experience some lag in real-time reports for the next 25 minutes as the system fully stabilizes.</p>"
+}

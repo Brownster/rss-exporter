@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Analytics and Reporting:  Americas (Sao Paulo)
+Published: 2025-05-14T17:45:35-04:00
+Link     : https://status.mypurecloud.com/incidents/815gfw0b1n55
+ID       : tag:status.mypurecloud.com,2005:Incident/25043320
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>May <var>14</var>, <var>17:45</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>May <var>14</var>, <var>17:39</var> EDT</small><br /><strong>Identified</strong> - Customers may be experiencing delays with real time analytics and reporting.  Mitigation steps have been implemented.  Next update 30 min or as information becomes available.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/25043320",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/815gfw0b1n55",
+  "published": "2025-05-14T17:45:35-04:00",
+  "published_parsed": [
+    2025,
+    5,
+    14,
+    21,
+    45,
+    35,
+    2,
+    134,
+    0
+  ],
+  "updated": "2025-05-14T17:45:35-04:00",
+  "updated_parsed": [
+    2025,
+    5,
+    14,
+    21,
+    45,
+    35,
+    2,
+    134,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/815gfw0b1n55"
+    }
+  ],
+  "title": "Analytics and Reporting:  Americas (Sao Paulo)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Analytics and Reporting:  Americas (Sao Paulo)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>May <var>14</var>, <var>17:45</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>May <var>14</var>, <var>17:39</var> EDT</small><br /><strong>Identified</strong> - Customers may be experiencing delays with real time analytics and reporting.  Mitigation steps have been implemented.  Next update 30 min or as information becomes available.</p>"
+    }
+  ],
+  "summary": "<p><small>May <var>14</var>, <var>17:45</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>May <var>14</var>, <var>17:39</var> EDT</small><br /><strong>Identified</strong> - Customers may be experiencing delays with real time analytics and reporting.  Mitigation steps have been implemented.  Next update 30 min or as information becomes available.</p>"
+}

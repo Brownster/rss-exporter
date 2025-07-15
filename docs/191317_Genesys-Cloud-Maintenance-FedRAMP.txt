@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Genesys Cloud Maintenance:  FedRAMP
+Published: 2025-04-27T01:12:41-04:00
+Link     : https://status.mypurecloud.com/incidents/kr3np58b8td6
+ID       : tag:status.mypurecloud.com,2005:Incident/24761479
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Apr <var>27</var>, <var>01:12</var> EDT</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Apr <var>27</var>, <var>00:30</var> EDT</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Apr <var>23</var>, <var>14:59</var> EDT</small><br /><strong>Scheduled</strong> - Genesys Cloud will be performing maintenance Sunday, April 27th in the Americas (FedRAMP) region.  During this maintenance speech and text analytics, sentiment feedback, and dictionary feedback submission functionality will be temporarily unavailable.  Customers will still be able to access read-only operations for the service.  The maintenance is for the admin interface only.  The maintenance window is 3 hours and unavailability of speech and text analytics, sentiment, and dictionary feedback is expected to be 90 minutes or less during the window.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24761479",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/kr3np58b8td6",
+  "published": "2025-04-27T01:12:41-04:00",
+  "published_parsed": [
+    2025,
+    4,
+    27,
+    5,
+    12,
+    41,
+    6,
+    117,
+    0
+  ],
+  "updated": "2025-04-27T01:12:41-04:00",
+  "updated_parsed": [
+    2025,
+    4,
+    27,
+    5,
+    12,
+    41,
+    6,
+    117,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/kr3np58b8td6"
+    }
+  ],
+  "title": "Genesys Cloud Maintenance:  FedRAMP",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Genesys Cloud Maintenance:  FedRAMP"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Apr <var>27</var>, <var>01:12</var> EDT</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Apr <var>27</var>, <var>00:30</var> EDT</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Apr <var>23</var>, <var>14:59</var> EDT</small><br /><strong>Scheduled</strong> - Genesys Cloud will be performing maintenance Sunday, April 27th in the Americas (FedRAMP) region.  During this maintenance speech and text analytics, sentiment feedback, and dictionary feedback submission functionality will be temporarily unavailable.  Customers will still be able to access read-only operations for the service.  The maintenance is for the admin interface only.  The maintenance window is 3 hours and unavailability of speech and text analytics, sentiment, and dictionary feedback is expected to be 90 minutes or less during the window.</p>"
+    }
+  ],
+  "summary": "<p><small>Apr <var>27</var>, <var>01:12</var> EDT</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Apr <var>27</var>, <var>00:30</var> EDT</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Apr <var>23</var>, <var>14:59</var> EDT</small><br /><strong>Scheduled</strong> - Genesys Cloud will be performing maintenance Sunday, April 27th in the Americas (FedRAMP) region.  During this maintenance speech and text analytics, sentiment feedback, and dictionary feedback submission functionality will be temporarily unavailable.  Customers will still be able to access read-only operations for the service.  The maintenance is for the admin interface only.  The maintenance window is 3 hours and unavailability of speech and text analytics, sentiment, and dictionary feedback is expected to be 90 minutes or less during the window.</p>"
+}

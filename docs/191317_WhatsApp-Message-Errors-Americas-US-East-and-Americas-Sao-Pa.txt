@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : WhatsApp Message Errors:  Americas (US East) and Americas (Sao Paulo)
+Published: 2025-06-18T11:52:37-04:00
+Link     : https://status.mypurecloud.com/incidents/8qg6jl5d62st
+ID       : tag:status.mypurecloud.com,2005:Incident/25524604
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Jun <var>18</var>, <var>11:52</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>18</var>, <var>11:48</var> EDT</small><br /><strong>Update</strong> - Monitoring for stability</p><p><small>Jun <var>18</var>, <var>11:41</var> EDT</small><br /><strong>Monitoring</strong> - Recovery is in progress after mitigation steps.</p><p><small>Jun <var>18</var>, <var>11:16</var> EDT</small><br /><strong>Identified</strong> - Genesys Cloud customers using the WhatsApp integration may be experiencing errors with messages that contain emojis.  The development team has implemented mitigation steps.  Next update bottom of the hour.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/25524604",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/8qg6jl5d62st",
+  "published": "2025-06-18T11:52:37-04:00",
+  "published_parsed": [
+    2025,
+    6,
+    18,
+    15,
+    52,
+    37,
+    2,
+    169,
+    0
+  ],
+  "updated": "2025-06-18T11:52:37-04:00",
+  "updated_parsed": [
+    2025,
+    6,
+    18,
+    15,
+    52,
+    37,
+    2,
+    169,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/8qg6jl5d62st"
+    }
+  ],
+  "title": "WhatsApp Message Errors:  Americas (US East) and Americas (Sao Paulo)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "WhatsApp Message Errors:  Americas (US East) and Americas (Sao Paulo)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Jun <var>18</var>, <var>11:52</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>18</var>, <var>11:48</var> EDT</small><br /><strong>Update</strong> - Monitoring for stability</p><p><small>Jun <var>18</var>, <var>11:41</var> EDT</small><br /><strong>Monitoring</strong> - Recovery is in progress after mitigation steps.</p><p><small>Jun <var>18</var>, <var>11:16</var> EDT</small><br /><strong>Identified</strong> - Genesys Cloud customers using the WhatsApp integration may be experiencing errors with messages that contain emojis.  The development team has implemented mitigation steps.  Next update bottom of the hour.</p>"
+    }
+  ],
+  "summary": "<p><small>Jun <var>18</var>, <var>11:52</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>18</var>, <var>11:48</var> EDT</small><br /><strong>Update</strong> - Monitoring for stability</p><p><small>Jun <var>18</var>, <var>11:41</var> EDT</small><br /><strong>Monitoring</strong> - Recovery is in progress after mitigation steps.</p><p><small>Jun <var>18</var>, <var>11:16</var> EDT</small><br /><strong>Identified</strong> - Genesys Cloud customers using the WhatsApp integration may be experiencing errors with messages that contain emojis.  The development team has implemented mitigation steps.  Next update bottom of the hour.</p>"
+}

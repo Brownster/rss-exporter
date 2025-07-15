@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Elevated Error Rates:  Text to Speech, Speech to Text, and Dialogflow ES/CX bot Integrations
+Published: 2025-06-12T19:36:04-04:00
+Link     : https://status.mypurecloud.com/incidents/8njpt0sd1ll2
+ID       : tag:status.mypurecloud.com,2005:Incident/25456901
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Jun <var>12</var>, <var>19:36</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>12</var>, <var>17:08</var> EDT</small><br /><strong>Update</strong> - Dialogflow errors have ceased.  The vendor is reporting recovery but has not provided the all clear.  Will continue to monitor.</p><p><small>Jun <var>12</var>, <var>16:23</var> EDT</small><br /><strong>Update</strong> - TTS and STT are healthy at this time.  Errors are still being observed on Dialogflow.  Pending status from vendor.</p><p><small>Jun <var>12</var>, <var>16:02</var> EDT</small><br /><strong>Update</strong> - Genesys is still seeing errors from the vendor but does note improvement since incident started.  Pending final resolution from the vendor.</p><p><small>Jun <var>12</var>, <var>15:43</var> EDT</small><br /><strong>Monitoring</strong> - The vendor advised they have largely recovered.  Genesys will monitor until the all clear is received.</p><p><small>Jun <var>12</var>, <var>15:19</var> EDT</small><br /><strong>Update</strong> - The vendor has advised mitigation steps are in progress with some recovery observed.  No ETR at this time.</p><p><small>Jun <var>12</var>, <var>14:44</var> EDT</small><br /><strong>Identified</strong> - Customers may be experiencing errors using TTS, STT, and bot flows.  A case has been opened with the vendor.  For speech-to-text issues, users should select Genesys Enhanced v2 as the speech-to-text provider in the bot flow. For text-to-speech (TTS), users need to select a non-Google voice.  Bot flows will take the configured default path.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/25456901",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/8njpt0sd1ll2",
+  "published": "2025-06-12T19:36:04-04:00",
+  "published_parsed": [
+    2025,
+    6,
+    12,
+    23,
+    36,
+    4,
+    3,
+    163,
+    0
+  ],
+  "updated": "2025-06-12T19:36:04-04:00",
+  "updated_parsed": [
+    2025,
+    6,
+    12,
+    23,
+    36,
+    4,
+    3,
+    163,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/8njpt0sd1ll2"
+    }
+  ],
+  "title": "Elevated Error Rates:  Text to Speech, Speech to Text, and Dialogflow ES/CX bot Integrations",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Elevated Error Rates:  Text to Speech, Speech to Text, and Dialogflow ES/CX bot Integrations"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Jun <var>12</var>, <var>19:36</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>12</var>, <var>17:08</var> EDT</small><br /><strong>Update</strong> - Dialogflow errors have ceased.  The vendor is reporting recovery but has not provided the all clear.  Will continue to monitor.</p><p><small>Jun <var>12</var>, <var>16:23</var> EDT</small><br /><strong>Update</strong> - TTS and STT are healthy at this time.  Errors are still being observed on Dialogflow.  Pending status from vendor.</p><p><small>Jun <var>12</var>, <var>16:02</var> EDT</small><br /><strong>Update</strong> - Genesys is still seeing errors from the vendor but does note improvement since incident started.  Pending final resolution from the vendor.</p><p><small>Jun <var>12</var>, <var>15:43</var> EDT</small><br /><strong>Monitoring</strong> - The vendor advised they have largely recovered.  Genesys will monitor until the all clear is received.</p><p><small>Jun <var>12</var>, <var>15:19</var> EDT</small><br /><strong>Update</strong> - The vendor has advised mitigation steps are in progress with some recovery observed.  No ETR at this time.</p><p><small>Jun <var>12</var>, <var>14:44</var> EDT</small><br /><strong>Identified</strong> - Customers may be experiencing errors using TTS, STT, and bot flows.  A case has been opened with the vendor.  For speech-to-text issues, users should select Genesys Enhanced v2 as the speech-to-text provider in the bot flow. For text-to-speech (TTS), users need to select a non-Google voice.  Bot flows will take the configured default path.</p>"
+    }
+  ],
+  "summary": "<p><small>Jun <var>12</var>, <var>19:36</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>Jun <var>12</var>, <var>17:08</var> EDT</small><br /><strong>Update</strong> - Dialogflow errors have ceased.  The vendor is reporting recovery but has not provided the all clear.  Will continue to monitor.</p><p><small>Jun <var>12</var>, <var>16:23</var> EDT</small><br /><strong>Update</strong> - TTS and STT are healthy at this time.  Errors are still being observed on Dialogflow.  Pending status from vendor.</p><p><small>Jun <var>12</var>, <var>16:02</var> EDT</small><br /><strong>Update</strong> - Genesys is still seeing errors from the vendor but does note improvement since incident started.  Pending final resolution from the vendor.</p><p><small>Jun <var>12</var>, <var>15:43</var> EDT</small><br /><strong>Monitoring</strong> - The vendor advised they have largely recovered.  Genesys will monitor until the all clear is received.</p><p><small>Jun <var>12</var>, <var>15:19</var> EDT</small><br /><strong>Update</strong> - The vendor has advised mitigation steps are in progress with some recovery observed.  No ETR at this time.</p><p><small>Jun <var>12</var>, <var>14:44</var> EDT</small><br /><strong>Identified</strong> - Customers may be experiencing errors using TTS, STT, and bot flows.  A case has been opened with the vendor.  For speech-to-text issues, users should select Genesys Enhanced v2 as the speech-to-text provider in the bot flow. For text-to-speech (TTS), users need to select a non-Google voice.  Bot flows will take the configured default path.</p>"
+}

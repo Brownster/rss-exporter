@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Genesys Cloud Maintenance - Realtime Analytics (FedRAMP)
+Published: 2025-03-05T03:30:21-05:00
+Link     : https://status.mypurecloud.com/incidents/3gd28gy45xrb
+ID       : tag:status.mypurecloud.com,2005:Incident/24061882
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Mar <var> 5</var>, <var>03:30</var> EST</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Mar <var> 5</var>, <var>03:00</var> EST</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Feb <var>18</var>, <var>13:28</var> EST</small><br /><strong>Scheduled</strong> - On March 5, 03:00 AM [FedRAMP], Genesys Cloud will perform improvements to the batch and stream processing framework responsible for real-time analytics data. During this maintenance, customers should expect a brief interruption of real-time analytics data ingestion while the service restarts. Real-time analytics will resume automatically after the restart, and historical data will remain unaffected.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24061882",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/3gd28gy45xrb",
+  "published": "2025-03-05T03:30:21-05:00",
+  "published_parsed": [
+    2025,
+    3,
+    5,
+    8,
+    30,
+    21,
+    2,
+    64,
+    0
+  ],
+  "updated": "2025-03-05T03:30:21-05:00",
+  "updated_parsed": [
+    2025,
+    3,
+    5,
+    8,
+    30,
+    21,
+    2,
+    64,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/3gd28gy45xrb"
+    }
+  ],
+  "title": "Genesys Cloud Maintenance - Realtime Analytics (FedRAMP)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Genesys Cloud Maintenance - Realtime Analytics (FedRAMP)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Mar <var> 5</var>, <var>03:30</var> EST</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Mar <var> 5</var>, <var>03:00</var> EST</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Feb <var>18</var>, <var>13:28</var> EST</small><br /><strong>Scheduled</strong> - On March 5, 03:00 AM [FedRAMP], Genesys Cloud will perform improvements to the batch and stream processing framework responsible for real-time analytics data. During this maintenance, customers should expect a brief interruption of real-time analytics data ingestion while the service restarts. Real-time analytics will resume automatically after the restart, and historical data will remain unaffected.</p>"
+    }
+  ],
+  "summary": "<p><small>Mar <var> 5</var>, <var>03:30</var> EST</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Mar <var> 5</var>, <var>03:00</var> EST</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Feb <var>18</var>, <var>13:28</var> EST</small><br /><strong>Scheduled</strong> - On March 5, 03:00 AM [FedRAMP], Genesys Cloud will perform improvements to the batch and stream processing framework responsible for real-time analytics data. During this maintenance, customers should expect a brief interruption of real-time analytics data ingestion while the service restarts. Real-time analytics will resume automatically after the restart, and historical data will remain unaffected.</p>"
+}

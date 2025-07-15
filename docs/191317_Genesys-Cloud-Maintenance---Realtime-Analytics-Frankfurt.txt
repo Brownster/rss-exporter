@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Genesys Cloud Maintenance - Realtime Analytics (Frankfurt)
+Published: 2025-03-01T19:30:21-05:00
+Link     : https://status.mypurecloud.com/incidents/dwpgw1v00n7w
+ID       : tag:status.mypurecloud.com,2005:Incident/24061798
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>Mar <var> 1</var>, <var>19:30</var> EST</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Mar <var> 1</var>, <var>19:00</var> EST</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Feb <var>18</var>, <var>13:22</var> EST</small><br /><strong>Scheduled</strong> - On March 2, 01:00 AM [Frankfurt], Genesys Cloud will perform improvements to the batch and stream processing framework responsible for real-time analytics data. During this maintenance, customers should expect a brief interruption of real-time analytics data ingestion while the service restarts. Real-time analytics will resume automatically after the restart, and historical data will remain unaffected.</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24061798",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/dwpgw1v00n7w",
+  "published": "2025-03-01T19:30:21-05:00",
+  "published_parsed": [
+    2025,
+    3,
+    2,
+    0,
+    30,
+    21,
+    6,
+    61,
+    0
+  ],
+  "updated": "2025-03-01T19:30:21-05:00",
+  "updated_parsed": [
+    2025,
+    3,
+    2,
+    0,
+    30,
+    21,
+    6,
+    61,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/dwpgw1v00n7w"
+    }
+  ],
+  "title": "Genesys Cloud Maintenance - Realtime Analytics (Frankfurt)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Genesys Cloud Maintenance - Realtime Analytics (Frankfurt)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>Mar <var> 1</var>, <var>19:30</var> EST</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Mar <var> 1</var>, <var>19:00</var> EST</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Feb <var>18</var>, <var>13:22</var> EST</small><br /><strong>Scheduled</strong> - On March 2, 01:00 AM [Frankfurt], Genesys Cloud will perform improvements to the batch and stream processing framework responsible for real-time analytics data. During this maintenance, customers should expect a brief interruption of real-time analytics data ingestion while the service restarts. Real-time analytics will resume automatically after the restart, and historical data will remain unaffected.</p>"
+    }
+  ],
+  "summary": "<p><small>Mar <var> 1</var>, <var>19:30</var> EST</small><br /><strong>Completed</strong> - The scheduled maintenance has been completed.</p><p><small>Mar <var> 1</var>, <var>19:00</var> EST</small><br /><strong>In progress</strong> - Scheduled maintenance is currently in progress. We will provide updates as necessary.</p><p><small>Feb <var>18</var>, <var>13:22</var> EST</small><br /><strong>Scheduled</strong> - On March 2, 01:00 AM [Frankfurt], Genesys Cloud will perform improvements to the batch and stream processing framework responsible for real-time analytics data. During this maintenance, customers should expect a brief interruption of real-time analytics data ingestion while the service restarts. Real-time analytics will resume automatically after the restart, and historical data will remain unaffected.</p>"
+}

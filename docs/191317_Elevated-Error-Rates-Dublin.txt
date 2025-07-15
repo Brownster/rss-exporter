@@ -1,0 +1,62 @@
+Provider : genesys
+Title    : Elevated Error Rates (Dublin)
+Published: 2025-05-05T07:45:03-04:00
+Link     : https://status.mypurecloud.com/incidents/dk8rcw2v8qcg
+ID       : tag:status.mypurecloud.com,2005:Incident/24878577
+
+--- SUMMARY / DESCRIPTION ---
+<p><small>May <var> 5</var>, <var>07:45</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>May <var> 5</var>, <var>07:23</var> EDT</small><br /><strong>Monitoring</strong> - Error rates have returned to normal levels and customers are seeing improvement.</p><p><small>May <var> 5</var>, <var>07:16</var> EDT</small><br /><strong>Investigating</strong> - Customers are experiencing issues with voice bot flows causing some calls to fail. Mitigation steps are being implemented. Next update 07:30 Eastern</p>
+
+--- FULL RAW ENTRY ---
+{
+  "id": "tag:status.mypurecloud.com,2005:Incident/24878577",
+  "guidislink": true,
+  "link": "https://status.mypurecloud.com/incidents/dk8rcw2v8qcg",
+  "published": "2025-05-05T07:45:03-04:00",
+  "published_parsed": [
+    2025,
+    5,
+    5,
+    11,
+    45,
+    3,
+    0,
+    125,
+    0
+  ],
+  "updated": "2025-05-05T07:45:03-04:00",
+  "updated_parsed": [
+    2025,
+    5,
+    5,
+    11,
+    45,
+    3,
+    0,
+    125,
+    0
+  ],
+  "links": [
+    {
+      "rel": "alternate",
+      "type": "text/html",
+      "href": "https://status.mypurecloud.com/incidents/dk8rcw2v8qcg"
+    }
+  ],
+  "title": "Elevated Error Rates (Dublin)",
+  "title_detail": {
+    "type": "text/plain",
+    "language": "en-US",
+    "base": "https://status.mypurecloud.com/history.atom",
+    "value": "Elevated Error Rates (Dublin)"
+  },
+  "content": [
+    {
+      "type": "text/html",
+      "language": "en-US",
+      "base": "https://status.mypurecloud.com/history.atom",
+      "value": "<p><small>May <var> 5</var>, <var>07:45</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>May <var> 5</var>, <var>07:23</var> EDT</small><br /><strong>Monitoring</strong> - Error rates have returned to normal levels and customers are seeing improvement.</p><p><small>May <var> 5</var>, <var>07:16</var> EDT</small><br /><strong>Investigating</strong> - Customers are experiencing issues with voice bot flows causing some calls to fail. Mitigation steps are being implemented. Next update 07:30 Eastern</p>"
+    }
+  ],
+  "summary": "<p><small>May <var> 5</var>, <var>07:45</var> EDT</small><br /><strong>Resolved</strong> - This incident has been resolved.</p><p><small>May <var> 5</var>, <var>07:23</var> EDT</small><br /><strong>Monitoring</strong> - Error rates have returned to normal levels and customers are seeing improvement.</p><p><small>May <var> 5</var>, <var>07:16</var> EDT</small><br /><strong>Investigating</strong> - Customers are experiencing issues with voice bot flows causing some calls to fail. Mitigation steps are being implemented. Next update 07:30 Eastern</p>"
+}
