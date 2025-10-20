@@ -79,6 +79,19 @@ func (s *FeedTestSuite) TestOpenAIResolved() {
 	s.NoError(err)
 }
 
+func (s *FeedTestSuite) TestGenesysIdentifiedIncident() {
+	s.setupExporter("testdata/genesys_feed.atom", "http://mock.genesys/feed", "genesys-test", "genesyscloud")
+	s.Exporter.Start()
+
+	expected := "# HELP genesys_test_service_status Current service status\n" +
+		"# TYPE genesys_test_service_status gauge\n" +
+		"genesys_test_service_status{customer=\"\",service=\"genesys-test\",state=\"ok\"} 0\n" +
+		"genesys_test_service_status{customer=\"\",service=\"genesys-test\",state=\"outage\"} 0\n" +
+		"genesys_test_service_status{customer=\"\",service=\"genesys-test\",state=\"service_issue\"} 1\n"
+	err := testutil.CollectAndCompare(s.Exporter, strings.NewReader(expected), "genesys-test_service_status")
+	s.NoError(err)
+}
+
 func TestFeedSuite(t *testing.T) {
 	suite.Run(t, new(FeedTestSuite))
 }
