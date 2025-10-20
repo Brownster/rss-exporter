@@ -24,6 +24,10 @@ services:
     provider: cloudflare
     url: https://www.cloudflarestatus.com/history.atom
     interval: 300
+  - name: twilio
+    provider: twilio
+    url: https://status.twilio.com/history.rss
+    interval: 300
   - name: openai
     provider: openai
     url: https://status.openai.com/history.atom

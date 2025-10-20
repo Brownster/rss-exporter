@@ -79,6 +79,7 @@ func (s *FeedTestSuite) TestOpenAIResolved() {
 	s.NoError(err)
 }
 
+
 func (s *FeedTestSuite) TestGenesysIdentifiedIncident() {
 	s.setupExporter("testdata/genesys_feed.atom", "http://mock.genesys/feed", "genesys-test", "genesyscloud")
 	s.Exporter.Start()
@@ -89,6 +90,24 @@ func (s *FeedTestSuite) TestGenesysIdentifiedIncident() {
 		"genesys_test_service_status{customer=\"\",service=\"genesys-test\",state=\"outage\"} 0\n" +
 		"genesys_test_service_status{customer=\"\",service=\"genesys-test\",state=\"service_issue\"} 1\n"
 	err := testutil.CollectAndCompare(s.Exporter, strings.NewReader(expected), "genesys-test_service_status")
+
+func (s *FeedTestSuite) TestTwilioScheduledMaintenance() {
+	s.setupExporter("testdata/twilio_scheduled.rss", "http://mock.twilio/feed", "twilio-test", "twilio")
+	s.Exporter.Start()
+
+	expectedStatus := "# HELP twilio_test_service_status Current service status\n" +
+		"# TYPE twilio_test_service_status gauge\n" +
+		"twilio_test_service_status{customer=\"\",service=\"twilio-test\",state=\"ok\"} 0\n" +
+		"twilio_test_service_status{customer=\"\",service=\"twilio-test\",state=\"outage\"} 0\n" +
+		"twilio_test_service_status{customer=\"\",service=\"twilio-test\",state=\"service_issue\"} 1\n"
+	err := testutil.CollectAndCompare(s.Exporter, strings.NewReader(expectedStatus), "twilio-test_service_status")
+	s.NoError(err)
+
+	expectedInfo := "# HELP twilio_test_service_issue_info Details for active service issues\n" +
+		"# TYPE twilio_test_service_issue_info gauge\n" +
+		"twilio_test_service_issue_info{customer=\"\",guid=\"https://status.twilio.com/incidents/2v98q17wsch8\",link=\"https://status.twilio.com/incidents/2v98q17wsch8\",region=\"United States and Canada\",service=\"twilio-test\",service_name=\"SMS and MMS\",title=\"United States and Canada Twilio SMS and MMS Maintenance\"} 1\n"
+	err = testutil.CollectAndCompare(s.Exporter, strings.NewReader(expectedInfo), "twilio-test_service_issue_info")
+
 	s.NoError(err)
 }
 
