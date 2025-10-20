@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>OpenAI status</title>
+        <link>https://status.openai.com/</link>
+        <description>OpenAI status page updates</description>
+        <lastBuildDate>Mon, 20 Oct 2025 09:50:39 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>incident.io</generator>
+        <item>
+            <title><![CDATA[Single Sign On (SSO) login issues]]></title>
+            <link>https://status.openai.com//incidents/01K80CBJD5Z64DF82KGT3K3QE0</link>
+            <guid>https://status.openai.com//incidents/01K80CBJD5Z64DF82KGT3K3QE0</guid>
+            <pubDate>Mon, 20 Oct 2025 09:43:12 GMT</pubDate>
+            <description><![CDATA[<b>Status: Monitoring</b><br/><br/>We seeing recovery on impacted services, and we are monitoring.<br/><br/><b>Affected components</b>
+          <ul>
+            <li>Login (Partial outage)</li>
+            <li>Login (Partial outage)</li>
+          </ul>]]></description>
+            <content:encoded><![CDATA[<b>Status: Monitoring</b><br/><br/>We seeing recovery on impacted services, and we are monitoring.<br/><br/><b>Affected components</b>
+          <ul>
+            <li>Login (Partial outage)</li>
+            <li>Login (Partial outage)</li>
+          </ul>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[API: Elevated error rates in gpt-5-mini]]></title>
+            <link>https://status.openai.com//incidents/01K7JN4FF78DYA5RCVC1ABN55P</link>
+            <guid>https://status.openai.com//incidents/01K7JN4FF78DYA5RCVC1ABN55P</guid>
+            <pubDate>Wed, 15 Oct 2025 01:25:56 GMT</pubDate>
+            <description><![CDATA[<b>Status: Resolved</b><br/><br/>All impacted services have now fully recovered.<br/><br/><b>Affected components</b>
+          <ul>
+            <li>Chat Completions (Operational)</li>
+            <li>Responses (Operational)</li>
+          </ul>]]></description>
+            <content:encoded><![CDATA[<b>Status: Resolved</b><br/><br/>All impacted services have now fully recovered.<br/><br/><b>Affected components</b>
+          <ul>
+            <li>Chat Completions (Operational)</li>
+            <li>Responses (Operational)</li>
+          </ul>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Delays with Supervised Fine-Tuning]]></title>
+            <link>https://status.openai.com//incidents/01K782M5NJ351CQDEZATG3W3QP</link>
+            <guid>https://status.openai.com//incidents/01K782M5NJ351CQDEZATG3W3QP</guid>
+            <pubDate>Mon, 13 Oct 2025 21:15:59 GMT</pubDate>
+            <description><![CDATA[<b>Status: Resolved</b><br/><br/>All impacted services have now fully recovered.<br/><br/><b>Affected components</b>
+          <ul>
+            <li>Fine-tuning (Operational)</li>
+          </ul>]]></description>
+            <content:encoded><![CDATA[<b>Status: Resolved</b><br/><br/>All impacted services have now fully recovered.<br/><br/><b>Affected components</b>
+          <ul>
+            <li>Fine-tuning (Operational)</li>
+          </ul>]]></content:encoded>
+        </item>
+    </channel>
+</rss>
