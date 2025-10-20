@@ -84,6 +84,45 @@ func (azureParser) IncidentKey(item *gofeed.Item) string {
 	return key
 }
 
+type twilioParser struct{}
+
+func (twilioParser) ServiceInfo(item *gofeed.Item) (string, string) {
+	title := strings.TrimSpace(item.Title)
+	if title == "" {
+		return "", ""
+	}
+
+	trimSuffixes := []string{
+		" Maintenance",
+		" maintenance",
+		" Incident",
+		" incident",
+		" Update",
+		" update",
+	}
+	cleaned := title
+	for _, suffix := range trimSuffixes {
+		cleaned = strings.TrimSpace(strings.TrimSuffix(cleaned, suffix))
+	}
+
+	separators := []string{" Twilio ", " SMS ", " MMS ", " Voice ", " Account "}
+	for _, sep := range separators {
+		if idx := strings.Index(cleaned, sep); idx != -1 {
+			region := strings.TrimSpace(cleaned[:idx])
+			service := strings.TrimSpace(cleaned[idx:])
+			service = strings.TrimPrefix(service, "Twilio ")
+			service = strings.TrimSpace(service)
+			return service, region
+		}
+	}
+
+	return cleaned, ""
+}
+
+func (twilioParser) IncidentKey(item *gofeed.Item) string {
+	return genericParser{}.IncidentKey(item)
+}
+
 type genericParser struct{}
 
 func (genericParser) ServiceInfo(item *gofeed.Item) (string, string) {
@@ -110,6 +149,8 @@ func ScraperForService(provider, service string) Scraper {
 		return gcpParser{}
 	case "azure":
 		return azureParser{}
+	case "twilio":
+		return twilioParser{}
 	case "":
 		// fall back to service name when provider not set
 	default:
@@ -126,6 +167,8 @@ func ScraperForService(provider, service string) Scraper {
 		return gcpParser{}
 	case strings.Contains(svc, "azure"):
 		return azureParser{}
+	case strings.Contains(svc, "twilio"):
+		return twilioParser{}
 	default:
 		return genericParser{}
 	}

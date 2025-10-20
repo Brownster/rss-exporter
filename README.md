@@ -66,6 +66,7 @@ The exporter includes dedicated scrapers for several cloud providers:
 * **aws** – parses AWS Health RSS feeds and extracts service and region.
 * **gcp** – handles Google Cloud status feeds.
 * **azure** – parses Azure status feeds and extracts service and region.
+* **twilio** – parses Twilio status feeds and surfaces the affected region and product for incidents and scheduled maintenance.
 
 Any other value falls back to the generic scraper. Provider names like
 `cloudflare`, `genesyscloud`, `okta`, or `openai` all use the generic collector.
