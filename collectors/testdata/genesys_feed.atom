@@ -1,17 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
-<title>Genesys Cloud Status - Incident History</title>
-<updated>2025-06-13T00:06:01-04:00</updated>
-<author>
-<name>Genesys Cloud</name>
-</author>
-<link rel="alternate" type="text/html" href="https://status.mypurecloud.com"/>
-<link rel="self" type="application/atom+xml" href="https://status.mypurecloud.com/history.atom"/>
-<id>tag:status.mypurecloud.com,2005:/history</id>
-<entry>
-<title>Elevated Error Rates: Text to Speech, Speech to Text, and Dialogflow ES/CX bot Integrations</title>
-<id>tag:status.mypurecloud.com,2005:Incident/mock-123</id>
-<link href="https://status.mypurecloud.com/incidents/mock-123"/>
-<updated>2025-06-12T19:36:04-04:00</updated>
-<content type="html"><p><strong>Resolved</strong> - This incident has been resolved.</p></content>
-</entry>
+  <id>tag:status.mypurecloud.com,2005:/history</id>
+  <link rel="alternate" type="text/html" href="https://status.mypurecloud.com"/>
+  <link rel="self" type="application/atom+xml" href="https://status.mypurecloud.com/history.atom"/>
+  <title>Genesys Cloud Status - Incident History</title>
+  <updated>2025-10-20T05:35:05-04:00</updated>
+  <author>
+    <name>Genesys Cloud</name>
+  </author>
+  <entry>
+    <id>tag:status.mypurecloud.com,2005:Incident/26815638</id>
+    <published>2025-10-20T05:35:05-04:00</published>
+    <updated>2025-10-20T05:35:05-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://status.mypurecloud.com/incidents/nj3rdcjrgh02"/>
+    <title>Americas (US East) Incident</title>
+    <content type="html">&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;20&lt;/var&gt;, &lt;var data-var='time'&gt;05:35&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Identified&lt;/strong&gt; - Genesys Cloud experienced a major incident due to the platform provider.  Genesys Cloud services are in recovery at this time, but have not fully restored.  Next update top of the hour.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:status.mypurecloud.com,2005:Incident/26773717</id>
+    <published>2025-10-16T04:00:16-04:00</published>
+    <updated>2025-10-16T04:00:16-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://status.mypurecloud.com/incidents/w2gq2ngw1km7"/>
+    <title>Analytics &amp; Reporting Delays Americas (Sao Paulo)</title>
+    <content type="html">&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;16&lt;/var&gt;, &lt;var data-var='time'&gt;04:00&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Resolved&lt;/strong&gt; - Error rates have returned to normal, and the backlogged events have been successfully processed. Issue is now resolved.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;16&lt;/var&gt;, &lt;var data-var='time'&gt;03:49&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Monitoring&lt;/strong&gt; - Mitigation steps were successful, with error rates continuing to decline. Next update: 04:00 AM ET, or earlier if new information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;16&lt;/var&gt;, &lt;var data-var='time'&gt;03:33&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Investigating&lt;/strong&gt; - Development teams are investigating an issue impacting real time analytics in Sao Paulo region. Customers may experience delays with user presence, aggregate metrics, observation metrics, and notifications. Mitigation steps have been implemented, and we are monitoring for improvement.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:status.mypurecloud.com,2005:Incident/26762425</id>
+    <published>2025-10-15T18:19:49-04:00</published>
+    <updated>2025-10-15T18:19:49-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://status.mypurecloud.com/incidents/qfzc7py86d9k"/>
+    <title>X (Twitter) Social Listening Services Impaired</title>
+    <content type="html">&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;18:19&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Resolved&lt;/strong&gt; - This incident has been resolved.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;15:59&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - Our vendor is still investigating the issue with their API v2 service. The next update will be provided by 18:00 Eastern, or sooner if new information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;14:02&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - Our vendor is still investigating the issue with their API v2 service. The next update will be provided by 16:00 Eastern, or sooner if new information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;13:00&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - Our vendor is still investigating the issue with their API v2 service. The next update will be provided by 14:00 Eastern, or sooner if new information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;11:30&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - Our vendor is continuing to investigate the issue in their API v2 offering, next update 13:00 Eastern or sooner as information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;09:55&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - Service teams continue to work with the vendor to restore service. Impact remains with Genesys Cloud Social Listening. Inbound and Outbound DMs are working as expected. Next update 11:30AM Eastern or sooner as information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;08:56&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - Genesys Cloud engineers remain engaged with the third-party vendor as the vendor continues to investigate root cause of the stream error within their platform. &lt;br /&gt;Next update 10:00 Eastern or sooner as information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;07:30&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - It is confirmed the issue is isolated to the X stream functionality only. Genesys Cloud engineers remain engaged with the third-party vendor as the vendor continues to investigate root cause. &lt;br /&gt;Next update 08:00 Eastern or sooner as information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;06:59&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - Genesys Cloud engineers remain engaged with the third-party vendor as the vendor continues to investigate root cause. Next update 08:00 Eastern or sooner as information becomes available.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;15&lt;/var&gt;, &lt;var data-var='time'&gt;06:14&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Identified&lt;/strong&gt; - Genesys Cloud engineers remain engaged with the third-party vendor as the vendor continues to investigate root cause of the messaging issue within their platform. Next update 07:00 Eastern or sooner as information becomes available&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:status.mypurecloud.com,2005:Incident/26386558</id>
+    <published>2025-10-10T17:30:23-04:00</published>
+    <updated>2025-10-10T17:30:24-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://status.mypurecloud.com/incidents/5ls46sbjnhz6"/>
+    <title>Genesys Cloud Maintenance - Mumbai</title>
+    <content type="html">&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;10&lt;/var&gt;, &lt;var data-var='time'&gt;17:30&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Completed&lt;/strong&gt; - The scheduled maintenance has been completed.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;10&lt;/var&gt;, &lt;var data-var='time'&gt;16:30&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;In progress&lt;/strong&gt; - Scheduled maintenance is currently in progress. We will provide updates as necessary.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt; 1&lt;/var&gt;, &lt;var data-var='time'&gt;13:53&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - The scheduled maintenance that is planned for October 4, 02:00 AM local time, has been rescheduled for October 11, 02:00 am local time.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Sep &lt;var data-var='date'&gt;18&lt;/var&gt;, &lt;var data-var='time'&gt;09:51&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - We will be undergoing scheduled maintenance during this time.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Sep &lt;var data-var='date'&gt;10&lt;/var&gt;, &lt;var data-var='time'&gt;10:12&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - We will be undergoing scheduled maintenance during this time.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Sep &lt;var data-var='date'&gt;10&lt;/var&gt;, &lt;var data-var='time'&gt;10:11&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - We will be undergoing scheduled maintenance during this time.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Sep &lt;var data-var='date'&gt;19&lt;/var&gt;, &lt;var data-var='time'&gt;16:30&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Update&lt;/strong&gt; - We will be undergoing scheduled maintenance during this time.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Sep &lt;var data-var='date'&gt;19&lt;/var&gt;, &lt;var data-var='time'&gt;16:30&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Scheduled&lt;/strong&gt; - On October 4, 02:00 AM local time, Genesys Cloud will be performing maintenance on the service responsible for managing and running outbound dialing campaigns. Maintenance is expected to take approximately sixty minutes, during which time, customers can expect intermittent timeouts, reconnects, and slowed or interrupted dialing.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:status.mypurecloud.com,2005:Incident/26616245</id>
+    <published>2025-10-10T03:00:21-04:00</published>
+    <updated>2025-10-10T03:00:21-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://status.mypurecloud.com/incidents/g8b4x3dr5yv6"/>
+    <title>Genesys Cloud Maintenance - Ohio</title>
+    <content type="html">&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;10&lt;/var&gt;, &lt;var data-var='time'&gt;03:00&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Completed&lt;/strong&gt; - The scheduled maintenance has been completed.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt;10&lt;/var&gt;, &lt;var data-var='time'&gt;02:00&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;In progress&lt;/strong&gt; - Scheduled maintenance is currently in progress. We will provide updates as necessary.&lt;/p&gt;&lt;p&gt;&lt;small&gt;Oct &lt;var data-var='date'&gt; 1&lt;/var&gt;, &lt;var data-var='time'&gt;14:03&lt;/var&gt; EDT&lt;/small&gt;&lt;br&gt;&lt;strong&gt;Scheduled&lt;/strong&gt; - The scheduled maintenance planned for September 28, 02:00 AM local time, was not completed and has been rescheduled for October 10, 2:00 am local time. &lt;br /&gt;&lt;br /&gt;Genesys Cloud will be performing maintenance on the service responsible for managing and running outbound dialing campaigns. Maintenance is expected to take approximately sixty minutes, during which time, customers can expect intermittent timeouts, reconnects, and slowed or interrupted dialing.&lt;/p&gt;</content>
+  </entry>
 </feed>
