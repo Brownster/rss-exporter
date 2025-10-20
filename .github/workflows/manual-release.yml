@@ -1,0 +1,96 @@
+name: Manual Go Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Semver version number for the package (e.g. 1.2.3)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build release artifacts
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - goos: linux
+            goarch: amd64
+            archive: tar.gz
+          - goos: linux
+            goarch: arm64
+            archive: tar.gz
+          - goos: darwin
+            goarch: amd64
+            archive: tar.gz
+          - goos: darwin
+            goarch: arm64
+            archive: tar.gz
+          - goos: windows
+            goarch: amd64
+            archive: zip
+          - goos: windows
+            goarch: arm64
+            archive: zip
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Download module dependencies
+        run: go mod download
+
+      - name: Build and package binary
+        id: package
+        env:
+          VERSION: ${{ inputs.version }}
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          ARCHIVE_FORMAT: ${{ matrix.archive }}
+        run: |
+          set -euo pipefail
+          TARGET="rss-exporter_${VERSION}_${GOOS}_${GOARCH}"
+          BIN_NAME="rss-exporter"
+          if [ "$GOOS" = "windows" ]; then
+            BIN_NAME="${BIN_NAME}.exe"
+          fi
+
+          mkdir -p "build/${TARGET}"
+          CGO_ENABLED=0 GOOS="$GOOS" GOARCH="$GOARCH" go build -o "build/${TARGET}/${BIN_NAME}" ./cmd/rss_exporter
+
+          mkdir -p dist
+          case "$ARCHIVE_FORMAT" in
+            zip)
+              ARCHIVE_PATH="dist/${TARGET}.zip"
+              (cd build && zip -r "../${ARCHIVE_PATH}" "${TARGET}")
+              ;;
+            tar.gz)
+              ARCHIVE_PATH="dist/${TARGET}.tar.gz"
+              (cd build && tar -czf "../${ARCHIVE_PATH}" "${TARGET}")
+              ;;
+            *)
+              echo "Unsupported archive format: $ARCHIVE_FORMAT" >&2
+              exit 1
+              ;;
+          esac
+
+          echo "archive_path=${ARCHIVE_PATH}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload packaged binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: rss-exporter-${{ inputs.version }}-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: ${{ steps.package.outputs.archive_path }}
+          if-no-files-found: error
