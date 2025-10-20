@@ -90,6 +90,12 @@ func (s *FeedTestSuite) TestGenesysIdentifiedIncident() {
 		"genesys_test_service_status{customer=\"\",service=\"genesys-test\",state=\"service_issue\"} 1\n"
 	err := testutil.CollectAndCompare(s.Exporter, strings.NewReader(expected), "genesys-test_service_status")
 	s.NoError(err)
+
+	expectedInfo := "# HELP genesys_test_service_issue_info Details for active service issues\n" +
+		"# TYPE genesys_test_service_issue_info gauge\n" +
+		"genesys_test_service_issue_info{customer=\"\",guid=\"tag:status.mypurecloud.com,2005:Incident/26815638\",link=\"https://status.mypurecloud.com/incidents/nj3rdcjrgh02\",region=\"multiple-regions\",service=\"genesys-test\",service_name=\"multiple-services\",title=\"Americas (US East) Incident\"} 1\n"
+	err = testutil.CollectAndCompare(s.Exporter, strings.NewReader(expectedInfo), "genesys-test_service_issue_info")
+	s.NoError(err)
 }
 
 func (s *FeedTestSuite) TestTwilioScheduledMaintenance() {

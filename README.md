@@ -67,9 +67,10 @@ The exporter includes dedicated scrapers for several cloud providers:
 * **gcp** – handles Google Cloud status feeds.
 * **azure** – parses Azure status feeds and extracts service and region.
 * **twilio** – parses Twilio status feeds and surfaces the affected region and product for incidents and scheduled maintenance.
+* **genesyscloud** – extracts Genesys service and regional information, including multi-region incidents when available.
 
 Any other value falls back to the generic scraper. Provider names like
-`cloudflare`, `genesyscloud`, `okta`, or `openai` all use the generic collector.
+`cloudflare`, `okta`, or `openai` all use the generic collector.
 When the `provider` field is omitted, the service name is inspected to select a
 suitable scraper.
 

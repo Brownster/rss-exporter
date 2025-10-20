@@ -1,6 +1,7 @@
 package collectors
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/mmcdole/gofeed"
@@ -123,6 +124,22 @@ func (twilioParser) IncidentKey(item *gofeed.Item) string {
 	return genericParser{}.IncidentKey(item)
 }
 
+type genesysParser struct{}
+
+func (genesysParser) ServiceInfo(item *gofeed.Item) (string, string) {
+	service, region := parseGenesysTitle(strings.TrimSpace(item.Title))
+	if service == "" {
+		service = inferGenesysService(item)
+	}
+	region = determineGenesysRegion(region, item)
+
+	return slugify(service), region
+}
+
+func (genesysParser) IncidentKey(item *gofeed.Item) string {
+	return genericParser{}.IncidentKey(item)
+}
+
 type genericParser struct{}
 
 func (genericParser) ServiceInfo(item *gofeed.Item) (string, string) {
@@ -151,6 +168,8 @@ func ScraperForService(provider, service string) Scraper {
 		return azureParser{}
 	case "twilio":
 		return twilioParser{}
+	case "genesyscloud":
+		return genesysParser{}
 	case "":
 		// fall back to service name when provider not set
 	default:
@@ -169,6 +188,8 @@ func ScraperForService(provider, service string) Scraper {
 		return azureParser{}
 	case strings.Contains(svc, "twilio"):
 		return twilioParser{}
+	case strings.Contains(svc, "genesys"):
+		return genesysParser{}
 	default:
 		return genericParser{}
 	}
@@ -236,4 +257,283 @@ func ParseAWSGUID(guid string) (serviceName, region string) {
 	}
 	serviceName = strings.ToLower(serviceName)
 	return
+}
+
+var (
+	genesysRegionKeyReplacer = strings.NewReplacer(
+		"(", " ",
+		")", " ",
+		",", " ",
+		".", " ",
+		":", " ",
+		"/", " ",
+		"-", " ",
+		"_", " ",
+		"*", " ",
+	)
+	slugifyCleanupRegexp      = regexp.MustCompile(`[^a-z0-9]+`)
+	genesysTitleRegionPattern = regexp.MustCompile(`(?i)([A-Za-z0-9&/ ]+\([^\)]+\))`)
+)
+
+type genesysRegionInfo struct {
+	label string
+	group string
+}
+
+var genesysRegionMap = map[string]genesysRegionInfo{
+	"americas":           {label: "americas", group: "americas"},
+	"americas us east":   {label: "americas-us-east", group: "americas"},
+	"us east":            {label: "americas-us-east", group: "americas"},
+	"americas us west":   {label: "americas-us-west", group: "americas"},
+	"us west":            {label: "americas-us-west", group: "americas"},
+	"canada":             {label: "americas-canada", group: "americas"},
+	"americas canada":    {label: "americas-canada", group: "americas"},
+	"sao paulo":          {label: "americas-sao-paulo", group: "americas"},
+	"americas sao paulo": {label: "americas-sao-paulo", group: "americas"},
+	"virginia":           {label: "americas-virginia", group: "americas"},
+	"ohio":               {label: "americas-ohio", group: "americas"},
+	"oregon":             {label: "americas-oregon", group: "americas"},
+	"montreal":           {label: "americas-montreal", group: "americas"},
+	"fedramp":            {label: "americas-fedramp", group: "americas"},
+	"emea":               {label: "emea", group: "emea"},
+	"dublin":             {label: "emea-dublin", group: "emea"},
+	"frankfurt":          {label: "emea-frankfurt", group: "emea"},
+	"london":             {label: "emea-london", group: "emea"},
+	"ireland":            {label: "emea-ireland", group: "emea"},
+	"paris":              {label: "emea-paris", group: "emea"},
+	"zurich":             {label: "emea-zurich", group: "emea"},
+	"emea dublin":        {label: "emea-dublin", group: "emea"},
+	"emea frankfurt":     {label: "emea-frankfurt", group: "emea"},
+	"emea london":        {label: "emea-london", group: "emea"},
+	"emea paris":         {label: "emea-paris", group: "emea"},
+	"emea zurich":        {label: "emea-zurich", group: "emea"},
+	"apac":               {label: "apac", group: "apac"},
+	"tokyo":              {label: "apac-tokyo", group: "apac"},
+	"osaka":              {label: "apac-osaka", group: "apac"},
+	"sydney":             {label: "apac-sydney", group: "apac"},
+	"hong kong":          {label: "apac-hong-kong", group: "apac"},
+	"singapore":          {label: "apac-singapore", group: "apac"},
+	"mumbai":             {label: "apac-mumbai", group: "apac"},
+	"jakarta":            {label: "apac-jakarta", group: "apac"},
+	"seoul":              {label: "apac-seoul", group: "apac"},
+	"apac tokyo":         {label: "apac-tokyo", group: "apac"},
+	"apac sydney":        {label: "apac-sydney", group: "apac"},
+	"apac mumbai":        {label: "apac-mumbai", group: "apac"},
+	"apac osaka":         {label: "apac-osaka", group: "apac"},
+	"cape town":          {label: "afs-cape-town", group: "afs"},
+	"afs":                {label: "afs", group: "afs"},
+	"mea":                {label: "mea", group: "mea"},
+	"uae":                {label: "mea-uae", group: "mea"},
+	"dubai":              {label: "mea-uae", group: "mea"},
+	"global":             {label: "global", group: "global"},
+	"multiple regions":   {label: "multiple-regions", group: "multiple"},
+	"cross regional":     {label: "multiple-regions", group: "multiple"},
+	"cross region":       {label: "multiple-regions", group: "multiple"},
+}
+
+var genesysServiceKeywords = []struct {
+	keyword string
+	label   string
+}{
+	{keyword: "acd email", label: "Email"},
+	{keyword: "email routing", label: "Email"},
+	{keyword: "email", label: "Email"},
+	{keyword: "sms", label: "SMS"},
+	{keyword: "mms", label: "SMS"},
+	{keyword: "whatsapp", label: "WhatsApp"},
+	{keyword: "web messaging", label: "Web Messaging"},
+	{keyword: "messaging", label: "Messaging"},
+	{keyword: "voice", label: "Voice"},
+	{keyword: "contact center", label: "Contact Center"},
+	{keyword: "social listening", label: "Social Listening"},
+	{keyword: "recording", label: "Recording"},
+	{keyword: "recordings", label: "Recording"},
+	{keyword: "analytics", label: "Analytics"},
+	{keyword: "reporting", label: "Analytics"},
+	{keyword: "text to speech", label: "Speech"},
+	{keyword: "speech to text", label: "Speech"},
+	{keyword: "outbound dialing", label: "Outbound Dialing"},
+	{keyword: "workforce management", label: "Workforce Management"},
+}
+
+func parseGenesysTitle(title string) (service, region string) {
+	service = strings.TrimSpace(title)
+	if service == "" {
+		return "", ""
+	}
+
+	service = strings.Join(strings.Fields(service), " ")
+
+	if matches := genesysTitleRegionPattern.FindAllStringIndex(service, -1); len(matches) > 0 {
+		last := matches[len(matches)-1]
+		region = strings.TrimSpace(service[last[0]:last[1]])
+		service = strings.TrimSpace(service[:last[0]] + service[last[1]:])
+	}
+
+	if idx := strings.LastIndex(service, " - "); idx != -1 {
+		if region == "" {
+			region = strings.TrimSpace(service[idx+3:])
+		}
+		service = strings.TrimSpace(service[:idx])
+	}
+
+	if idx := strings.Index(service, ":"); idx != -1 {
+		service = strings.TrimSpace(service[idx+1:])
+	}
+
+	service = trimGenesysServiceSuffix(service)
+	return service, strings.TrimSpace(region)
+}
+
+func trimGenesysServiceSuffix(service string) string {
+	if service == "" {
+		return service
+	}
+	lower := strings.ToLower(service)
+	suffixes := []string{
+		" incident",
+		" incidents",
+		" service issue",
+		" service issues",
+		" service impact",
+		" services impacted",
+		" services impaired",
+		" update",
+		" outage",
+		" partial outage",
+		" monitoring",
+	}
+	for {
+		trimmed := false
+		for _, suffix := range suffixes {
+			if strings.HasSuffix(lower, suffix) {
+				service = strings.TrimSpace(service[:len(service)-len(suffix)])
+				lower = strings.ToLower(service)
+				trimmed = true
+			}
+		}
+		if !trimmed {
+			break
+		}
+	}
+	return strings.TrimSpace(service)
+}
+
+func inferGenesysService(item *gofeed.Item) string {
+	text := strings.ToLower(strings.Join([]string{item.Title, item.Description, item.Content}, " "))
+	if text == "" {
+		return ""
+	}
+
+	seen := make(map[string]struct{})
+	matches := []string{}
+	for _, candidate := range genesysServiceKeywords {
+		if strings.Contains(text, candidate.keyword) {
+			if _, ok := seen[candidate.label]; ok {
+				continue
+			}
+			seen[candidate.label] = struct{}{}
+			matches = append(matches, candidate.label)
+		}
+	}
+	if len(matches) == 0 {
+		return ""
+	}
+	if len(matches) == 1 {
+		return matches[0]
+	}
+	return "Multiple Services"
+}
+
+func determineGenesysRegion(initial string, item *gofeed.Item) string {
+	fallback := strings.TrimSpace(initial)
+	regions := map[genesysRegionInfo]struct{}{}
+
+	if info, ok := lookupGenesysRegion(initial); ok {
+		regions[info] = struct{}{}
+	}
+
+	text := strings.Join([]string{item.Title, item.Description, item.Content}, " ")
+	for info := range detectGenesysRegions(text) {
+		regions[info] = struct{}{}
+	}
+
+	if len(regions) == 0 {
+		lower := strings.ToLower(text)
+		switch {
+		case strings.Contains(lower, "global"):
+			return "global"
+		case strings.Contains(lower, "cross regional"), strings.Contains(lower, "multiple regions"), strings.Contains(lower, "cross-region"):
+			return "multiple-regions"
+		}
+		return slugify(fallback)
+	}
+
+	groups := make(map[string]struct{})
+	var first genesysRegionInfo
+	count := 0
+	for info := range regions {
+		groups[info.group] = struct{}{}
+		if count == 0 {
+			first = info
+		}
+		count++
+	}
+
+	if len(groups) > 1 {
+		return "multiple-regions"
+	}
+
+	if count == 1 {
+		return first.label
+	}
+
+	for group := range groups {
+		if group == "multiple" {
+			return "multiple-regions"
+		}
+		if group != "" {
+			return group
+		}
+	}
+
+	if first.label != "" {
+		return first.label
+	}
+	return slugify(fallback)
+}
+
+func lookupGenesysRegion(region string) (genesysRegionInfo, bool) {
+	key := normalizeGenesysRegionKey(region)
+	info, ok := genesysRegionMap[key]
+	return info, ok
+}
+
+func detectGenesysRegions(text string) map[genesysRegionInfo]struct{} {
+	cleaned := " " + normalizeGenesysRegionKey(text) + " "
+	found := make(map[genesysRegionInfo]struct{})
+	for key, info := range genesysRegionMap {
+		if strings.Contains(cleaned, " "+key+" ") {
+			found[info] = struct{}{}
+		}
+	}
+	return found
+}
+
+func normalizeGenesysRegionKey(value string) string {
+	if value == "" {
+		return ""
+	}
+	cleaned := genesysRegionKeyReplacer.Replace(strings.ToLower(value))
+	return strings.Join(strings.Fields(cleaned), " ")
+}
+
+func slugify(value string) string {
+	value = strings.ToLower(strings.TrimSpace(value))
+	if value == "" {
+		return ""
+	}
+	value = slugifyCleanupRegexp.ReplaceAllString(value, "-")
+	value = strings.Trim(value, "-")
+	return value
 }
