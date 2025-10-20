@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Twilio Status - Incident History</title>
+    <link>https://status.twilio.com</link>
+    <description>Statuspage</description>
+    <pubDate>Mon, 20 Oct 2025 01:41:55 -0700</pubDate>
+    <item>
+      <title>United States and Canada Twilio SMS and MMS Maintenance</title>
+      <description><![CDATA[
+<p><strong>THIS IS A SCHEDULED EVENT Nov <var data-var='date'>25</var>, <var data-var='time'>20:00</var> PST&nbsp;-&nbsp; Nov <var data-var='date'>26</var>, <var data-var='time'>00:00</var> PST</strong></p>
+<p><small>Oct <var data-var='date'> 6</var>, <var data-var='time'>11:27</var> PDT</small><br><strong>Scheduled</strong> - Twilio is conducting a planned maintenance from 25 November 2025 at 20:00 PST until 26 November 2025 at 00:00 PST. During the maintenance window, there could be intermittent delays or failures delivering SMS and MMS to and from United States and Canada handsets via subset of long codes, short codes and toll free numbers.</p>
+      ]]></description>
+      <pubDate>Tue, 25 Nov 2025 20:00:00 -0800</pubDate>
+      <maintenanceEndDate>Wed, 26 Nov 2025 00:00:00 -0800</maintenanceEndDate>
+      <link>https://status.twilio.com/incidents/2v98q17wsch8</link>
+      <guid>https://status.twilio.com/incidents/2v98q17wsch8</guid>
+    </item>
+    <item>
+      <title>United States MMS Carrier Partner Maintenance</title>
+      <description><![CDATA[
+<p><strong>THIS IS A SCHEDULED EVENT Nov <var data-var='date'>4</var>, <var data-var='time'>00:00</var> - <var data-var='time'>02:00</var> PST</strong></p>
+<p><small>Oct <var data-var='date'>16</var>, <var data-var='time'>12:19</var> PDT</small><br><strong>Scheduled</strong> - Our MMS carrier partner in the United States is conducting a planned maintenance from 04 November 2025 at 00:00 PST until 04 November 2025 at 02:00 PST. During the maintenance window, there could be intermittent delays delivering MMS to United States handsets via United States short codes.</p>
+      ]]></description>
+      <pubDate>Tue, 04 Nov 2025 00:00:00 -0800</pubDate>
+      <maintenanceEndDate>Tue, 04 Nov 2025 02:00:00 -0800</maintenanceEndDate>
+      <link>https://status.twilio.com/incidents/95t2pyjhr9k5</link>
+      <guid>https://status.twilio.com/incidents/95t2pyjhr9k5</guid>
+    </item>
+  </channel>
+</rss>
