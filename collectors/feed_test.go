@@ -66,19 +66,18 @@ func (s *FeedTestSuite) TestAzureServiceIssue() {
 	s.NoError(err)
 }
 
-func (s *FeedTestSuite) TestOpenAIResolved() {
-	s.setupExporter("testdata/openai_resolved.atom", "http://mock.openai/feed", "openai-test", "")
+func (s *FeedTestSuite) TestOpenAIServiceIssue() {
+	s.setupExporter("testdata/openai_monitoring.rss", "http://mock.openai/feed", "openai-test", "")
 	s.Exporter.Start()
 
 	expected := "# HELP openai_test_service_status Current service status\n" +
 		"# TYPE openai_test_service_status gauge\n" +
-		"openai_test_service_status{customer=\"\",service=\"openai-test\",state=\"ok\"} 1\n" +
+		"openai_test_service_status{customer=\"\",service=\"openai-test\",state=\"ok\"} 0\n" +
 		"openai_test_service_status{customer=\"\",service=\"openai-test\",state=\"outage\"} 0\n" +
-		"openai_test_service_status{customer=\"\",service=\"openai-test\",state=\"service_issue\"} 0\n"
+		"openai_test_service_status{customer=\"\",service=\"openai-test\",state=\"service_issue\"} 1\n"
 	err := testutil.CollectAndCompare(s.Exporter, strings.NewReader(expected), "openai-test_service_status")
 	s.NoError(err)
 }
-
 
 func (s *FeedTestSuite) TestGenesysIdentifiedIncident() {
 	s.setupExporter("testdata/genesys_feed.atom", "http://mock.genesys/feed", "genesys-test", "genesyscloud")
@@ -90,6 +89,8 @@ func (s *FeedTestSuite) TestGenesysIdentifiedIncident() {
 		"genesys_test_service_status{customer=\"\",service=\"genesys-test\",state=\"outage\"} 0\n" +
 		"genesys_test_service_status{customer=\"\",service=\"genesys-test\",state=\"service_issue\"} 1\n"
 	err := testutil.CollectAndCompare(s.Exporter, strings.NewReader(expected), "genesys-test_service_status")
+	s.NoError(err)
+}
 
 func (s *FeedTestSuite) TestTwilioScheduledMaintenance() {
 	s.setupExporter("testdata/twilio_scheduled.rss", "http://mock.twilio/feed", "twilio-test", "twilio")
